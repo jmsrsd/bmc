@@ -1,0 +1,16 @@
+{
+  "version": 2,
+  "publicDirectory":"/",
+  "env": {
+    "NEXTAUTH_URL": "https://${NEXTAUTH_URL}",
+    "VERCED_EDGE_FUNCTS": [
+      "bc-microservice",
+      "graphify-update"
+    ]
+  },
+  "staticDirs": [
+    "/.well-known/tensorflow",
+    "/.well-known/onnx",
+    "/.well-known/docker"
+  ]
+}
