@@ -8,6 +8,27 @@ import { prisma } from '@/lib/prisma'
 import { revalidatePath } from 'next/cache'
 import { getSession, checkAccess } from '@/lib/auth'
 import { BUILDING_ID } from '@/lib/types'
+import {
+  SetTemperatureSchema,
+  SetFanSpeedSchema,
+  SetHvacModeSchema,
+  SetDimLevelSchema,
+  ToggleLightSchema,
+  SetDoorStateSchema,
+  RecallElevatorSchema,
+  ClearElevatorRecallSchema,
+  ClearFireAlarmSchema,
+  AcknowledgeAlarmSchema,
+} from '@/lib/schemas'
+
+// Helper: FormData.get() returns null for missing fields — strip nulls for Zod
+function formDataToObject(fd: FormData): Record<string, string | number> {
+  const obj: Record<string, string> = {}
+  fd.forEach((val, key) => {
+    obj[key] = val
+  })
+  return obj
+}
 
 // ─── HVAC Actions ────────────────────────────────────────────
 
@@ -16,14 +37,12 @@ export async function setTemperature(prevState: any, formData: FormData) {
   try {
     checkAccess(session?.user ?? null, BUILDING_ID, 'operator')
 
-    const zoneId = formData.get('zoneId') as string
-    const setpoint = Number(formData.get('setpoint'))
-
-    if (!zoneId || isNaN(setpoint) || setpoint < 16 || setpoint > 30) {
-      return { error: 'Invalid input: setpoint must be 16-30°C' }
+    const parsed = SetTemperatureSchema.safeParse(formDataToObject(formData))
+    if (!parsed.success) {
+      return { error: parsed.error.issues[0].message }
     }
+    const { zoneId, setpoint } = parsed.data
 
-    // Read current value for audit
     const current = await prisma.hVACUnit.findFirst({ where: { zoneId }, select: { setpoint: true } })
 
     await prisma.hVACUnit.updateMany({
@@ -53,13 +72,11 @@ export async function setFanSpeed(prevState: any, formData: FormData) {
   try {
     checkAccess(session?.user ?? null, BUILDING_ID, 'operator')
 
-    const zoneId = formData.get('zoneId') as string
-    const speed = formData.get('speed') as string
-    const validSpeeds = ['OFF', 'LOW', 'MEDIUM', 'HIGH', 'AUTO']
-
-    if (!zoneId || !validSpeeds.includes(speed)) {
-      return { error: 'Invalid fan speed' }
+    const parsed = SetFanSpeedSchema.safeParse(formDataToObject(formData))
+    if (!parsed.success) {
+      return { error: parsed.error.issues[0].message }
     }
+    const { zoneId, speed } = parsed.data
 
     const current = await prisma.hVACUnit.findFirst({ where: { zoneId }, select: { fanSpeed: true } })
 
@@ -90,13 +107,11 @@ export async function setHvacMode(prevState: any, formData: FormData) {
   try {
     checkAccess(session?.user ?? null, BUILDING_ID, 'operator')
 
-    const zoneId = formData.get('zoneId') as string
-    const mode = formData.get('mode') as string
-    const validModes = ['COOL', 'HEAT', 'AUTO', 'VENT']
-
-    if (!zoneId || !validModes.includes(mode)) {
-      return { error: 'Invalid HVAC mode' }
+    const parsed = SetHvacModeSchema.safeParse(formDataToObject(formData))
+    if (!parsed.success) {
+      return { error: parsed.error.issues[0].message }
     }
+    const { zoneId, mode } = parsed.data
 
     const current = await prisma.hVACUnit.findFirst({ where: { zoneId }, select: { mode: true } })
 
@@ -129,12 +144,11 @@ export async function setDimLevel(prevState: any, formData: FormData) {
   try {
     checkAccess(session?.user ?? null, BUILDING_ID, 'operator')
 
-    const zoneId = formData.get('zoneId') as string
-    const level = Number(formData.get('level'))
-
-    if (!zoneId || isNaN(level) || level < 0 || level > 100) {
-      return { error: 'Invalid dim level (0-100)' }
+    const parsed = SetDimLevelSchema.safeParse(formDataToObject(formData))
+    if (!parsed.success) {
+      return { error: parsed.error.issues[0].message }
     }
+    const { zoneId, level } = parsed.data
 
     const current = await prisma.lightZone.findFirst({ where: { zoneId }, select: { dimLevel: true } })
 
@@ -165,12 +179,11 @@ export async function toggleLight(prevState: any, formData: FormData) {
   try {
     checkAccess(session?.user ?? null, BUILDING_ID, 'operator')
 
-    const zoneId = formData.get('zoneId') as string
-    const newState = formData.get('newState') as string
-
-    if (!zoneId || !['ON', 'OFF'].includes(newState)) {
-      return { error: 'Invalid light state' }
+    const parsed = ToggleLightSchema.safeParse(formDataToObject(formData))
+    if (!parsed.success) {
+      return { error: parsed.error.issues[0].message }
     }
+    const { zoneId, newState } = parsed.data
 
     const current = await prisma.lightZone.findFirst({ where: { zoneId }, select: { state: true } })
 
@@ -203,12 +216,11 @@ export async function setDoorState(prevState: any, formData: FormData) {
   try {
     checkAccess(session?.user ?? null, BUILDING_ID, 'security')
 
-    const doorId = formData.get('doorId') as string
-    const newState = formData.get('newState') as string
-
-    if (!doorId || !['LOCKED', 'UNLOCKED'].includes(newState)) {
-      return { error: 'Invalid door state' }
+    const parsed = SetDoorStateSchema.safeParse(formDataToObject(formData))
+    if (!parsed.success) {
+      return { error: parsed.error.issues[0].message }
     }
+    const { doorId, newState } = parsed.data
 
     const current = await prisma.door.findUnique({ where: { id: doorId }, select: { state: true, name: true } })
     if (!current) return { error: 'Door not found' }
@@ -242,12 +254,11 @@ export async function recallElevator(prevState: any, formData: FormData) {
   try {
     checkAccess(session?.user ?? null, BUILDING_ID, 'security')
 
-    const carId = formData.get('carId') as string
-    const targetFloor = Number(formData.get('targetFloor'))
-
-    if (!carId || isNaN(targetFloor) || targetFloor < -2 || targetFloor > 50) {
-      return { error: 'Invalid recall target' }
+    const parsed = RecallElevatorSchema.safeParse(formDataToObject(formData))
+    if (!parsed.success) {
+      return { error: parsed.error.issues[0].message }
     }
+    const { carId, targetFloor } = parsed.data
 
     const car = await prisma.elevatorCar.findUnique({ where: { id: carId } })
     if (!car) return { error: 'Elevator car not found' }
@@ -279,8 +290,11 @@ export async function clearElevatorRecall(prevState: any, formData: FormData) {
   try {
     checkAccess(session?.user ?? null, BUILDING_ID, 'security')
 
-    const carId = formData.get('carId') as string
-    if (!carId) return { error: 'Missing car ID' }
+    const parsed = ClearElevatorRecallSchema.safeParse(formDataToObject(formData))
+    if (!parsed.success) {
+      return { error: parsed.error.issues[0].message }
+    }
+    const { carId } = parsed.data
 
     const car = await prisma.elevatorCar.findUnique({ where: { id: carId } })
     if (!car) return { error: 'Elevator car not found' }
@@ -314,10 +328,11 @@ export async function clearFireAlarm(prevState: any, formData: FormData) {
   try {
     checkAccess(session?.user ?? null, BUILDING_ID, 'security')
 
-    const panelId = formData.get('panelId') as string
-    const comment = (formData.get('comment') as string) || ''
-
-    if (!panelId) return { error: 'Missing panel ID' }
+    const parsed = ClearFireAlarmSchema.safeParse(formDataToObject(formData))
+    if (!parsed.success) {
+      return { error: parsed.error.issues[0].message }
+    }
+    const { panelId, comment } = parsed.data
 
     const panel = await prisma.firePanel.findUnique({ where: { id: panelId } })
     if (!panel) return { error: 'Panel not found' }
@@ -327,7 +342,6 @@ export async function clearFireAlarm(prevState: any, formData: FormData) {
       data: { state: 'NORMAL' },
     })
 
-    // Also clear all devices under this panel
     await prisma.fireDevice.updateMany({
       where: { panelId },
       data: { state: 'NORMAL' },
@@ -357,10 +371,11 @@ export async function acknowledgeAlarm(prevState: any, formData: FormData) {
   try {
     checkAccess(session?.user ?? null, BUILDING_ID, 'operator')
 
-    const alarmId = formData.get('alarmId') as string
-    const comment = (formData.get('comment') as string) || ''
-
-    if (!alarmId) return { error: 'Missing alarm ID' }
+    const parsed = AcknowledgeAlarmSchema.safeParse(formDataToObject(formData))
+    if (!parsed.success) {
+      return { error: parsed.error.issues[0].message }
+    }
+    const { alarmId, comment } = parsed.data
 
     const alarm = await prisma.alarm.findUnique({ where: { id: alarmId } })
     if (!alarm || alarm.status !== 'open') {

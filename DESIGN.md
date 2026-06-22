@@ -15,6 +15,7 @@
 > **Directive D1:** When modifying this doc, web-search all referenced library APIs and patterns for current correctness. Append "(web-validated YYYY-MM-DD)" to header after doing so.
 > **Testing Context:** See `TESTING.md` for verification contracts and test patterns
 > **Use Case Context:** See `USECASE.md` for actor workflows, pre/post conditions, and scenario outputs
+> **Web-Validated:** (2025-06-23)
 
 ---
 
