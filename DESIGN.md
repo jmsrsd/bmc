@@ -27,6 +27,7 @@
 5. [IoT Integration Layer](#5-iot-integration-layer)
 6. [Auth & Authorization](#6-auth--authorization)
 7. [Frontend Architecture](#7-frontend-architecture)
+7.4. [Design System: Editorial Charcoal](#74-design-system-editorial-charcoal)
 8. [AI/ML Pipeline](#8-aiml-pipeline)
 9. [Deployment & Infrastructure](#9-deployment--infrastructure)
 10. [Key Design Decisions & Trade-offs](#10-key-design-decisions--trade-offs)
@@ -945,6 +946,66 @@ export function useSSE<T>(url: string, initial: T): T {
 
 > **Use case alignment:** UC-STRM-01 (subscribe to telemetry stream)
 > **Testing alignment:** TESTING.md §3.1 (mock EventSource, verify lifecycle)
+
+### 7.4 Design System: Editorial Charcoal
+
+> **"Information, not interface."** Editorial Charcoal treats the UI as a silent, invisible stage where data and status anomalies are the only elements allowed to command attention.
+
+*   **Restraint Over Decoration:** No heavy card borders, drop shadows, or background gradients.
+*   **Physical Hardware Mental Model:** Status indicators mimic precise, emissive physical LEDs.
+*   **Typographic Hierarchy:** High-contrast headlines paired with monospaced telemetry data.
+
+#### 7.4.1 Core Color Palette
+
+| Token | Hex | Application |
+|-------|-----|-------------|
+| `color-bg-canvas` | `#0B0B0C` | App canvas background |
+| `color-bg-surface` | `#121214` | Card/container backgrounds |
+| `color-bg-elevated` | `#1C1C1E` | Dropdowns, popovers |
+| `color-border-hairline` | `#242427` | 1px dividers |
+| `color-status-critical` | `#FF453A` | Critical alerts (6px LED) |
+| `color-status-warning` | `#FF9F0A` | Warning alerts (6px LED) |
+| `color-status-normal` | `#32D74B` | Normal status (6px LED) |
+| `color-status-active` | `#0A84FF` | Interactive elements |
+
+#### 7.4.2 Typography & Data Display
+
+| Element | Size | Weight | Color | Font |
+|---------|------|--------|-------|------|
+| H1 (Page Title) | 24px | Semi-Bold | `#FFFFFF` | `SF Pro Display` |
+| H2 (Section Header) | 14px | Medium | `#8E8E93` | `Inter` |
+| Metric Large | 32px | Light | `#FFFFFF` | `JetBrains Mono` |
+| Body/Metadata | 12px | Regular | `#AEAEB2` | `Inter` |
+
+*Tracking (letter-spacing): `-0.02em` for headers.*
+
+#### 7.4.3 Layout & Grid System ("Ink Grid")
+
+```css
+.app-grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 16px; }
+.grid-span-4 { grid-column: span 4; }  /* 33% width */
+.grid-span-8 { grid-column: span 8; }  /* 66% width */
+```
+
+#### 7.4.4 Component Patterns
+
+**Status LED (replacing badges):**
+```tsx
+<span className={`inline-block w-1.5 h-1.5 rounded-full ${state === 'ON' ? 'bg-green-500' : state === 'FAULT' ? 'bg-red-500' : 'bg-gray-500'}`} />
+```
+
+**Card (glassmorphism):**
+```tsx
+<div className="bg-gray-800/50 backdrop-blur border border-gray-700 rounded-xl">
+```
+
+**Form Input:**
+```tsx
+<input className="bg-gray-700 border border-gray-600 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" />
+```
+
+> **Use case alignment:** UC-HVAC-01 (HVAC controls), UC-LGT-01 (lighting controls), UC-SEC-01 (security controls)
+> **Testing alignment:** TESTING.md §2.2 (component style tests via RTL queries)
 
 ---
 
