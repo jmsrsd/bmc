@@ -1,18 +1,13 @@
 # Graph Report - bmc  (2026-06-23)
 
 ## Corpus Check
-- 92 files · ~45,061 words
+- 107 files · ~48,459 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 548 nodes · 720 edges · 54 communities (40 shown, 14 thin omitted)
+- 581 nodes · 780 edges · 57 communities (43 shown, 14 thin omitted)
 - Extraction: 100% EXTRACTED · 0% INFERRED · 0% AMBIGUOUS
 - Token cost: 0 input · 0 output
-
-## Graph Freshness
-- Built from commit: `3c3f52de`
-- Run `git rev-parse HEAD` and compare to check if the graph is stale.
-- Run `graphify update .` after code changes (no API cost).
 
 ## Community Hubs (Navigation)
 - [[_COMMUNITY_Community 0|Community 0]]
@@ -63,8 +58,8 @@
 
 ## God Nodes (most connected - your core abstractions)
 1. `getSession()` - 37 edges
-2. `compilerOptions` - 16 edges
-3. `WidgetConfig` - 14 edges
+2. `WidgetConfig` - 22 edges
+3. `compilerOptions` - 16 edges
 4. `BMC — Design Document [UPDATED 2026-06-23]` - 14 edges
 5. `checkAccess()` - 13 edges
 6. `[UPDATED 2026-06-23] BMC — Testing Strategy` - 13 edges
@@ -76,10 +71,10 @@
 ## Surprising Connections (you probably didn't know these)
 - `AlarmsPage()` --calls--> `getSession()`  [EXTRACTED]
   app/(routes)/alarms/page.tsx → lib/auth.ts
+- `SmartDashboardPage()` --calls--> `getSession()`  [EXTRACTED]
+  app/(routes)/building/dashboard/page.tsx → lib/auth.ts
 - `HVACPage()` --calls--> `getSession()`  [EXTRACTED]
   app/(routes)/building/hvac/page.tsx → lib/auth.ts
-- `LightingPage()` --calls--> `getSession()`  [EXTRACTED]
-  app/(routes)/building/lighting/page.tsx → lib/auth.ts
 - `BuildingOverviewPage()` --calls--> `getSession()`  [EXTRACTED]
   app/(routes)/building/page.tsx → lib/auth.ts
 - `FirePage()` --calls--> `getSession()`  [EXTRACTED]
@@ -88,11 +83,11 @@
 ## Import Cycles
 - None detected.
 
-## Communities (54 total, 14 thin omitted)
+## Communities (57 total, 14 thin omitted)
 
 ### Community 0 - "Community 0"
-Cohesion: 0.07
-Nodes (44): metadata, SmartDashboardPage(), DashboardGrid(), ElevatorClearRecallButton(), ElevatorRecallForm(), carStateBadge, ElevatorsPage(), metadata (+36 more)
+Cohesion: 0.06
+Nodes (45): ElevatorClearRecallButton(), ElevatorRecallForm(), carStateBadge, ElevatorsPage(), metadata, acknowledgeAlarm(), clearElevatorRecall(), clearFireAlarm() (+37 more)
 
 ### Community 1 - "Community 1"
 Cohesion: 0.29
@@ -107,16 +102,16 @@ Cohesion: 0.17
 Nodes (6): DashboardPage(), metadata, QuickActionCardProps, StatCardProps, AlarmAckForm(), AlarmAckFormProps
 
 ### Community 4 - "Community 4"
-Cohesion: 0.12
-Nodes (20): clearSessionCookie(), createDemoUser(), createSessionCookie(), Session, verifyPassword(), AlarmSeverity, AlarmStatus, DoorState (+12 more)
+Cohesion: 0.07
+Nodes (28): AcknowledgeButton(), AlarmsPage(), metadata, SearchParams, severityBadge, severityBorder, statusBadge, statusFilters (+20 more)
 
 ### Community 5 - "Community 5"
 Cohesion: 0.08
 Nodes (23): compilerOptions, allowJs, esModuleInterop, incremental, isolatedModules, jsx, lib, module (+15 more)
 
 ### Community 6 - "Community 6"
-Cohesion: 0.05
-Nodes (40): devDependencies, autoprefixer, eslint, eslint-config-next, jsdom, msw, @playwright/test, postcss (+32 more)
+Cohesion: 0.09
+Nodes (23): devDependencies, autoprefixer, eslint, eslint-config-next, jsdom, msw, @playwright/test, postcss (+15 more)
 
 ### Community 7 - "Community 7"
 Cohesion: 0.11
@@ -124,23 +119,23 @@ Nodes (18): 0. TDD is compulsory — never write code without a failing test fir
 
 ### Community 8 - "Community 8"
 Cohesion: 0.08
-Nodes (15): AcknowledgeButton(), AlarmsPage(), metadata, SearchParams, severityBadge, severityBorder, statusBadge, statusFilters (+7 more)
+Nodes (15): EnergyPage(), getMeters(), metadata, meterBarColors, meterColors, meterIcons, FireClearForm(), deviceIcons (+7 more)
 
 ### Community 9 - "Community 9"
-Cohesion: 0.24
-Nodes (7): HVACPage(), metadata, PageProps, FanSpeedButtons(), HvacModeButtons(), SetpointForm(), HvacCard()
+Cohesion: 0.21
+Nodes (8): HVACPage(), metadata, PageProps, baseConfig, FanSpeedButtons(), HvacModeButtons(), SetpointForm(), HvacCard()
 
 ### Community 10 - "Community 10"
-Cohesion: 0.18
-Nodes (11): dependencies, class-variance-authority, clsx, lucide-react, next, @prisma/client, react, react-dom (+3 more)
+Cohesion: 0.07
+Nodes (29): dependencies, class-variance-authority, clsx, lucide-react, next, @prisma/client, react, react-dom (+21 more)
 
 ### Community 11 - "Community 11"
 Cohesion: 0.27
 Nodes (8): BuildingOverviewPage(), findSensor(), hvacStatusColor(), hvacStatusLabel(), metadata, StatCardProps, ZoneCard(), ZoneWithRelations
 
 ### Community 12 - "Community 12"
-Cohesion: 0.22
-Nodes (8): FireClearForm(), deviceIcons, deviceStateBadge, deviceTypeLabel, FirePage(), metadata, stateBadge, stateBorder
+Cohesion: 0.48
+Nodes (5): AnomalyResult, getAnomalyScore(), getBatchScores(), mockModel(), ModelFn
 
 ### Community 13 - "Community 13"
 Cohesion: 0.06
@@ -155,8 +150,8 @@ Cohesion: 0.29
 Nodes (7): 4.1 Data Flow, 4.2 Edge Processing, 4.3 Stream Distribution, 4.4 Reconnection Strategy, 4.5 Backpressure & Throttling, 4.6 SSE Chaos Testing Scenarios, 4. Real-Time Pipeline
 
 ### Community 16 - "Community 16"
-Cohesion: 0.11
-Nodes (20): DashboardClient(), DashboardClientProps, SDUIRenderer(), UnknownWidget(), SSESnapshot, TelemetryEvent, WidgetSSEState, Role (+12 more)
+Cohesion: 0.09
+Nodes (28): DashboardClient(), DashboardClientProps, SDUIRenderer(), UnknownWidget(), SSESnapshot, TelemetryEvent, WidgetSSEState, Role (+20 more)
 
 ### Community 17 - "Community 17"
 Cohesion: 0.48
@@ -167,12 +162,12 @@ Cohesion: 0.33
 Nodes (4): getActions(), mockPrisma, mockRevalidatePath, mockSession
 
 ### Community 23 - "Community 23"
-Cohesion: 0.08
-Nodes (20): getService(), mockPrisma, getRoute(), mockPrisma, mockSession, GET(), NavLinkSchema, SensorMetaSchema (+12 more)
+Cohesion: 0.07
+Nodes (23): metadata, SmartDashboardPage(), DashboardGrid(), getService(), mockPrisma, getRoute(), mockPrisma, mockSession (+15 more)
 
 ### Community 26 - "Community 26"
-Cohesion: 0.36
-Nodes (4): LightingPage(), metadata, DimSlider(), LightToggle()
+Cohesion: 0.60
+Nodes (3): Telemetry, TelemetrySchema, validateTelemetry()
 
 ### Community 42 - "Community 42"
 Cohesion: 0.29
@@ -215,24 +210,24 @@ Cohesion: 0.14
 Nodes (14): 7.1 Page Structure, 7.2 Component Hierarchy, 7.3 Real-Time Integration (useSSE hook), 7.4.1 Types (`lib/ui-config/types.ts`), 7.4.2 Service (`lib/ui-config/service.ts`), 7.4.3 API (`app/api/buildings/[id]/ui-config/route.ts`), 7.4.4 Registry (`components/dynamic/widgets/index.ts`), 7.4.5 Renderer (`components/dynamic/SDUIRenderer.tsx`) (+6 more)
 
 ## Knowledge Gaps
-- **283 isolated node(s):** `type`, `ErrorProps`, `metadata`, `SearchParams`, `severityBorder` (+278 more)
+- **296 isolated node(s):** `type`, `ErrorProps`, `metadata`, `SearchParams`, `severityBorder` (+291 more)
   These have ≤1 connection - possible missing edges or undocumented components.
 - **14 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `getSession()` connect `Community 0` to `Community 3`, `Community 4`, `Community 8`, `Community 9`, `Community 11`, `Community 12`, `Community 16`, `Community 23`, `Community 26`?**
-  _High betweenness centrality (0.043) - this node is a cross-community bridge._
+- **Why does `getSession()` connect `Community 0` to `Community 3`, `Community 4`, `Community 8`, `Community 9`, `Community 11`, `Community 23`?**
+  _High betweenness centrality (0.041) - this node is a cross-community bridge._
 - **Why does `BMC — Design Document [UPDATED 2026-06-23]` connect `Community 1` to `Community 43`, `Community 44`, `Community 45`, `Community 46`, `Community 15`, `Community 48`, `Community 49`, `Community 50`, `Community 51`, `Community 47`?**
-  _High betweenness centrality (0.012) - this node is a cross-community bridge._
+  _High betweenness centrality (0.011) - this node is a cross-community bridge._
+- **Why does `WidgetConfig` connect `Community 16` to `Community 9`, `Community 23`?**
+  _High betweenness centrality (0.011) - this node is a cross-community bridge._
 - **What connects `type`, `ErrorProps`, `metadata` to the rest of the system?**
-  _283 weakly-connected nodes found - possible documentation gaps or missing edges._
+  _296 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `Community 0` be split into smaller, more focused modules?**
-  _Cohesion score 0.06829573934837092 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.06448087431693988 - nodes in this community are weakly interconnected._
 - **Should `Community 2` be split into smaller, more focused modules?**
   _Cohesion score 0.05128205128205128 - nodes in this community are weakly interconnected._
 - **Should `Community 4` be split into smaller, more focused modules?**
-  _Cohesion score 0.11666666666666667 - nodes in this community are weakly interconnected._
-- **Should `Community 5` be split into smaller, more focused modules?**
-  _Cohesion score 0.08333333333333333 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.0746031746031746 - nodes in this community are weakly interconnected._

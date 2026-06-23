@@ -30,7 +30,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "alarms_ack_button",
-      "community": 8,
+      "community": 4,
       "norm_label": "ack-button.tsx"
     },
     {
@@ -40,7 +40,7 @@
       "source_location": "L7",
       "_origin": "ast",
       "id": "alarms_ack_button_acknowledgebutton",
-      "community": 8,
+      "community": 4,
       "norm_label": "acknowledgebutton()"
     },
     {
@@ -80,7 +80,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "alarms_page",
-      "community": 8,
+      "community": 4,
       "norm_label": "page.tsx"
     },
     {
@@ -90,7 +90,7 @@
       "source_location": "L10",
       "_origin": "ast",
       "id": "alarms_page_metadata",
-      "community": 8,
+      "community": 4,
       "norm_label": "metadata"
     },
     {
@@ -100,7 +100,7 @@
       "source_location": "L15",
       "_origin": "ast",
       "id": "alarms_page_searchparams",
-      "community": 8,
+      "community": 4,
       "norm_label": "searchparams"
     },
     {
@@ -110,7 +110,7 @@
       "source_location": "L17",
       "_origin": "ast",
       "id": "alarms_page_relativetime",
-      "community": 8,
+      "community": 4,
       "norm_label": "relativetime()"
     },
     {
@@ -120,7 +120,7 @@
       "source_location": "L28",
       "_origin": "ast",
       "id": "alarms_page_severityborder",
-      "community": 8,
+      "community": 4,
       "norm_label": "severityborder"
     },
     {
@@ -130,7 +130,7 @@
       "source_location": "L34",
       "_origin": "ast",
       "id": "alarms_page_severitybadge",
-      "community": 8,
+      "community": 4,
       "norm_label": "severitybadge"
     },
     {
@@ -140,7 +140,7 @@
       "source_location": "L40",
       "_origin": "ast",
       "id": "alarms_page_statusbadge",
-      "community": 8,
+      "community": 4,
       "norm_label": "statusbadge"
     },
     {
@@ -150,7 +150,7 @@
       "source_location": "L46",
       "_origin": "ast",
       "id": "alarms_page_statusfilters",
-      "community": 8,
+      "community": 4,
       "norm_label": "statusfilters"
     },
     {
@@ -160,7 +160,7 @@
       "source_location": "L53",
       "_origin": "ast",
       "id": "alarms_page_alarmspage",
-      "community": 8,
+      "community": 4,
       "norm_label": "alarmspage()"
     },
     {
@@ -170,7 +170,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "dashboard_page",
-      "community": 0,
+      "community": 23,
       "norm_label": "page.tsx"
     },
     {
@@ -180,7 +180,7 @@
       "source_location": "L10",
       "_origin": "ast",
       "id": "dashboard_page_metadata",
-      "community": 0,
+      "community": 23,
       "norm_label": "metadata"
     },
     {
@@ -190,7 +190,7 @@
       "source_location": "L16",
       "_origin": "ast",
       "id": "dashboard_page_smartdashboardpage",
-      "community": 0,
+      "community": 23,
       "norm_label": "smartdashboardpage()"
     },
     {
@@ -290,7 +290,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "lighting_page",
-      "community": 26,
+      "community": 0,
       "norm_label": "page.tsx"
     },
     {
@@ -300,7 +300,7 @@
       "source_location": "L10",
       "_origin": "ast",
       "id": "lighting_page_metadata",
-      "community": 26,
+      "community": 0,
       "norm_label": "metadata"
     },
     {
@@ -310,7 +310,7 @@
       "source_location": "L17",
       "_origin": "ast",
       "id": "lighting_page_dimbarcolor",
-      "community": 26,
+      "community": 0,
       "norm_label": "dimbarcolor()"
     },
     {
@@ -320,7 +320,7 @@
       "source_location": "L25",
       "_origin": "ast",
       "id": "lighting_page_lightingpage",
-      "community": 26,
+      "community": 0,
       "norm_label": "lightingpage()"
     },
     {
@@ -760,7 +760,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "fire_fire_clear_form",
-      "community": 12,
+      "community": 8,
       "norm_label": "fire-clear-form.tsx"
     },
     {
@@ -770,7 +770,7 @@
       "source_location": "L7",
       "_origin": "ast",
       "id": "fire_fire_clear_form_fireclearform",
-      "community": 12,
+      "community": 8,
       "norm_label": "fireclearform()"
     },
     {
@@ -780,7 +780,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "fire_page",
-      "community": 12,
+      "community": 8,
       "norm_label": "page.tsx"
     },
     {
@@ -790,7 +790,7 @@
       "source_location": "L10",
       "_origin": "ast",
       "id": "fire_page_metadata",
-      "community": 12,
+      "community": 8,
       "norm_label": "metadata"
     },
     {
@@ -800,7 +800,7 @@
       "source_location": "L15",
       "_origin": "ast",
       "id": "fire_page_stateborder",
-      "community": 12,
+      "community": 8,
       "norm_label": "stateborder"
     },
     {
@@ -810,7 +810,7 @@
       "source_location": "L22",
       "_origin": "ast",
       "id": "fire_page_statebadge",
-      "community": 12,
+      "community": 8,
       "norm_label": "statebadge"
     },
     {
@@ -820,7 +820,7 @@
       "source_location": "L29",
       "_origin": "ast",
       "id": "fire_page_deviceicons",
-      "community": 12,
+      "community": 8,
       "norm_label": "deviceicons"
     },
     {
@@ -830,7 +830,7 @@
       "source_location": "L37",
       "_origin": "ast",
       "id": "fire_page_devicestatebadge",
-      "community": 12,
+      "community": 8,
       "norm_label": "devicestatebadge"
     },
     {
@@ -840,7 +840,7 @@
       "source_location": "L43",
       "_origin": "ast",
       "id": "fire_page_devicetypelabel",
-      "community": 12,
+      "community": 8,
       "norm_label": "devicetypelabel"
     },
     {
@@ -850,7 +850,7 @@
       "source_location": "L51",
       "_origin": "ast",
       "id": "fire_page_firepage",
-      "community": 12,
+      "community": 8,
       "norm_label": "firepage()"
     },
     {
@@ -1090,7 +1090,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "dynamic_dashboardgrid",
-      "community": 16,
+      "community": 23,
       "norm_label": "dashboardgrid.tsx"
     },
     {
@@ -1100,7 +1100,7 @@
       "source_location": "L13",
       "_origin": "ast",
       "id": "dynamic_dashboardgrid_dashboardgrid",
-      "community": 0,
+      "community": 23,
       "norm_label": "dashboardgrid()"
     },
     {
@@ -1142,6 +1142,36 @@
       "id": "dynamic_unknownwidget_unknownwidget",
       "community": 16,
       "norm_label": "unknownwidget()"
+    },
+    {
+      "label": "SDUIRenderer.test.tsx",
+      "file_type": "code",
+      "source_file": "app/components/dynamic/__tests__/SDUIRenderer.test.tsx",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "tests_sduirenderer_test",
+      "community": 16,
+      "norm_label": "sduirenderer.test.tsx"
+    },
+    {
+      "label": "consoleErrorSpy",
+      "file_type": "code",
+      "source_file": "app/components/dynamic/__tests__/SDUIRenderer.test.tsx",
+      "source_location": "L17",
+      "_origin": "ast",
+      "id": "tests_sduirenderer_test_consoleerrorspy",
+      "community": 16,
+      "norm_label": "consoleerrorspy"
+    },
+    {
+      "label": "baseConfig",
+      "file_type": "code",
+      "source_file": "app/components/dynamic/__tests__/SDUIRenderer.test.tsx",
+      "source_location": "L19",
+      "_origin": "ast",
+      "id": "tests_sduirenderer_test_baseconfig",
+      "community": 16,
+      "norm_label": "baseconfig"
     },
     {
       "label": "AlarmList.tsx",
@@ -1284,6 +1314,146 @@
       "norm_label": "sensorreadout()"
     },
     {
+      "label": "AlarmList.test.tsx",
+      "file_type": "code",
+      "source_file": "app/components/dynamic/widgets/__tests__/AlarmList.test.tsx",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "tests_alarmlist_test",
+      "community": 16,
+      "norm_label": "alarmlist.test.tsx"
+    },
+    {
+      "label": "baseConfig",
+      "file_type": "code",
+      "source_file": "app/components/dynamic/widgets/__tests__/AlarmList.test.tsx",
+      "source_location": "L11",
+      "_origin": "ast",
+      "id": "tests_alarmlist_test_baseconfig",
+      "community": 16,
+      "norm_label": "baseconfig"
+    },
+    {
+      "label": "DoorCard.test.tsx",
+      "file_type": "code",
+      "source_file": "app/components/dynamic/widgets/__tests__/DoorCard.test.tsx",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "tests_doorcard_test",
+      "community": 16,
+      "norm_label": "doorcard.test.tsx"
+    },
+    {
+      "label": "baseConfig",
+      "file_type": "code",
+      "source_file": "app/components/dynamic/widgets/__tests__/DoorCard.test.tsx",
+      "source_location": "L11",
+      "_origin": "ast",
+      "id": "tests_doorcard_test_baseconfig",
+      "community": 16,
+      "norm_label": "baseconfig"
+    },
+    {
+      "label": "FirePanelCard.test.tsx",
+      "file_type": "code",
+      "source_file": "app/components/dynamic/widgets/__tests__/FirePanelCard.test.tsx",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "tests_firepanelcard_test",
+      "community": 16,
+      "norm_label": "firepanelcard.test.tsx"
+    },
+    {
+      "label": "baseConfig",
+      "file_type": "code",
+      "source_file": "app/components/dynamic/widgets/__tests__/FirePanelCard.test.tsx",
+      "source_location": "L6",
+      "_origin": "ast",
+      "id": "tests_firepanelcard_test_baseconfig",
+      "community": 16,
+      "norm_label": "baseconfig"
+    },
+    {
+      "label": "HvacCard.test.tsx",
+      "file_type": "code",
+      "source_file": "app/components/dynamic/widgets/__tests__/HvacCard.test.tsx",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "tests_hvaccard_test",
+      "community": 9,
+      "norm_label": "hvaccard.test.tsx"
+    },
+    {
+      "label": "baseConfig",
+      "file_type": "code",
+      "source_file": "app/components/dynamic/widgets/__tests__/HvacCard.test.tsx",
+      "source_location": "L13",
+      "_origin": "ast",
+      "id": "tests_hvaccard_test_baseconfig",
+      "community": 9,
+      "norm_label": "baseconfig"
+    },
+    {
+      "label": "LightingCard.test.tsx",
+      "file_type": "code",
+      "source_file": "app/components/dynamic/widgets/__tests__/LightingCard.test.tsx",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "tests_lightingcard_test",
+      "community": 16,
+      "norm_label": "lightingcard.test.tsx"
+    },
+    {
+      "label": "baseConfig",
+      "file_type": "code",
+      "source_file": "app/components/dynamic/widgets/__tests__/LightingCard.test.tsx",
+      "source_location": "L12",
+      "_origin": "ast",
+      "id": "tests_lightingcard_test_baseconfig",
+      "community": 16,
+      "norm_label": "baseconfig"
+    },
+    {
+      "label": "MeterGauge.test.tsx",
+      "file_type": "code",
+      "source_file": "app/components/dynamic/widgets/__tests__/MeterGauge.test.tsx",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "tests_metergauge_test",
+      "community": 16,
+      "norm_label": "metergauge.test.tsx"
+    },
+    {
+      "label": "baseConfig",
+      "file_type": "code",
+      "source_file": "app/components/dynamic/widgets/__tests__/MeterGauge.test.tsx",
+      "source_location": "L6",
+      "_origin": "ast",
+      "id": "tests_metergauge_test_baseconfig",
+      "community": 16,
+      "norm_label": "baseconfig"
+    },
+    {
+      "label": "SensorReadout.test.tsx",
+      "file_type": "code",
+      "source_file": "app/components/dynamic/widgets/__tests__/SensorReadout.test.tsx",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "tests_sensorreadout_test",
+      "community": 16,
+      "norm_label": "sensorreadout.test.tsx"
+    },
+    {
+      "label": "baseConfig",
+      "file_type": "code",
+      "source_file": "app/components/dynamic/widgets/__tests__/SensorReadout.test.tsx",
+      "source_location": "L6",
+      "_origin": "ast",
+      "id": "tests_sensorreadout_test_baseconfig",
+      "community": 16,
+      "norm_label": "baseconfig"
+    },
+    {
       "label": "index.ts",
       "file_type": "code",
       "source_file": "app/components/dynamic/widgets/index.ts",
@@ -1340,7 +1510,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "tests_lighting_controls_test",
-      "community": 26,
+      "community": 0,
       "norm_label": "lighting-controls.test.tsx"
     },
     {
@@ -1460,7 +1630,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "ui_lighting_controls",
-      "community": 26,
+      "community": 0,
       "norm_label": "lighting-controls.tsx"
     },
     {
@@ -1470,7 +1640,7 @@
       "source_location": "L7",
       "_origin": "ast",
       "id": "ui_lighting_controls_dimslider",
-      "community": 26,
+      "community": 0,
       "norm_label": "dimslider()"
     },
     {
@@ -1480,7 +1650,7 @@
       "source_location": "L35",
       "_origin": "ast",
       "id": "ui_lighting_controls_lighttoggle",
-      "community": 26,
+      "community": 0,
       "norm_label": "lighttoggle()"
     },
     {
@@ -1844,6 +2014,36 @@
       "norm_label": "dashboardpage()"
     },
     {
+      "label": "auth.spec.ts",
+      "file_type": "code",
+      "source_file": "e2e/auth.spec.ts",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "e2e_auth_spec",
+      "community": 54,
+      "norm_label": "auth.spec.ts"
+    },
+    {
+      "label": "hvac.spec.ts",
+      "file_type": "code",
+      "source_file": "e2e/hvac.spec.ts",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "e2e_hvac_spec",
+      "community": 55,
+      "norm_label": "hvac.spec.ts"
+    },
+    {
+      "label": "security.spec.ts",
+      "file_type": "code",
+      "source_file": "e2e/security.spec.ts",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "e2e_security_spec",
+      "community": 56,
+      "norm_label": "security.spec.ts"
+    },
+    {
       "label": "smoke.spec.ts",
       "file_type": "code",
       "source_file": "e2e/smoke.spec.ts",
@@ -1922,6 +2122,26 @@
       "id": "tests_auth_test",
       "community": 4,
       "norm_label": "auth.test.ts"
+    },
+    {
+      "label": "inference.test.ts",
+      "file_type": "code",
+      "source_file": "lib/__tests__/inference.test.ts",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "tests_inference_test",
+      "community": 12,
+      "norm_label": "inference.test.ts"
+    },
+    {
+      "label": "telemetry.test.ts",
+      "file_type": "code",
+      "source_file": "lib/__tests__/telemetry.test.ts",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "tests_telemetry_test",
+      "community": 26,
+      "norm_label": "telemetry.test.ts"
     },
     {
       "label": "useSSE.test.ts",
@@ -2142,6 +2362,66 @@
       "id": "lib_auth_checkaccess",
       "community": 0,
       "norm_label": "checkaccess()"
+    },
+    {
+      "label": "inference.ts",
+      "file_type": "code",
+      "source_file": "lib/inference.ts",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "lib_inference",
+      "community": 12,
+      "norm_label": "inference.ts"
+    },
+    {
+      "label": "AnomalyResult",
+      "file_type": "code",
+      "source_file": "lib/inference.ts",
+      "source_location": "L4",
+      "_origin": "ast",
+      "id": "lib_inference_anomalyresult",
+      "community": 12,
+      "norm_label": "anomalyresult"
+    },
+    {
+      "label": "ModelFn",
+      "file_type": "code",
+      "source_file": "lib/inference.ts",
+      "source_location": "L12",
+      "_origin": "ast",
+      "id": "lib_inference_modelfn",
+      "community": 12,
+      "norm_label": "modelfn"
+    },
+    {
+      "label": "mockModel()",
+      "file_type": "code",
+      "source_file": "lib/inference.ts",
+      "source_location": "L14",
+      "_origin": "ast",
+      "id": "lib_inference_mockmodel",
+      "community": 12,
+      "norm_label": "mockmodel()"
+    },
+    {
+      "label": "getAnomalyScore()",
+      "file_type": "code",
+      "source_file": "lib/inference.ts",
+      "source_location": "L26",
+      "_origin": "ast",
+      "id": "lib_inference_getanomalyscore",
+      "community": 12,
+      "norm_label": "getanomalyscore()"
+    },
+    {
+      "label": "getBatchScores()",
+      "file_type": "code",
+      "source_file": "lib/inference.ts",
+      "source_location": "L73",
+      "_origin": "ast",
+      "id": "lib_inference_getbatchscores",
+      "community": 12,
+      "norm_label": "getbatchscores()"
     },
     {
       "label": "prisma.ts",
@@ -2372,6 +2652,46 @@
       "id": "lib_schemas_acknowledgealarminput",
       "community": 0,
       "norm_label": "acknowledgealarminput"
+    },
+    {
+      "label": "telemetry.ts",
+      "file_type": "code",
+      "source_file": "lib/telemetry.ts",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "lib_telemetry",
+      "community": 26,
+      "norm_label": "telemetry.ts"
+    },
+    {
+      "label": "TelemetrySchema",
+      "file_type": "code",
+      "source_file": "lib/telemetry.ts",
+      "source_location": "L5",
+      "_origin": "ast",
+      "id": "lib_telemetry_telemetryschema",
+      "community": 26,
+      "norm_label": "telemetryschema"
+    },
+    {
+      "label": "Telemetry",
+      "file_type": "code",
+      "source_file": "lib/telemetry.ts",
+      "source_location": "L27",
+      "_origin": "ast",
+      "id": "lib_telemetry_telemetry",
+      "community": 26,
+      "norm_label": "telemetry"
+    },
+    {
+      "label": "validateTelemetry()",
+      "file_type": "code",
+      "source_file": "lib/telemetry.ts",
+      "source_location": "L29",
+      "_origin": "ast",
+      "id": "lib_telemetry_validatetelemetry",
+      "community": 26,
+      "norm_label": "validatetelemetry()"
     },
     {
       "label": "temperature.ts",
@@ -2970,7 +3290,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "package",
-      "community": 6,
+      "community": 10,
       "norm_label": "package.json"
     },
     {
@@ -2980,7 +3300,7 @@
       "source_location": "L2",
       "_origin": "ast",
       "id": "package_name",
-      "community": 6,
+      "community": 10,
       "norm_label": "name"
     },
     {
@@ -2990,7 +3310,7 @@
       "source_location": "L3",
       "_origin": "ast",
       "id": "package_version",
-      "community": 6,
+      "community": 10,
       "norm_label": "version"
     },
     {
@@ -3000,7 +3320,7 @@
       "source_location": "L4",
       "_origin": "ast",
       "id": "package_private",
-      "community": 6,
+      "community": 10,
       "norm_label": "private"
     },
     {
@@ -3010,7 +3330,7 @@
       "source_location": "L5",
       "_origin": "ast",
       "id": "package_scripts",
-      "community": 6,
+      "community": 10,
       "norm_label": "scripts"
     },
     {
@@ -3020,7 +3340,7 @@
       "source_location": "L6",
       "_origin": "ast",
       "id": "package_scripts_dev",
-      "community": 6,
+      "community": 10,
       "norm_label": "dev"
     },
     {
@@ -3030,7 +3350,7 @@
       "source_location": "L7",
       "_origin": "ast",
       "id": "package_scripts_build",
-      "community": 6,
+      "community": 10,
       "norm_label": "build"
     },
     {
@@ -3040,7 +3360,7 @@
       "source_location": "L8",
       "_origin": "ast",
       "id": "package_scripts_start",
-      "community": 6,
+      "community": 10,
       "norm_label": "start"
     },
     {
@@ -3050,7 +3370,7 @@
       "source_location": "L9",
       "_origin": "ast",
       "id": "package_scripts_lint",
-      "community": 6,
+      "community": 10,
       "norm_label": "lint"
     },
     {
@@ -3060,7 +3380,7 @@
       "source_location": "L10",
       "_origin": "ast",
       "id": "package_scripts_db_generate",
-      "community": 6,
+      "community": 10,
       "norm_label": "db:generate"
     },
     {
@@ -3070,7 +3390,7 @@
       "source_location": "L11",
       "_origin": "ast",
       "id": "package_scripts_db_push",
-      "community": 6,
+      "community": 10,
       "norm_label": "db:push"
     },
     {
@@ -3080,7 +3400,7 @@
       "source_location": "L12",
       "_origin": "ast",
       "id": "package_scripts_db_seed",
-      "community": 6,
+      "community": 10,
       "norm_label": "db:seed"
     },
     {
@@ -3090,7 +3410,7 @@
       "source_location": "L13",
       "_origin": "ast",
       "id": "package_scripts_test",
-      "community": 6,
+      "community": 10,
       "norm_label": "test"
     },
     {
@@ -3100,7 +3420,7 @@
       "source_location": "L14",
       "_origin": "ast",
       "id": "package_scripts_test_watch",
-      "community": 6,
+      "community": 10,
       "norm_label": "test:watch"
     },
     {
@@ -3110,7 +3430,7 @@
       "source_location": "L15",
       "_origin": "ast",
       "id": "package_scripts_test_coverage",
-      "community": 6,
+      "community": 10,
       "norm_label": "test:coverage"
     },
     {
@@ -3120,7 +3440,7 @@
       "source_location": "L16",
       "_origin": "ast",
       "id": "package_scripts_test_ui",
-      "community": 6,
+      "community": 10,
       "norm_label": "test:ui"
     },
     {
@@ -3334,10 +3654,20 @@
       "norm_label": "@vitejs/plugin-react"
     },
     {
-      "label": "autoprefixer",
+      "label": "@vitest/coverage-v8",
       "file_type": "code",
       "source_file": "package.json",
       "source_location": "L40",
+      "_origin": "ast",
+      "id": "package_devdependencies_vitest_coverage_v8",
+      "community": 6,
+      "norm_label": "@vitest/coverage-v8"
+    },
+    {
+      "label": "autoprefixer",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L41",
       "_origin": "ast",
       "id": "package_devdependencies_autoprefixer",
       "community": 6,
@@ -3347,7 +3677,7 @@
       "label": "eslint",
       "file_type": "code",
       "source_file": "package.json",
-      "source_location": "L41",
+      "source_location": "L42",
       "_origin": "ast",
       "id": "package_devdependencies_eslint",
       "community": 6,
@@ -3357,7 +3687,7 @@
       "label": "eslint-config-next",
       "file_type": "code",
       "source_file": "package.json",
-      "source_location": "L42",
+      "source_location": "L43",
       "_origin": "ast",
       "id": "package_devdependencies_eslint_config_next",
       "community": 6,
@@ -3367,7 +3697,7 @@
       "label": "jsdom",
       "file_type": "code",
       "source_file": "package.json",
-      "source_location": "L43",
+      "source_location": "L44",
       "_origin": "ast",
       "id": "package_devdependencies_jsdom",
       "community": 6,
@@ -3377,7 +3707,7 @@
       "label": "msw",
       "file_type": "code",
       "source_file": "package.json",
-      "source_location": "L44",
+      "source_location": "L45",
       "_origin": "ast",
       "id": "package_devdependencies_msw",
       "community": 6,
@@ -3387,7 +3717,7 @@
       "label": "postcss",
       "file_type": "code",
       "source_file": "package.json",
-      "source_location": "L45",
+      "source_location": "L46",
       "_origin": "ast",
       "id": "package_devdependencies_postcss",
       "community": 6,
@@ -3397,7 +3727,7 @@
       "label": "prisma",
       "file_type": "code",
       "source_file": "package.json",
-      "source_location": "L46",
+      "source_location": "L47",
       "_origin": "ast",
       "id": "package_devdependencies_prisma",
       "community": 6,
@@ -3407,7 +3737,7 @@
       "label": "supertest",
       "file_type": "code",
       "source_file": "package.json",
-      "source_location": "L47",
+      "source_location": "L48",
       "_origin": "ast",
       "id": "package_devdependencies_supertest",
       "community": 6,
@@ -3417,7 +3747,7 @@
       "label": "tailwindcss",
       "file_type": "code",
       "source_file": "package.json",
-      "source_location": "L48",
+      "source_location": "L49",
       "_origin": "ast",
       "id": "package_devdependencies_tailwindcss",
       "community": 6,
@@ -3427,7 +3757,7 @@
       "label": "tsx",
       "file_type": "code",
       "source_file": "package.json",
-      "source_location": "L49",
+      "source_location": "L50",
       "_origin": "ast",
       "id": "package_devdependencies_tsx",
       "community": 6,
@@ -3437,7 +3767,7 @@
       "label": "typescript",
       "file_type": "code",
       "source_file": "package.json",
-      "source_location": "L50",
+      "source_location": "L51",
       "_origin": "ast",
       "id": "package_devdependencies_typescript",
       "community": 6,
@@ -3447,7 +3777,7 @@
       "label": "vitest",
       "file_type": "code",
       "source_file": "package.json",
-      "source_location": "L51",
+      "source_location": "L52",
       "_origin": "ast",
       "id": "package_devdependencies_vitest",
       "community": 6,
@@ -3457,30 +3787,30 @@
       "label": "prisma",
       "file_type": "code",
       "source_file": "package.json",
-      "source_location": "L53",
+      "source_location": "L54",
       "_origin": "ast",
       "id": "package_prisma",
-      "community": 6,
+      "community": 10,
       "norm_label": "prisma"
     },
     {
       "label": "seed",
       "file_type": "code",
       "source_file": "package.json",
-      "source_location": "L54",
+      "source_location": "L55",
       "_origin": "ast",
       "id": "package_prisma_seed",
-      "community": 6,
+      "community": 10,
       "norm_label": "seed"
     },
     {
       "label": "packageManager",
       "file_type": "code",
       "source_file": "package.json",
-      "source_location": "L56",
+      "source_location": "L57",
       "_origin": "ast",
       "id": "package_packagemanager",
-      "community": 6,
+      "community": 10,
       "norm_label": "packagemanager"
     },
     {
@@ -7485,6 +7815,28 @@
       "target": "widgets_index_widgetregistry"
     },
     {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app/components/dynamic/__tests__/SDUIRenderer.test.tsx",
+      "source_location": "L3",
+      "weight": 1.0,
+      "source": "tests_sduirenderer_test",
+      "target": "dynamic_sduirenderer",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app/components/dynamic/__tests__/SDUIRenderer.test.tsx",
+      "source_location": "L3",
+      "weight": 1.0,
+      "source": "tests_sduirenderer_test",
+      "target": "dynamic_sduirenderer_sduirenderer",
+      "confidence_score": 1.0
+    },
+    {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "app/components/dynamic/UnknownWidget.tsx",
@@ -7520,6 +7872,17 @@
       "relation": "imports_from",
       "context": "import",
       "confidence": "EXTRACTED",
+      "source_file": "app/components/dynamic/__tests__/SDUIRenderer.test.tsx",
+      "source_location": "L4",
+      "weight": 1.0,
+      "source": "tests_sduirenderer_test",
+      "target": "dynamic_unknownwidget",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
       "source_file": "app/components/dynamic/widgets/index.ts",
       "source_location": "L10",
       "weight": 1.0,
@@ -7531,12 +7894,76 @@
       "relation": "imports",
       "context": "import",
       "confidence": "EXTRACTED",
+      "source_file": "app/components/dynamic/__tests__/SDUIRenderer.test.tsx",
+      "source_location": "L4",
+      "weight": 1.0,
+      "source": "tests_sduirenderer_test",
+      "target": "dynamic_unknownwidget_unknownwidget",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
       "source_file": "app/components/dynamic/widgets/index.ts",
       "source_location": "L10",
       "weight": 1.0,
       "confidence_score": 1.0,
       "source": "widgets_index",
       "target": "dynamic_unknownwidget_unknownwidget"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app/components/dynamic/__tests__/SDUIRenderer.test.tsx",
+      "source_location": "L19",
+      "weight": 1.0,
+      "source": "tests_sduirenderer_test",
+      "target": "tests_sduirenderer_test_baseconfig",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app/components/dynamic/__tests__/SDUIRenderer.test.tsx",
+      "source_location": "L17",
+      "weight": 1.0,
+      "source": "tests_sduirenderer_test",
+      "target": "tests_sduirenderer_test_consoleerrorspy",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app/components/dynamic/__tests__/SDUIRenderer.test.tsx",
+      "source_location": "L5",
+      "weight": 1.0,
+      "source": "tests_sduirenderer_test",
+      "target": "ui_config_types",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app/components/dynamic/__tests__/SDUIRenderer.test.tsx",
+      "source_location": "L5",
+      "weight": 1.0,
+      "source": "tests_sduirenderer_test",
+      "target": "ui_config_types_widgetconfig",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app/components/dynamic/widgets/__tests__/AlarmList.test.tsx",
+      "source_location": "L3",
+      "weight": 1.0,
+      "source": "tests_alarmlist_test",
+      "target": "widgets_alarmlist",
+      "confidence_score": 1.0
     },
     {
       "relation": "imports",
@@ -7596,12 +8023,34 @@
       "relation": "imports",
       "context": "import",
       "confidence": "EXTRACTED",
+      "source_file": "app/components/dynamic/widgets/__tests__/AlarmList.test.tsx",
+      "source_location": "L3",
+      "weight": 1.0,
+      "source": "tests_alarmlist_test",
+      "target": "widgets_alarmlist_alarmlist",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
       "source_file": "app/components/dynamic/widgets/index.ts",
       "source_location": "L7",
       "weight": 1.0,
       "confidence_score": 1.0,
       "source": "widgets_index",
       "target": "widgets_alarmlist_alarmlist"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app/components/dynamic/widgets/__tests__/DoorCard.test.tsx",
+      "source_location": "L3",
+      "weight": 1.0,
+      "source": "tests_doorcard_test",
+      "target": "widgets_doorcard",
+      "confidence_score": 1.0
     },
     {
       "relation": "imports_from",
@@ -7661,12 +8110,34 @@
       "relation": "imports",
       "context": "import",
       "confidence": "EXTRACTED",
+      "source_file": "app/components/dynamic/widgets/__tests__/DoorCard.test.tsx",
+      "source_location": "L3",
+      "weight": 1.0,
+      "source": "tests_doorcard_test",
+      "target": "widgets_doorcard_doorcard",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
       "source_file": "app/components/dynamic/widgets/index.ts",
       "source_location": "L5",
       "weight": 1.0,
       "confidence_score": 1.0,
       "source": "widgets_index",
       "target": "widgets_doorcard_doorcard"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app/components/dynamic/widgets/__tests__/FirePanelCard.test.tsx",
+      "source_location": "L3",
+      "weight": 1.0,
+      "source": "tests_firepanelcard_test",
+      "target": "widgets_firepanelcard",
+      "confidence_score": 1.0
     },
     {
       "relation": "imports_from",
@@ -7715,12 +8186,34 @@
       "relation": "imports",
       "context": "import",
       "confidence": "EXTRACTED",
+      "source_file": "app/components/dynamic/widgets/__tests__/FirePanelCard.test.tsx",
+      "source_location": "L3",
+      "weight": 1.0,
+      "source": "tests_firepanelcard_test",
+      "target": "widgets_firepanelcard_firepanelcard",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
       "source_file": "app/components/dynamic/widgets/index.ts",
       "source_location": "L9",
       "weight": 1.0,
       "confidence_score": 1.0,
       "source": "widgets_index",
       "target": "widgets_firepanelcard_firepanelcard"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app/components/dynamic/widgets/__tests__/HvacCard.test.tsx",
+      "source_location": "L3",
+      "weight": 1.0,
+      "source": "tests_hvaccard_test",
+      "target": "widgets_hvaccard",
+      "confidence_score": 1.0
     },
     {
       "relation": "imports_from",
@@ -7802,12 +8295,34 @@
       "relation": "imports",
       "context": "import",
       "confidence": "EXTRACTED",
+      "source_file": "app/components/dynamic/widgets/__tests__/HvacCard.test.tsx",
+      "source_location": "L3",
+      "weight": 1.0,
+      "source": "tests_hvaccard_test",
+      "target": "widgets_hvaccard_hvaccard",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
       "source_file": "app/components/dynamic/widgets/index.ts",
       "source_location": "L3",
       "weight": 1.0,
       "confidence_score": 1.0,
       "source": "widgets_index",
       "target": "widgets_hvaccard_hvaccard"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app/components/dynamic/widgets/__tests__/LightingCard.test.tsx",
+      "source_location": "L3",
+      "weight": 1.0,
+      "source": "tests_lightingcard_test",
+      "target": "widgets_lightingcard",
+      "confidence_score": 1.0
     },
     {
       "relation": "imports_from",
@@ -7878,12 +8393,34 @@
       "relation": "imports",
       "context": "import",
       "confidence": "EXTRACTED",
+      "source_file": "app/components/dynamic/widgets/__tests__/LightingCard.test.tsx",
+      "source_location": "L3",
+      "weight": 1.0,
+      "source": "tests_lightingcard_test",
+      "target": "widgets_lightingcard_lightingcard",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
       "source_file": "app/components/dynamic/widgets/index.ts",
       "source_location": "L4",
       "weight": 1.0,
       "confidence_score": 1.0,
       "source": "widgets_index",
       "target": "widgets_lightingcard_lightingcard"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app/components/dynamic/widgets/__tests__/MeterGauge.test.tsx",
+      "source_location": "L3",
+      "weight": 1.0,
+      "source": "tests_metergauge_test",
+      "target": "widgets_metergauge",
+      "confidence_score": 1.0
     },
     {
       "relation": "imports_from",
@@ -7932,12 +8469,34 @@
       "relation": "imports",
       "context": "import",
       "confidence": "EXTRACTED",
+      "source_file": "app/components/dynamic/widgets/__tests__/MeterGauge.test.tsx",
+      "source_location": "L3",
+      "weight": 1.0,
+      "source": "tests_metergauge_test",
+      "target": "widgets_metergauge_metergauge",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
       "source_file": "app/components/dynamic/widgets/index.ts",
       "source_location": "L8",
       "weight": 1.0,
       "confidence_score": 1.0,
       "source": "widgets_index",
       "target": "widgets_metergauge_metergauge"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app/components/dynamic/widgets/__tests__/SensorReadout.test.tsx",
+      "source_location": "L3",
+      "weight": 1.0,
+      "source": "tests_sensorreadout_test",
+      "target": "widgets_sensorreadout",
+      "confidence_score": 1.0
     },
     {
       "relation": "imports_from",
@@ -7986,12 +8545,247 @@
       "relation": "imports",
       "context": "import",
       "confidence": "EXTRACTED",
+      "source_file": "app/components/dynamic/widgets/__tests__/SensorReadout.test.tsx",
+      "source_location": "L3",
+      "weight": 1.0,
+      "source": "tests_sensorreadout_test",
+      "target": "widgets_sensorreadout_sensorreadout",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
       "source_file": "app/components/dynamic/widgets/index.ts",
       "source_location": "L6",
       "weight": 1.0,
       "confidence_score": 1.0,
       "source": "widgets_index",
       "target": "widgets_sensorreadout_sensorreadout"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app/components/dynamic/widgets/__tests__/AlarmList.test.tsx",
+      "source_location": "L11",
+      "weight": 1.0,
+      "source": "tests_alarmlist_test",
+      "target": "tests_alarmlist_test_baseconfig",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app/components/dynamic/widgets/__tests__/AlarmList.test.tsx",
+      "source_location": "L4",
+      "weight": 1.0,
+      "source": "tests_alarmlist_test",
+      "target": "ui_config_types",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app/components/dynamic/widgets/__tests__/AlarmList.test.tsx",
+      "source_location": "L4",
+      "weight": 1.0,
+      "source": "tests_alarmlist_test",
+      "target": "ui_config_types_widgetconfig",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app/components/dynamic/widgets/__tests__/DoorCard.test.tsx",
+      "source_location": "L11",
+      "weight": 1.0,
+      "source": "tests_doorcard_test",
+      "target": "tests_doorcard_test_baseconfig",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app/components/dynamic/widgets/__tests__/DoorCard.test.tsx",
+      "source_location": "L4",
+      "weight": 1.0,
+      "source": "tests_doorcard_test",
+      "target": "ui_config_types",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app/components/dynamic/widgets/__tests__/DoorCard.test.tsx",
+      "source_location": "L4",
+      "weight": 1.0,
+      "source": "tests_doorcard_test",
+      "target": "ui_config_types_widgetconfig",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app/components/dynamic/widgets/__tests__/FirePanelCard.test.tsx",
+      "source_location": "L6",
+      "weight": 1.0,
+      "source": "tests_firepanelcard_test",
+      "target": "tests_firepanelcard_test_baseconfig",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app/components/dynamic/widgets/__tests__/FirePanelCard.test.tsx",
+      "source_location": "L4",
+      "weight": 1.0,
+      "source": "tests_firepanelcard_test",
+      "target": "ui_config_types",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app/components/dynamic/widgets/__tests__/FirePanelCard.test.tsx",
+      "source_location": "L4",
+      "weight": 1.0,
+      "source": "tests_firepanelcard_test",
+      "target": "ui_config_types_widgetconfig",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app/components/dynamic/widgets/__tests__/HvacCard.test.tsx",
+      "source_location": "L13",
+      "weight": 1.0,
+      "source": "tests_hvaccard_test",
+      "target": "tests_hvaccard_test_baseconfig",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app/components/dynamic/widgets/__tests__/HvacCard.test.tsx",
+      "source_location": "L4",
+      "weight": 1.0,
+      "source": "tests_hvaccard_test",
+      "target": "ui_config_types",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app/components/dynamic/widgets/__tests__/HvacCard.test.tsx",
+      "source_location": "L4",
+      "weight": 1.0,
+      "source": "tests_hvaccard_test",
+      "target": "ui_config_types_widgetconfig",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app/components/dynamic/widgets/__tests__/LightingCard.test.tsx",
+      "source_location": "L12",
+      "weight": 1.0,
+      "source": "tests_lightingcard_test",
+      "target": "tests_lightingcard_test_baseconfig",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app/components/dynamic/widgets/__tests__/LightingCard.test.tsx",
+      "source_location": "L4",
+      "weight": 1.0,
+      "source": "tests_lightingcard_test",
+      "target": "ui_config_types",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app/components/dynamic/widgets/__tests__/LightingCard.test.tsx",
+      "source_location": "L4",
+      "weight": 1.0,
+      "source": "tests_lightingcard_test",
+      "target": "ui_config_types_widgetconfig",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app/components/dynamic/widgets/__tests__/MeterGauge.test.tsx",
+      "source_location": "L6",
+      "weight": 1.0,
+      "source": "tests_metergauge_test",
+      "target": "tests_metergauge_test_baseconfig",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app/components/dynamic/widgets/__tests__/MeterGauge.test.tsx",
+      "source_location": "L4",
+      "weight": 1.0,
+      "source": "tests_metergauge_test",
+      "target": "ui_config_types",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app/components/dynamic/widgets/__tests__/MeterGauge.test.tsx",
+      "source_location": "L4",
+      "weight": 1.0,
+      "source": "tests_metergauge_test",
+      "target": "ui_config_types_widgetconfig",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app/components/dynamic/widgets/__tests__/SensorReadout.test.tsx",
+      "source_location": "L6",
+      "weight": 1.0,
+      "source": "tests_sensorreadout_test",
+      "target": "tests_sensorreadout_test_baseconfig",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app/components/dynamic/widgets/__tests__/SensorReadout.test.tsx",
+      "source_location": "L4",
+      "weight": 1.0,
+      "source": "tests_sensorreadout_test",
+      "target": "ui_config_types",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app/components/dynamic/widgets/__tests__/SensorReadout.test.tsx",
+      "source_location": "L4",
+      "weight": 1.0,
+      "source": "tests_sensorreadout_test",
+      "target": "ui_config_types_widgetconfig",
+      "confidence_score": 1.0
     },
     {
       "relation": "imports_from",
@@ -8032,9 +8826,9 @@
       "source_file": "app/components/ui/__tests__/alarm-ack-form.test.tsx",
       "source_location": "L3",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "tests_alarm_ack_form_test",
-      "target": "ui_alarm_ack_form",
-      "confidence_score": 1.0
+      "target": "ui_alarm_ack_form"
     },
     {
       "relation": "imports",
@@ -8043,9 +8837,9 @@
       "source_file": "app/components/ui/__tests__/alarm-ack-form.test.tsx",
       "source_location": "L3",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "tests_alarm_ack_form_test",
-      "target": "ui_alarm_ack_form_alarmackform",
-      "confidence_score": 1.0
+      "target": "ui_alarm_ack_form_alarmackform"
     },
     {
       "relation": "imports_from",
@@ -8054,9 +8848,9 @@
       "source_file": "app/components/ui/__tests__/door-controls.test.tsx",
       "source_location": "L3",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "tests_door_controls_test",
-      "target": "ui_door_controls",
-      "confidence_score": 1.0
+      "target": "ui_door_controls"
     },
     {
       "relation": "imports",
@@ -8065,9 +8859,9 @@
       "source_file": "app/components/ui/__tests__/door-controls.test.tsx",
       "source_location": "L3",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "tests_door_controls_test",
-      "target": "ui_door_controls_doorlockbutton",
-      "confidence_score": 1.0
+      "target": "ui_door_controls_doorlockbutton"
     },
     {
       "relation": "imports_from",
@@ -8076,9 +8870,9 @@
       "source_file": "app/components/ui/__tests__/hvac-controls.test.tsx",
       "source_location": "L4",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "tests_hvac_controls_test",
-      "target": "ui_hvac_controls",
-      "confidence_score": 1.0
+      "target": "ui_hvac_controls"
     },
     {
       "relation": "imports",
@@ -8087,9 +8881,9 @@
       "source_file": "app/components/ui/__tests__/hvac-controls.test.tsx",
       "source_location": "L4",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "tests_hvac_controls_test",
-      "target": "ui_hvac_controls_fanspeedbuttons",
-      "confidence_score": 1.0
+      "target": "ui_hvac_controls_fanspeedbuttons"
     },
     {
       "relation": "imports",
@@ -8098,9 +8892,9 @@
       "source_file": "app/components/ui/__tests__/hvac-controls.test.tsx",
       "source_location": "L4",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "tests_hvac_controls_test",
-      "target": "ui_hvac_controls_hvacmodebuttons",
-      "confidence_score": 1.0
+      "target": "ui_hvac_controls_hvacmodebuttons"
     },
     {
       "relation": "imports",
@@ -8109,9 +8903,9 @@
       "source_file": "app/components/ui/__tests__/hvac-controls.test.tsx",
       "source_location": "L4",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "tests_hvac_controls_test",
-      "target": "ui_hvac_controls_setpointform",
-      "confidence_score": 1.0
+      "target": "ui_hvac_controls_setpointform"
     },
     {
       "relation": "imports_from",
@@ -8120,9 +8914,9 @@
       "source_file": "app/components/ui/__tests__/lighting-controls.test.tsx",
       "source_location": "L3",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "tests_lighting_controls_test",
-      "target": "ui_lighting_controls",
-      "confidence_score": 1.0
+      "target": "ui_lighting_controls"
     },
     {
       "relation": "imports",
@@ -8131,9 +8925,9 @@
       "source_file": "app/components/ui/__tests__/lighting-controls.test.tsx",
       "source_location": "L3",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "tests_lighting_controls_test",
-      "target": "ui_lighting_controls_dimslider",
-      "confidence_score": 1.0
+      "target": "ui_lighting_controls_dimslider"
     },
     {
       "relation": "imports",
@@ -8142,9 +8936,9 @@
       "source_file": "app/components/ui/__tests__/lighting-controls.test.tsx",
       "source_location": "L3",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "tests_lighting_controls_test",
-      "target": "ui_lighting_controls_lighttoggle",
-      "confidence_score": 1.0
+      "target": "ui_lighting_controls_lighttoggle"
     },
     {
       "relation": "contains",
@@ -8152,9 +8946,9 @@
       "source_file": "app/components/ui/__tests__/navigation.test.tsx",
       "source_location": "L7",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "tests_navigation_test",
-      "target": "tests_navigation_test_mockusepathname",
-      "confidence_score": 1.0
+      "target": "tests_navigation_test_mockusepathname"
     },
     {
       "relation": "imports_from",
@@ -8163,9 +8957,9 @@
       "source_file": "app/components/ui/__tests__/navigation.test.tsx",
       "source_location": "L4",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "tests_navigation_test",
-      "target": "ui_navigation",
-      "confidence_score": 1.0
+      "target": "ui_navigation"
     },
     {
       "relation": "imports",
@@ -8174,9 +8968,9 @@
       "source_file": "app/components/ui/__tests__/navigation.test.tsx",
       "source_location": "L4",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "tests_navigation_test",
-      "target": "ui_navigation_navigation",
-      "confidence_score": 1.0
+      "target": "ui_navigation_navigation"
     },
     {
       "relation": "imports_from",
@@ -8842,6 +9636,72 @@
       "confidence_score": 1.0,
       "source": "tests_auth_test",
       "target": "lib_types_role_hierarchy"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/__tests__/inference.test.ts",
+      "source_location": "L2",
+      "weight": 1.0,
+      "source": "tests_inference_test",
+      "target": "lib_inference",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/__tests__/inference.test.ts",
+      "source_location": "L2",
+      "weight": 1.0,
+      "source": "tests_inference_test",
+      "target": "lib_inference_getanomalyscore",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/__tests__/inference.test.ts",
+      "source_location": "L2",
+      "weight": 1.0,
+      "source": "tests_inference_test",
+      "target": "lib_inference_getbatchscores",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/__tests__/telemetry.test.ts",
+      "source_location": "L2",
+      "weight": 1.0,
+      "source": "tests_telemetry_test",
+      "target": "lib_telemetry",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/__tests__/telemetry.test.ts",
+      "source_location": "L2",
+      "weight": 1.0,
+      "source": "tests_telemetry_test",
+      "target": "lib_telemetry_telemetryschema",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/__tests__/telemetry.test.ts",
+      "source_location": "L2",
+      "weight": 1.0,
+      "source": "tests_telemetry_test",
+      "target": "lib_telemetry_validatetelemetry",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -9619,6 +10479,78 @@
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
+      "source_file": "lib/inference.ts",
+      "source_location": "L4",
+      "weight": 1.0,
+      "source": "lib_inference",
+      "target": "lib_inference_anomalyresult",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/inference.ts",
+      "source_location": "L26",
+      "weight": 1.0,
+      "source": "lib_inference",
+      "target": "lib_inference_getanomalyscore",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/inference.ts",
+      "source_location": "L73",
+      "weight": 1.0,
+      "source": "lib_inference",
+      "target": "lib_inference_getbatchscores",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/inference.ts",
+      "source_location": "L14",
+      "weight": 1.0,
+      "source": "lib_inference",
+      "target": "lib_inference_mockmodel",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/inference.ts",
+      "source_location": "L12",
+      "weight": 1.0,
+      "source": "lib_inference",
+      "target": "lib_inference_modelfn",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/inference.ts",
+      "source_location": "L60",
+      "weight": 1.0,
+      "source": "lib_inference_getanomalyscore",
+      "target": "lib_inference_mockmodel",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/inference.ts",
+      "source_location": "L78",
+      "weight": 1.0,
+      "source": "lib_inference_getbatchscores",
+      "target": "lib_inference_getanomalyscore",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
       "source_file": "lib/prisma.ts",
       "source_location": "L3",
       "weight": 1.0,
@@ -9836,6 +10768,36 @@
       "confidence_score": 1.0,
       "source": "lib_schemas",
       "target": "lib_schemas_togglelightschema"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/telemetry.ts",
+      "source_location": "L27",
+      "weight": 1.0,
+      "source": "lib_telemetry",
+      "target": "lib_telemetry_telemetry",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/telemetry.ts",
+      "source_location": "L5",
+      "weight": 1.0,
+      "source": "lib_telemetry",
+      "target": "lib_telemetry_telemetryschema",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/telemetry.ts",
+      "source_location": "L29",
+      "weight": 1.0,
+      "source": "lib_telemetry",
+      "target": "lib_telemetry_validatetelemetry",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -10997,6 +11959,16 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "package.json",
+      "source_location": "L40",
+      "weight": 1.0,
+      "source": "package_devdependencies",
+      "target": "package_devdependencies_vitest_coverage_v8",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "package.json",
       "source_location": "L52",
       "weight": 1.0,
       "confidence_score": 1.0,
@@ -11423,9 +12395,9 @@
       "source_file": "AGENTS.md",
       "source_location": "L2",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "agents",
-      "target": "agents_agents_md_web_validated_2026_06_23",
-      "confidence_score": 1.0
+      "target": "agents_agents_md_web_validated_2026_06_23"
     },
     {
       "relation": "contains",
@@ -11433,9 +12405,9 @@
       "source_file": "AGENTS.md",
       "source_location": "L45",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "agents_agents_md_web_validated_2026_06_23",
-      "target": "agents_agent_rules_sorted_by_precedence",
-      "confidence_score": 1.0
+      "target": "agents_agent_rules_sorted_by_precedence"
     },
     {
       "relation": "contains",
@@ -11443,9 +12415,9 @@
       "source_file": "AGENTS.md",
       "source_location": "L226",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "agents_agents_md_web_validated_2026_06_23",
-      "target": "agents_design_usecase_test_map",
-      "confidence_score": 1.0
+      "target": "agents_design_usecase_test_map"
     },
     {
       "relation": "contains",
@@ -11453,9 +12425,9 @@
       "source_file": "AGENTS.md",
       "source_location": "L12",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "agents_agents_md_web_validated_2026_06_23",
-      "target": "agents_global_directives",
-      "confidence_score": 1.0
+      "target": "agents_global_directives"
     },
     {
       "relation": "contains",
@@ -11463,9 +12435,9 @@
       "source_file": "AGENTS.md",
       "source_location": "L197",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "agents_agents_md_web_validated_2026_06_23",
-      "target": "agents_quick_reference",
-      "confidence_score": 1.0
+      "target": "agents_quick_reference"
     },
     {
       "relation": "contains",
@@ -11603,9 +12575,9 @@
       "source_file": "DESIGN.md",
       "source_location": "L1",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "design",
-      "target": "design_bmc_design_document_updated_2026_06_23",
-      "confidence_score": 1.0
+      "target": "design_bmc_design_document_updated_2026_06_23"
     },
     {
       "relation": "contains",
@@ -11613,9 +12585,9 @@
       "source_file": "DESIGN.md",
       "source_location": "L1281",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "design_bmc_design_document_updated_2026_06_23",
-      "target": "design_10_key_design_decisions_trade_offs",
-      "confidence_score": 1.0
+      "target": "design_10_key_design_decisions_trade_offs"
     },
     {
       "relation": "contains",
@@ -11623,9 +12595,9 @@
       "source_file": "DESIGN.md",
       "source_location": "L1299",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "design_bmc_design_document_updated_2026_06_23",
-      "target": "design_11_security_considerations",
-      "confidence_score": 1.0
+      "target": "design_11_security_considerations"
     },
     {
       "relation": "contains",
@@ -11633,9 +12605,9 @@
       "source_file": "DESIGN.md",
       "source_location": "L1520",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "design_bmc_design_document_updated_2026_06_23",
-      "target": "design_12_monitoring_observability",
-      "confidence_score": 1.0
+      "target": "design_12_monitoring_observability"
     },
     {
       "relation": "contains",
@@ -11643,9 +12615,9 @@
       "source_file": "DESIGN.md",
       "source_location": "L39",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "design_bmc_design_document_updated_2026_06_23",
-      "target": "design_1_system_context_architecture",
-      "confidence_score": 1.0
+      "target": "design_1_system_context_architecture"
     },
     {
       "relation": "contains",
@@ -11653,9 +12625,9 @@
       "source_file": "DESIGN.md",
       "source_location": "L102",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "design_bmc_design_document_updated_2026_06_23",
-      "target": "design_2_data_model",
-      "confidence_score": 1.0
+      "target": "design_2_data_model"
     },
     {
       "relation": "contains",
@@ -11663,9 +12635,9 @@
       "source_file": "DESIGN.md",
       "source_location": "L427",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "design_bmc_design_document_updated_2026_06_23",
-      "target": "design_3_api_design",
-      "confidence_score": 1.0
+      "target": "design_3_api_design"
     },
     {
       "relation": "contains",
@@ -11673,9 +12645,9 @@
       "source_file": "DESIGN.md",
       "source_location": "L566",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "design_bmc_design_document_updated_2026_06_23",
-      "target": "design_4_real_time_pipeline",
-      "confidence_score": 1.0
+      "target": "design_4_real_time_pipeline"
     },
     {
       "relation": "contains",
@@ -11683,9 +12655,9 @@
       "source_file": "DESIGN.md",
       "source_location": "L669",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "design_bmc_design_document_updated_2026_06_23",
-      "target": "design_5_iot_integration_layer",
-      "confidence_score": 1.0
+      "target": "design_5_iot_integration_layer"
     },
     {
       "relation": "contains",
@@ -11693,9 +12665,9 @@
       "source_file": "DESIGN.md",
       "source_location": "L739",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "design_bmc_design_document_updated_2026_06_23",
-      "target": "design_6_auth_authorization",
-      "confidence_score": 1.0
+      "target": "design_6_auth_authorization"
     },
     {
       "relation": "contains",
@@ -11703,9 +12675,9 @@
       "source_file": "DESIGN.md",
       "source_location": "L829",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "design_bmc_design_document_updated_2026_06_23",
-      "target": "design_7_frontend_architecture",
-      "confidence_score": 1.0
+      "target": "design_7_frontend_architecture"
     },
     {
       "relation": "contains",
@@ -11713,9 +12685,9 @@
       "source_file": "DESIGN.md",
       "source_location": "L1126",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "design_bmc_design_document_updated_2026_06_23",
-      "target": "design_8_ai_ml_pipeline",
-      "confidence_score": 1.0
+      "target": "design_8_ai_ml_pipeline"
     },
     {
       "relation": "contains",
@@ -11723,9 +12695,9 @@
       "source_file": "DESIGN.md",
       "source_location": "L1186",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "design_bmc_design_document_updated_2026_06_23",
-      "target": "design_9_deployment_infrastructure",
-      "confidence_score": 1.0
+      "target": "design_9_deployment_infrastructure"
     },
     {
       "relation": "contains",
@@ -11733,9 +12705,9 @@
       "source_file": "DESIGN.md",
       "source_location": "L22",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "design_bmc_design_document_updated_2026_06_23",
-      "target": "design_table_of_contents",
-      "confidence_score": 1.0
+      "target": "design_table_of_contents"
     },
     {
       "relation": "contains",
@@ -11993,9 +12965,9 @@
       "source_file": "DESIGN.md",
       "source_location": "L953",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "design_7_frontend_architecture",
-      "target": "design_7_4_server_driven_ui_sdui_pipeline",
-      "confidence_score": 1.0
+      "target": "design_7_4_server_driven_ui_sdui_pipeline"
     },
     {
       "relation": "contains",
@@ -12003,9 +12975,9 @@
       "source_file": "DESIGN.md",
       "source_location": "L964",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "design_7_4_server_driven_ui_sdui_pipeline",
-      "target": "design_7_4_1_types_lib_ui_config_types_ts",
-      "confidence_score": 1.0
+      "target": "design_7_4_1_types_lib_ui_config_types_ts"
     },
     {
       "relation": "contains",
@@ -12013,9 +12985,9 @@
       "source_file": "DESIGN.md",
       "source_location": "L1004",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "design_7_4_server_driven_ui_sdui_pipeline",
-      "target": "design_7_4_2_service_lib_ui_config_service_ts",
-      "confidence_score": 1.0
+      "target": "design_7_4_2_service_lib_ui_config_service_ts"
     },
     {
       "relation": "contains",
@@ -12023,9 +12995,9 @@
       "source_file": "DESIGN.md",
       "source_location": "L1016",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "design_7_4_server_driven_ui_sdui_pipeline",
-      "target": "design_7_4_3_api_app_api_buildings_id_ui_config_route_ts",
-      "confidence_score": 1.0
+      "target": "design_7_4_3_api_app_api_buildings_id_ui_config_route_ts"
     },
     {
       "relation": "contains",
@@ -12033,9 +13005,9 @@
       "source_file": "DESIGN.md",
       "source_location": "L1027",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "design_7_4_server_driven_ui_sdui_pipeline",
-      "target": "design_7_4_4_registry_components_dynamic_widgets_index_ts",
-      "confidence_score": 1.0
+      "target": "design_7_4_4_registry_components_dynamic_widgets_index_ts"
     },
     {
       "relation": "contains",
@@ -12043,9 +13015,9 @@
       "source_file": "DESIGN.md",
       "source_location": "L1045",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "design_7_4_server_driven_ui_sdui_pipeline",
-      "target": "design_7_4_5_renderer_components_dynamic_sduirenderer_tsx",
-      "confidence_score": 1.0
+      "target": "design_7_4_5_renderer_components_dynamic_sduirenderer_tsx"
     },
     {
       "relation": "contains",
@@ -12053,9 +13025,9 @@
       "source_file": "DESIGN.md",
       "source_location": "L1064",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "design_7_4_server_driven_ui_sdui_pipeline",
-      "target": "design_7_4_6_grid_components_dynamic_dashboardgrid_tsx_dashboardclient_tsx",
-      "confidence_score": 1.0
+      "target": "design_7_4_6_grid_components_dynamic_dashboardgrid_tsx_dashboardclient_tsx"
     },
     {
       "relation": "contains",
@@ -12063,9 +13035,9 @@
       "source_file": "DESIGN.md",
       "source_location": "L1084",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "design_7_4_server_driven_ui_sdui_pipeline",
-      "target": "design_7_4_7_sse_integration_hooks_usewidgetsse_ts",
-      "confidence_score": 1.0
+      "target": "design_7_4_7_sse_integration_hooks_usewidgetsse_ts"
     },
     {
       "relation": "contains",
@@ -12073,9 +13045,9 @@
       "source_file": "DESIGN.md",
       "source_location": "L1099",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "design_7_4_server_driven_ui_sdui_pipeline",
-      "target": "design_7_4_8_backward_compatibility_deployment_safety",
-      "confidence_score": 1.0
+      "target": "design_7_4_8_backward_compatibility_deployment_safety"
     },
     {
       "relation": "contains",
@@ -12083,9 +13055,9 @@
       "source_file": "DESIGN.md",
       "source_location": "L1109",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "design_7_4_server_driven_ui_sdui_pipeline",
-      "target": "design_7_4_9_widget_components",
-      "confidence_score": 1.0
+      "target": "design_7_4_9_widget_components"
     },
     {
       "relation": "contains",
@@ -12243,9 +13215,9 @@
       "source_file": "TESTING.md",
       "source_location": "L1",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "testing",
-      "target": "testing_updated_2026_06_23_bmc_testing_strategy",
-      "confidence_score": 1.0
+      "target": "testing_updated_2026_06_23_bmc_testing_strategy"
     },
     {
       "relation": "contains",
@@ -12253,9 +13225,9 @@
       "source_file": "TESTING.md",
       "source_location": "L764",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "testing_updated_2026_06_23_bmc_testing_strategy",
-      "target": "testing_10_verification_checklist",
-      "confidence_score": 1.0
+      "target": "testing_10_verification_checklist"
     },
     {
       "relation": "contains",
@@ -12263,9 +13235,9 @@
       "source_file": "TESTING.md",
       "source_location": "L14",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "testing_updated_2026_06_23_bmc_testing_strategy",
-      "target": "testing_1_tdd_as_compulsory_practice",
-      "confidence_score": 1.0
+      "target": "testing_1_tdd_as_compulsory_practice"
     },
     {
       "relation": "contains",
@@ -12273,9 +13245,9 @@
       "source_file": "TESTING.md",
       "source_location": "L51",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "testing_updated_2026_06_23_bmc_testing_strategy",
-      "target": "testing_2_test_pyramid",
-      "confidence_score": 1.0
+      "target": "testing_2_test_pyramid"
     },
     {
       "relation": "contains",
@@ -12283,9 +13255,9 @@
       "source_file": "TESTING.md",
       "source_location": "L307",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "testing_updated_2026_06_23_bmc_testing_strategy",
-      "target": "testing_3_bmc_specific_test_patterns",
-      "confidence_score": 1.0
+      "target": "testing_3_bmc_specific_test_patterns"
     },
     {
       "relation": "contains",
@@ -12293,9 +13265,9 @@
       "source_file": "TESTING.md",
       "source_location": "L536",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "testing_updated_2026_06_23_bmc_testing_strategy",
-      "target": "testing_4_testing_infrastructure",
-      "confidence_score": 1.0
+      "target": "testing_4_testing_infrastructure"
     },
     {
       "relation": "contains",
@@ -12303,9 +13275,9 @@
       "source_file": "TESTING.md",
       "source_location": "L605",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "testing_updated_2026_06_23_bmc_testing_strategy",
-      "target": "testing_5_coverage_thresholds",
-      "confidence_score": 1.0
+      "target": "testing_5_coverage_thresholds"
     },
     {
       "relation": "contains",
@@ -12313,9 +13285,9 @@
       "source_file": "TESTING.md",
       "source_location": "L627",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "testing_updated_2026_06_23_bmc_testing_strategy",
-      "target": "testing_6_tdd_workflow_for_hermes_agents",
-      "confidence_score": 1.0
+      "target": "testing_6_tdd_workflow_for_hermes_agents"
     },
     {
       "relation": "contains",
@@ -12323,9 +13295,9 @@
       "source_file": "TESTING.md",
       "source_location": "L677",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "testing_updated_2026_06_23_bmc_testing_strategy",
-      "target": "testing_7_testing_anti_patterns",
-      "confidence_score": 1.0
+      "target": "testing_7_testing_anti_patterns"
     },
     {
       "relation": "contains",
@@ -12333,9 +13305,9 @@
       "source_file": "TESTING.md",
       "source_location": "L692",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "testing_updated_2026_06_23_bmc_testing_strategy",
-      "target": "testing_8_test_data_strategy",
-      "confidence_score": 1.0
+      "target": "testing_8_test_data_strategy"
     },
     {
       "relation": "contains",
@@ -12343,9 +13315,9 @@
       "source_file": "TESTING.md",
       "source_location": "L738",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "testing_updated_2026_06_23_bmc_testing_strategy",
-      "target": "testing_9_test_naming_convention",
-      "confidence_score": 1.0
+      "target": "testing_9_test_naming_convention"
     },
     {
       "relation": "contains",
@@ -12353,9 +13325,9 @@
       "source_file": "TESTING.md",
       "source_location": "L787",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "testing_updated_2026_06_23_bmc_testing_strategy",
-      "target": "testing_appendix_a_quick_reference",
-      "confidence_score": 1.0
+      "target": "testing_appendix_a_quick_reference"
     },
     {
       "relation": "contains",
@@ -12363,9 +13335,9 @@
       "source_file": "TESTING.md",
       "source_location": "L800",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "testing_updated_2026_06_23_bmc_testing_strategy",
-      "target": "testing_appendix_b_design_md_usecase_md_test_cross_reference",
-      "confidence_score": 1.0
+      "target": "testing_appendix_b_design_md_usecase_md_test_cross_reference"
     },
     {
       "relation": "contains",
@@ -12453,9 +13425,9 @@
       "source_file": "TESTING.md",
       "source_location": "L218",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "testing_2_test_pyramid",
-      "target": "testing_2_6_sdui_service_schema_tests_vitest",
-      "confidence_score": 1.0
+      "target": "testing_2_6_sdui_service_schema_tests_vitest"
     },
     {
       "relation": "contains",
@@ -12513,9 +13485,9 @@
       "source_file": "TESTING.md",
       "source_location": "L430",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "testing_3_bmc_specific_test_patterns",
-      "target": "testing_3_6_sdui_service_tests_uiconfig_service",
-      "confidence_score": 1.0
+      "target": "testing_3_6_sdui_service_tests_uiconfig_service"
     },
     {
       "relation": "contains",
@@ -12523,9 +13495,9 @@
       "source_file": "TESTING.md",
       "source_location": "L470",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "testing_3_bmc_specific_test_patterns",
-      "target": "testing_3_7_widget_rendering_tests_sduirenderer",
-      "confidence_score": 1.0
+      "target": "testing_3_7_widget_rendering_tests_sduirenderer"
     },
     {
       "relation": "contains",
@@ -12533,9 +13505,9 @@
       "source_file": "TESTING.md",
       "source_location": "L498",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "testing_3_bmc_specific_test_patterns",
-      "target": "testing_3_8_uiconfig_api_route_tests_get_api_buildings_id_ui_config",
-      "confidence_score": 1.0
+      "target": "testing_3_8_uiconfig_api_route_tests_get_api_buildings_id_ui_config"
     },
     {
       "relation": "contains",
@@ -12633,9 +13605,9 @@
       "source_file": "USECASE.md",
       "source_location": "L1",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "usecase",
-      "target": "usecase_bmc_use_case_specification",
-      "confidence_score": 1.0
+      "target": "usecase_bmc_use_case_specification"
     },
     {
       "relation": "contains",
@@ -12643,9 +13615,9 @@
       "source_file": "USECASE.md",
       "source_location": "L22",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "usecase_bmc_use_case_specification",
-      "target": "usecase_1_actors",
-      "confidence_score": 1.0
+      "target": "usecase_1_actors"
     },
     {
       "relation": "contains",
@@ -12653,9 +13625,9 @@
       "source_file": "USECASE.md",
       "source_location": "L52",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "usecase_bmc_use_case_specification",
-      "target": "usecase_2_use_case_catalog",
-      "confidence_score": 1.0
+      "target": "usecase_2_use_case_catalog"
     },
     {
       "relation": "contains",
@@ -12663,9 +13635,9 @@
       "source_file": "USECASE.md",
       "source_location": "L498",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "usecase_bmc_use_case_specification",
-      "target": "usecase_3_actor_use_case_matrix",
-      "confidence_score": 1.0
+      "target": "usecase_3_actor_use_case_matrix"
     },
     {
       "relation": "contains",
@@ -12673,9 +13645,9 @@
       "source_file": "USECASE.md",
       "source_location": "L531",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "usecase_bmc_use_case_specification",
-      "target": "usecase_4_use_case_relationships",
-      "confidence_score": 1.0
+      "target": "usecase_4_use_case_relationships"
     },
     {
       "relation": "contains",
@@ -12683,9 +13655,9 @@
       "source_file": "USECASE.md",
       "source_location": "L571",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "usecase_bmc_use_case_specification",
-      "target": "usecase_5_critical_flow_details",
-      "confidence_score": 1.0
+      "target": "usecase_5_critical_flow_details"
     },
     {
       "relation": "contains",
@@ -12693,9 +13665,9 @@
       "source_file": "USECASE.md",
       "source_location": "L585",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "usecase_bmc_use_case_specification",
-      "target": "usecase_6_failure_edge_case_scenarios",
-      "confidence_score": 1.0
+      "target": "usecase_6_failure_edge_case_scenarios"
     },
     {
       "relation": "contains",
@@ -12703,9 +13675,9 @@
       "source_file": "USECASE.md",
       "source_location": "L12",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "usecase_bmc_use_case_specification",
-      "target": "usecase_table_of_contents",
-      "confidence_score": 1.0
+      "target": "usecase_table_of_contents"
     },
     {
       "relation": "contains",
@@ -12713,9 +13685,9 @@
       "source_file": "USECASE.md",
       "source_location": "L24",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "usecase_1_actors",
-      "target": "usecase_1_1_human_actors",
-      "confidence_score": 1.0
+      "target": "usecase_1_1_human_actors"
     },
     {
       "relation": "contains",
@@ -12723,9 +13695,9 @@
       "source_file": "USECASE.md",
       "source_location": "L38",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "usecase_1_actors",
-      "target": "usecase_1_2_system_actors",
-      "confidence_score": 1.0
+      "target": "usecase_1_2_system_actors"
     },
     {
       "relation": "contains",
@@ -12733,9 +13705,9 @@
       "source_file": "USECASE.md",
       "source_location": "L404",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "usecase_2_use_case_catalog",
-      "target": "usecase_2_10_cross_cutting",
-      "confidence_score": 1.0
+      "target": "usecase_2_10_cross_cutting"
     },
     {
       "relation": "contains",
@@ -12743,9 +13715,9 @@
       "source_file": "USECASE.md",
       "source_location": "L421",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "usecase_2_use_case_catalog",
-      "target": "usecase_2_11_smart_dynamic_dashboard_sdui",
-      "confidence_score": 1.0
+      "target": "usecase_2_11_smart_dynamic_dashboard_sdui"
     },
     {
       "relation": "contains",
@@ -12753,9 +13725,9 @@
       "source_file": "USECASE.md",
       "source_location": "L54",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "usecase_2_use_case_catalog",
-      "target": "usecase_2_1_hvac_control",
-      "confidence_score": 1.0
+      "target": "usecase_2_1_hvac_control"
     },
     {
       "relation": "contains",
@@ -12763,9 +13735,9 @@
       "source_file": "USECASE.md",
       "source_location": "L122",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "usecase_2_use_case_catalog",
-      "target": "usecase_2_2_lighting_control",
-      "confidence_score": 1.0
+      "target": "usecase_2_2_lighting_control"
     },
     {
       "relation": "contains",
@@ -12773,9 +13745,9 @@
       "source_file": "USECASE.md",
       "source_location": "L156",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "usecase_2_use_case_catalog",
-      "target": "usecase_2_3_security_access_control",
-      "confidence_score": 1.0
+      "target": "usecase_2_3_security_access_control"
     },
     {
       "relation": "contains",
@@ -12783,9 +13755,9 @@
       "source_file": "USECASE.md",
       "source_location": "L199",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "usecase_2_use_case_catalog",
-      "target": "usecase_2_4_energy_analytics",
-      "confidence_score": 1.0
+      "target": "usecase_2_4_energy_analytics"
     },
     {
       "relation": "contains",
@@ -12793,9 +13765,9 @@
       "source_file": "USECASE.md",
       "source_location": "L225",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "usecase_2_use_case_catalog",
-      "target": "usecase_2_5_alarms_faults",
-      "confidence_score": 1.0
+      "target": "usecase_2_5_alarms_faults"
     },
     {
       "relation": "contains",
@@ -12803,9 +13775,9 @@
       "source_file": "USECASE.md",
       "source_location": "L255",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "usecase_2_use_case_catalog",
-      "target": "usecase_2_6_fire_safety",
-      "confidence_score": 1.0
+      "target": "usecase_2_6_fire_safety"
     },
     {
       "relation": "contains",
@@ -12813,9 +13785,9 @@
       "source_file": "USECASE.md",
       "source_location": "L275",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "usecase_2_use_case_catalog",
-      "target": "usecase_2_7_elevators",
-      "confidence_score": 1.0
+      "target": "usecase_2_7_elevators"
     },
     {
       "relation": "contains",
@@ -12823,9 +13795,9 @@
       "source_file": "USECASE.md",
       "source_location": "L303",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "usecase_2_use_case_catalog",
-      "target": "usecase_2_8_system_integration",
-      "confidence_score": 1.0
+      "target": "usecase_2_8_system_integration"
     },
     {
       "relation": "contains",
@@ -12833,9 +13805,9 @@
       "source_file": "USECASE.md",
       "source_location": "L324",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "usecase_2_use_case_catalog",
-      "target": "usecase_2_9_biomedical_campus_bio",
-      "confidence_score": 1.0
+      "target": "usecase_2_9_biomedical_campus_bio"
     },
     {
       "relation": "contains",
@@ -12843,9 +13815,9 @@
       "source_file": "USECASE.md",
       "source_location": "L533",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "usecase_4_use_case_relationships",
-      "target": "usecase_4_1_include_mandatory_dependency",
-      "confidence_score": 1.0
+      "target": "usecase_4_1_include_mandatory_dependency"
     },
     {
       "relation": "contains",
@@ -12853,9 +13825,9 @@
       "source_file": "USECASE.md",
       "source_location": "L544",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "usecase_4_use_case_relationships",
-      "target": "usecase_4_2_extend_conditional",
-      "confidence_score": 1.0
+      "target": "usecase_4_2_extend_conditional"
     },
     {
       "relation": "contains",
@@ -12863,9 +13835,9 @@
       "source_file": "USECASE.md",
       "source_location": "L553",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "usecase_4_use_case_relationships",
-      "target": "usecase_4_3_generalization_inheritance",
-      "confidence_score": 1.0
+      "target": "usecase_4_3_generalization_inheritance"
     },
     {
       "relation": "contains",
@@ -12873,9 +13845,9 @@
       "source_file": "USECASE.md",
       "source_location": "L573",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "usecase_5_critical_flow_details",
-      "target": "usecase_5_1_full_walkthrough_operator_changes_hvac_setpoint",
-      "confidence_score": 1.0
+      "target": "usecase_5_1_full_walkthrough_operator_changes_hvac_setpoint"
     },
     {
       "relation": "contains",
@@ -12948,6 +13920,5 @@
       "target": "usecase_6_7_audit_compliance_failure_scenarios"
     }
   ],
-  "hyperedges": [],
-  "built_at_commit": "3c3f52de7948022c8c118849e4b16ff8c68cb6eb"
+  "hyperedges": []
 }

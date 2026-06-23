@@ -255,8 +255,8 @@
     "semantic_hash": ""
   },
   "package.json": {
-    "mtime": 1782138133.2476978,
-    "ast_hash": "a14d0226f716730afc9421f84dae3448",
+    "mtime": 1782182792.4075549,
+    "ast_hash": "040102a693786d72d7388956b9f323ba",
     "semantic_hash": ""
   },
   "postcss.config.mjs": {
@@ -280,8 +280,8 @@
     "semantic_hash": ""
   },
   "vitest.config.ts": {
-    "mtime": 1782114396.1571803,
-    "ast_hash": "2467ee725f0ae323cc90f816a337b748",
+    "mtime": 1782183124.030677,
+    "ast_hash": "cb9492634c7064dd6f6f62ed97bc8237",
     "semantic_hash": ""
   },
   "AGENTS.md": {
@@ -462,6 +462,81 @@
   "app/components/ui/__tests__/navigation.test.tsx": {
     "mtime": 1782182496.3176486,
     "ast_hash": "83a073dbb3c04b1f240940bc676d3881",
+    "semantic_hash": ""
+  },
+  "app/components/dynamic/__tests__/SDUIRenderer.test.tsx": {
+    "mtime": 1782183160.9339132,
+    "ast_hash": "bfb6d3abc50db67b28850465ef7383e8",
+    "semantic_hash": ""
+  },
+  "app/components/dynamic/widgets/__tests__/AlarmList.test.tsx": {
+    "mtime": 1782183033.8991003,
+    "ast_hash": "d2f69f7e027f65f516b1b621c29dfdf5",
+    "semantic_hash": ""
+  },
+  "app/components/dynamic/widgets/__tests__/DoorCard.test.tsx": {
+    "mtime": 1782183033.9211004,
+    "ast_hash": "356aaee07a055cc73ffac011d8842dd1",
+    "semantic_hash": ""
+  },
+  "app/components/dynamic/widgets/__tests__/FirePanelCard.test.tsx": {
+    "mtime": 1782183033.8621001,
+    "ast_hash": "1c14e9f89007bf1533b9199485f009c7",
+    "semantic_hash": ""
+  },
+  "app/components/dynamic/widgets/__tests__/HvacCard.test.tsx": {
+    "mtime": 1782183033.9441006,
+    "ast_hash": "251fde277cfc41dbe64afa30e56a3cdd",
+    "semantic_hash": ""
+  },
+  "app/components/dynamic/widgets/__tests__/LightingCard.test.tsx": {
+    "mtime": 1782183033.9531007,
+    "ast_hash": "bfe30d2207d65de0928fcdff8870f29b",
+    "semantic_hash": ""
+  },
+  "app/components/dynamic/widgets/__tests__/MeterGauge.test.tsx": {
+    "mtime": 1782183033.9711008,
+    "ast_hash": "72cff135c7fb36016db3967c18ae0fa5",
+    "semantic_hash": ""
+  },
+  "app/components/dynamic/widgets/__tests__/SensorReadout.test.tsx": {
+    "mtime": 1782183150.761848,
+    "ast_hash": "65283492bbe79ce824ad3014d7338bd2",
+    "semantic_hash": ""
+  },
+  "e2e/auth.spec.ts": {
+    "mtime": 1782183465.0423872,
+    "ast_hash": "8e0e25463f15ae3bad01b95022eea1de",
+    "semantic_hash": ""
+  },
+  "e2e/hvac.spec.ts": {
+    "mtime": 1782183465.039859,
+    "ast_hash": "c7216ff1a3f3d62a95981e4117426754",
+    "semantic_hash": ""
+  },
+  "e2e/security.spec.ts": {
+    "mtime": 1782183465.0408592,
+    "ast_hash": "01765dbfc653b3ad3ae85d7967fa46ac",
+    "semantic_hash": ""
+  },
+  "lib/__tests__/inference.test.ts": {
+    "mtime": 1782183280.1936002,
+    "ast_hash": "94220156551fea8707b85debc2a71fb7",
+    "semantic_hash": ""
+  },
+  "lib/__tests__/telemetry.test.ts": {
+    "mtime": 1782182969.9685724,
+    "ast_hash": "721c096cc8792f3d4d4cc89945322a45",
+    "semantic_hash": ""
+  },
+  "lib/inference.ts": {
+    "mtime": 1782183280.1716762,
+    "ast_hash": "ed8dd766ff4f2c4ef5e277ce82fd9ff5",
+    "semantic_hash": ""
+  },
+  "lib/telemetry.ts": {
+    "mtime": 1782182956.5846055,
+    "ast_hash": "c01f4ce1e63f98af0a3b8bdf1d6d1619",
     "semantic_hash": ""
   }
 }
