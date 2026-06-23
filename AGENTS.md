@@ -1,6 +1,6 @@
 # AGENTS.md
 
-> **Architecture Authority:** `DESIGN.md` (12 sections, 2 appendices)
+| **Architecture Authority:** `DESIGN.md` (12 sections + §7.4 design system)
 > **Testing Mandate:** `TESTING.md` (10 sections, 2 appendices — TDD compulsory, checklist at §10)
 > **Use Case Authority:** `USECASE.md` (40 requirements, 37 use cases, 8 actors, critical flows)
 > **Stack:** Next.js 15 App Router + Prisma + Tailwind + Vercel
@@ -67,7 +67,7 @@ Do not implement P2 before P0. Do not add features not listed without explicit u
 - `'use client'` only for: SSE subscriptions (useSSE), sliders/toggles, real-time gauges, form inputs
 - Server Actions for all mutations (setpoint, lock/unlock, scene activation)
 - Edge middleware only for auth checks + redirects
-- **Design authority:** DESIGN.md §1.2 (architectural philosophy), §7.1 (component tree)
+- **Design authority:** DESIGN.md §7.1 (component tree), §7.4 (design system)
 - **Testing authority:** TESTING.md §2.2 (component tests), §2.1 (pure function tests)
 - **Use case alignment:** UC-HVAC-01 (setpoint), UC-SEC-01 (lock/unlock), UC-LGT-01 (dimming)
 
@@ -81,7 +81,7 @@ All live data arrives via SSE (Server-Sent Events). No polling on any dashboard.
 ### 5. No global state library
 
 Each Client Component manages its own SSE subscription via `useSSE` hook from `@/lib/useSSE`. No Redux/Zustand/Jotai.
-- **Design authority:** DESIGN.md §7.2 (state management table), §7.3 (useSSE implementation)
+- **Design authority:** DESIGN.md §7.2 (state management), §7.3 (useSSE), §7.4 (design system)
 - **Testing authority:** TESTING.md §3.1 (connection lifecycle, message parsing, cleanup on unmount)
 - **Use case alignment:** UC-STRM-01 (SSE subscription lifecycle)
 
@@ -169,7 +169,7 @@ pnpm test:all         # vitest + playwright
 | TDD practice | RED-GREEN-REFACTOR, compulsory | — | §1 | — |
 | Test framework | Vitest + Testing Library + Playwright | — | §2 | — |
 | Server Action tests | Direct invocation, mock Prisma with `@/` alias | §3.4 | §2.3 | UC-HVAC-01 |
-| Component tests | Behavior assertions (no snapshots) | §7.1 | §2.2 | UC-HVAC-01, UC-LGT-01 |
+| Component tests | Behavior assertions (no snapshots) | §7.1, §7.4 | §2.2 | UC-HVAC-01, UC-LGT-01 |
 | SSE hook tests | Mock EventSource global | §7.3 | §3.1 | UC-STRM-01 |
 | Auth matrix tests | 7 role combos + building scope | §6.2, §6.3 | §3.3 | UC-AUTH-02 |
 | Telemetry schema | Zod: buildingId, value range, quality 0-100 | §4.1, §4.2 | §3.2 | UC-SYS-01 |

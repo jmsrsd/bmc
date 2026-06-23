@@ -594,7 +594,7 @@ pnpm test:all                 # Everything
 | Test Pattern | Section | USECASE | DESIGN Ref |
 |-------------|---------|---------|------------|
 | Unit: pure functions | §2.1 | — | §3.4 (setpoint 16-30°C), §4.2 (telemetry) |
-| Component: rendering | §2.2 | UC-HVAC-01, UC-LGT-01 | §7.1 (component tree), §7.2 (state) |
+|| Component: rendering | §2.2 | UC-HVAC-01, UC-LGT-01 | §7.1 (component tree), §7.2 (state), §7.4 (design system) |
 | Server Action: setTemperature | §2.3 | UC-HVAC-01, UC-AUTH-02, UC-AUDIT-01 | §3.4 (Zod + Prisma + revalidatePath + audit) |
 | API: building CRUD | §2.4 | — | §3.2 (URL schema) |
 | E2E: HVAC journey | §2.5 | UC-HVAC-01 | §7.1 (page structure, Server Action) |
