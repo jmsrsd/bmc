@@ -285,28 +285,23 @@
     "semantic_hash": ""
   },
   "AGENTS.md": {
-    "mtime": 1782120684.5611908,
-    "ast_hash": "f4a7a6c08887b1e9a1a2e3807f4b0c7c",
+    "mtime": 1782179846.8513508,
+    "ast_hash": "391380d7ea9d395a302631b73d6c5287",
     "semantic_hash": ""
   },
   "DESIGN.md": {
-    "mtime": 1782138326.6330035,
-    "ast_hash": "96bbbcfa1782145e23366b8cf557a06a",
-    "semantic_hash": ""
-  },
-  "REVISION_PLAN.md": {
-    "mtime": 1782119920.931023,
-    "ast_hash": "b2532fcc2d4d5b27681cc523b27502b7",
+    "mtime": 1782180044.9216478,
+    "ast_hash": "a362b56c2c29cde6a15e761632734828",
     "semantic_hash": ""
   },
   "TESTING.md": {
-    "mtime": 1782120672.5282543,
-    "ast_hash": "a390e48a590edf37d8cc864bc2871917",
+    "mtime": 1782180263.434438,
+    "ast_hash": "456867bd1edbbd4af0eb1ef13de61118",
     "semantic_hash": ""
   },
   "USECASE.md": {
-    "mtime": 1782134614.2644343,
-    "ast_hash": "c237c114d5aab4e3da03ebcc0aa77079",
+    "mtime": 1782180512.1905997,
+    "ast_hash": "04209e32d71a516fcd88143450d0d7ff",
     "semantic_hash": ""
   },
   "pnpm-workspace.yaml": {
@@ -442,6 +437,31 @@
   "vercel.json": {
     "mtime": 1782159373.422725,
     "ast_hash": "d18ec4b6f0e4af38a8cae4e020c97889",
+    "semantic_hash": ""
+  },
+  "app/components/ui/__tests__/alarm-ack-form.test.tsx": {
+    "mtime": 1782182473.2635117,
+    "ast_hash": "a6f4afff7444ac4e5f660064c328fd22",
+    "semantic_hash": ""
+  },
+  "app/components/ui/__tests__/door-controls.test.tsx": {
+    "mtime": 1782182473.1895113,
+    "ast_hash": "55f054252611f10218619d01b6a7d882",
+    "semantic_hash": ""
+  },
+  "app/components/ui/__tests__/hvac-controls.test.tsx": {
+    "mtime": 1782182473.3635123,
+    "ast_hash": "c4a3e8a057435d9654734c7d87b1dec8",
+    "semantic_hash": ""
+  },
+  "app/components/ui/__tests__/lighting-controls.test.tsx": {
+    "mtime": 1782182473.2255116,
+    "ast_hash": "3cf43040962a6fd8892f48964e6ba1a5",
+    "semantic_hash": ""
+  },
+  "app/components/ui/__tests__/navigation.test.tsx": {
+    "mtime": 1782182496.3176486,
+    "ast_hash": "83a073dbb3c04b1f240940bc676d3881",
     "semantic_hash": ""
   }
 }
