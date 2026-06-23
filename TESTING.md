@@ -1,4 +1,4 @@
-# BMC — Testing Strategy
+# [UPDATED 2026-06-23] BMC — Testing Strategy
 
 > **Practice:** TDD (RED-GREEN-REFACTOR) — compulsory for all code
 > **Framework:** Vitest + Testing Library + Playwright
@@ -215,8 +215,95 @@ test('operator can change HVAC setpoint', async ({ page }) => {
 })
 ```
 
----
+### 2.6 SDUI Service & Schema Tests (Vitest)
 
+**What to test:** UiConfig schema validation (Zod parse), service-layer DB queries with mocked Prisma, widget-capability mapping, SSE subscription lifecycle per widget config.
+
+**What NOT to test:** Next.js App Router internals, Prisma engine, widget rendering (see §3.7).
+
+```typescript
+// lib/ui-config/__tests__/schema.test.ts
+import { describe, it, expect } from 'vitest'
+import { WidgetCapabilitySchema, WidgetConfigSchema, UiConfigResponseSchema } from '../schema'
+
+describe('WidgetCapabilitySchema', () => {
+  it('accepts valid capability object', () => {
+    expect(WidgetCapabilitySchema.parse({ widgetType: 'hvac', canControl: true, canView: true }))
+      .toEqual({ widgetType: 'hvac', canControl: true, canView: true })
+  })
+  it('rejects missing widgetType', () => {
+    expect(() => WidgetCapabilitySchema.parse({ canControl: true })).toThrow()
+  })
+  it('accepts empty sensors array', () => {
+    expect(WidgetConfigSchema.parse({ id: 'w1', type: 'sensor-readout', zoneId: 'z1', capabilities: {}, sensors: [] }))
+      .toMatchObject({ id: 'w1' })
+  })
+})
+```
+
+```typescript
+// lib/ui-config/__tests__/service.test.ts
+import { describe, it, expect, vi, beforeEach } from 'vitest'
+import { buildUiConfig } from '../service'
+
+vi.mock('@/lib/prisma', () => ({
+  prisma: {
+    zone: { findMany: vi.fn().mockResolvedValue([{ id: 'z1', name: 'Zone 1', buildingId: 'b1' }]) },
+    hVACUnit: { findMany: vi.fn().mockResolvedValue([{ id: 'ahu-1', zoneId: 'z1', setpoint: 22 }]) },
+    // ... other models
+  },
+}))
+
+describe('buildUiConfig', () => {
+  beforeEach(() => vi.clearAllMocks())
+
+  it('returns widgets with hvac type for zones with HAVC units', async () => {
+    const config = await buildUiConfig('b1')
+    expect(config.widgets.some(w => w.type === 'hvac')).toBe(true)
+  })
+
+  it('includes sensor fields in hvac widget capabilities', async () => {
+    const config = await buildUiConfig('b1')
+    const hvacWidget = config.widgets.find(w => w.type === 'hvac')
+    expect(hvacWidget?.capabilities.sensors).toContain('temperature')
+  })
+})
+```
+
+```typescript
+// app/hooks/__tests__/useWidgetSSE.test.ts
+import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest'
+import { renderHook, act } from '@testing-library/react'
+import { useWidgetSSE } from '../useWidgetSSE'
+
+describe('useWidgetSSE', () => {
+  let mockES: any
+  beforeEach(() => {
+    mockES = { close: vi.fn(), onmessage: null, onerror: null }
+    global.EventSource = vi.fn(() => mockES)
+  })
+  afterEach(() => vi.restoreAllMocks())
+
+  it('subscribes per widget config', () => {
+    renderHook(() => useWidgetSSE({ widgets: [{ id: 'w1', type: 'hvac', zoneId: 'z1' }] }))
+    expect(EventSource).toHaveBeenCalledWith(expect.stringContaining('/api/stream'))
+  })
+
+  it('parses incoming messages', () => {
+    const { result } = renderHook(() => useWidgetSSE({ widgets: [{ id: 'w1', type: 'hvac', zoneId: 'z1' }] }))
+    act(() => { mockES.onmessage?.({ data: JSON.stringify({ zoneId: 'z1', temp: 23 }) }) })
+    expect(result.current).toEqual({ z1: { temp: 23 } })
+  })
+
+  it('cleans up EventSource on unmount', () => {
+    const { unmount } = renderHook(() => useWidgetSSE({ widgets: [] }))
+    unmount()
+    expect(mockES.close).toHaveBeenCalled()
+  })
+})
+```
+
+---
 ## 3. BMC-Specific Test Patterns
 
 ### 3.1 SSE Hook Tests — UC-STRM-01
@@ -340,6 +427,110 @@ describe('anomaly score inference', () => {
 })
 ```
 
+### 3.6 SDUI Service Tests — UiConfig Service
+
+Tests `buildUiConfig` service (DESIGN.md §7.4, §3.6). Mock Prisma models per zone → verify correct widget type, capabilities, and sensors.
+
+```typescript
+// lib/ui-config/__tests__/service.test.ts
+import { describe, it, expect, vi, beforeEach } from 'vitest'
+import { buildUiConfig } from '../service'
+// DESIGN.md §7.4: UiConfig service, mock DB → correct widgets per zone
+// Test: HVAC zone → hvac widget with temperature sensor capability
+
+vi.mock('@/lib/prisma', () => ({
+  prisma: {
+    zone: { findMany: vi.fn().mockResolvedValue([{ id: 'z1', name: 'Zone 1', buildingId: 'b1' }]) },
+    hVACUnit: { findMany: vi.fn().mockResolvedValue([{ id: 'ahu-1', zoneId: 'z1', setpoint: 22 }]) },
+    lightZone: { findMany: vi.fn().mockResolvedValue([]) },
+    door: { findMany: vi.fn().mockResolvedValue([]) },
+    sensor: { findMany: vi.fn().mockResolvedValue([]) },
+    alarm: { findMany: vi.fn().mockResolvedValue([]) },
+    meter: { findMany: vi.fn().mockResolvedValue([]) },
+    firePanel: { findMany: vi.fn().mockResolvedValue([]) },
+  },
+}))
+
+describe('buildUiConfig', () => {
+  beforeEach(() => vi.clearAllMocks())
+
+  it('returns hvac widget for zone with HVAC unit', async () => {
+    const config = await buildUiConfig('b1')
+    expect(config.widgets.some(w => w.type === 'hvac')).toBe(true)
+  })
+
+  it('widget capabilities include sensors field', async () => {
+    const config = await buildUiConfig('b1')
+    const w = config.widgets.find(w => w.type === 'hvac')
+    expect(w?.capabilities.sensors).toBeDefined()
+  })
+})
+```
+
+### 3.7 Widget Rendering Tests — SDUIRenderer
+
+Tests `SDUIRenderer` component dispatches `WidgetConfig` to the correct registered widget (DESIGN.md §7.4). Use Testing Library for render output.
+
+```typescript
+// app/components/dynamic/__tests__/SDUIRenderer.test.tsx
+import { describe, it, expect } from 'vitest'
+import { render, screen } from '@testing-library/react'
+import { SDUIRenderer } from '../SDUIRenderer'
+
+describe('SDUIRenderer', () => {
+  it('renders HvacCard for hvac widget type', () => {
+    render(<SDUIRenderer widget={{ id: 'w1', type: 'hvac', zoneId: 'z1', capabilities: { canControl: true }, sensors: [] }} />)
+    expect(screen.getByTestId('hvac-card')).toBeInTheDocument()
+  })
+
+  it('renders UnknownWidget for unrecognized type', () => {
+    render(<SDUIRenderer widget={{ id: 'wX', type: 'unknown-type', zoneId: 'z1', capabilities: {}, sensors: [] }} />)
+    expect(screen.getByText(/unknown widget/i)).toBeInTheDocument()
+  })
+
+  it('passes capabilities prop to widget', () => {
+    render(<SDUIRenderer widget={{ id: 'w1', type: 'door', zoneId: 'z1', capabilities: { canControl: false, canView: true }, sensors: [] }} />)
+    expect(screen.getByTestId('door-card')).toBeInTheDocument()
+  })
+})
+```
+
+### 3.8 UiConfig API Route Tests — GET /api/buildings/[id]/ui-config
+
+Tests the UiConfig API endpoint (DESIGN.md §3.6). Use supertest against the dev server.
+
+```typescript
+// app/api/buildings/[id]/__tests__/ui-config.test.ts
+import { describe, it, expect } from 'vitest'
+import supertest from 'supertest'
+
+const request = supertest('http://localhost:3000')
+
+describe('GET /api/buildings/[id]/ui-config', () => {
+  it('returns 200 with valid UiConfigResponse body', async () => {
+    const res = await request.get('/api/buildings/b1/ui-config')
+    expect(res.status).toBe(200)
+  })
+
+  it('includes ETag header', async () => {
+    const res = await request.get('/api/buildings/b1/ui-config')
+    expect(res.headers['etag']).toBeDefined()
+  })
+
+  it('includes x-schema-version header', async () => {
+    const res = await request.get('/api/buildings/b1/ui-config')
+    expect(res.headers['x-schema-version']).toBeDefined()
+  })
+
+  it('body matches UiConfigResponseSchema (Zod-valid)', async () => {
+    const res = await request.get('/api/buildings/b1/ui-config')
+    expect(res.body).toHaveProperty('widgets')
+    expect(res.body).toHaveProperty('version')
+    expect(Array.isArray(res.body.widgets)).toBe(true)
+  })
+})
+```
+
 ---
 
 ## 4. Testing Infrastructure
@@ -354,8 +545,13 @@ bmc/
 │   │   ├── helpers.ts         # buildBuilding(), buildZone(), buildSensor()
 │   │   └── temperature.test.ts
 │   ├── lib/__tests__/         # temperature, actions, auth, useSSE, telemetry, inference
-│   ├── components/ui/__tests__/  # temperature-control, fan-speed, door-status
-│   └── api/__tests__/         # building, alarms
+│   ├── lib/ui-config/__tests__/   # UiConfig schema (18) + service (10)
+│   ├── components/ui/__tests__/   # temperature-control, fan-speed, door-status
+│   ├── components/dynamic/__tests__/ # SDUIRenderer widget dispatch
+│   ├── hooks/__tests__/           # useWidgetSSE (10)
+│   └── api/
+│       ├── __tests__/             # building, alarms
+│       └── buildings/[id]/__tests__/ # ui-config API route (4)
 ├── e2e/                       # hvac.spec, security.spec, auth.spec
 ├── vitest.config.ts
 ├── playwright.config.ts
@@ -417,6 +613,11 @@ jobs:
 | SSE hooks (lib/useSSE.ts) | 85% | 75% | 85% | 85% | §3.1 |
 | API routes (api/) | 80% | 70% | 80% | 80% | §2.4 |
 | Inference wrapper (lib/inference.ts) | 80% | 70% | 80% | 80% | §3.5 |
+| UiConfig schema (lib/ui-config/schema.ts) | 90% | 85% | 90% | 90% | §2.6, §3.6 |
+| UiConfig service (lib/ui-config/service.ts) | 85% | 80% | 85% | 85% | §3.6 |
+| SDUIRenderer (components/dynamic/SDUIRenderer.tsx) | 75% | 65% | 80% | 75% | §3.7 |
+| Widget components (components/dynamic/widgets/) | 75% | 65% | 80% | 75% | §3.7 |
+| useWidgetSSE hook (hooks/useWidgetSSE.ts) | 85% | 75% | 85% | 85% | §2.6 |
 | **Project-wide** | **70%** | **60%** | **70%** | **70%** | — |
 
 Coverage is a **floor**, not a target. Every PR must maintain or improve these numbers.
@@ -538,8 +739,11 @@ export async function createTestDb(): Promise<PrismaClient> {
 
 ```
 app/lib/__tests__/<module>.test.ts              — Pure functions, Server Actions
-app/components/<name>/__tests__/<name>.test.tsx — Components
-app/api/__tests__/<route>.test.ts                — API routes
+app/lib/ui-config/__tests__/<module>.test.ts    — UiConfig schema + service
+app/components/<name>/__tests__/<name>.test.tsx — Components (incl. SDUIRenderer)
+app/hooks/__tests__/<hook>.test.ts              — Custom hooks (useWidgetSSE)
+app/api/__tests__/<route>.test.ts                — API routes (general)
+app/api/<route>/[param]/__tests__/<route>.test.ts — API routes (parameterized)
 e2e/<subsystem>.spec.ts                          — Playwright E2E
 ```
 
@@ -552,6 +756,8 @@ e2e/<subsystem>.spec.ts                          — Playwright E2E
 | `disables controls when loading` | `testLoadingState` |
 | `closes SSE connection on unmount` | `testCleanup` |
 | `denies tech from operator-level actions` | `testAuthLevels` |
+| `rejects invalid WidgetCapabilitySchema` | `testWidgetCapabilityValidation` |
+| `renders HvacCard for hvac widget type` | `testSDUIRenderer` |
 
 ---
 
@@ -573,6 +779,8 @@ Before marking any code complete:
 - [ ] AI/ML inference tested with timeout guard (UC-SYS-04)
 - [ ] SSE hook tests verify disconnect/cleanup (UC-STRM-01)
 - [ ] Audit log entry verified for every control action (UC-AUDIT-01)
+- [ ] UiConfig schema tests cover valid, invalid, and edge case inputs (§3.6)
+- [ ] UiConfig service tests mock all Prisma models per zone type (§3.6)
 
 ---
 
@@ -603,3 +811,8 @@ pnpm test:all                 # Everything
 | Auth: checkAccess matrix | §3.3 | UC-AUTH-02 | §6.2-6.3 (JWT roles, building scope) |
 | Gateway: Python tests | §3.4 | UC-SYS-01, UC-SYS-05/06 | §5.1-5.4 (BACnet/Modbus/MQTT) |
 | ML: inference timeout | §3.5 | UC-SYS-04 | §8.2 (latency targets), §8.4 (ONNX) |
+| SDUI: UiConfig schema validation | §2.6, §3.6 | — | §7.4 (Zod schemas) |
+| SDUI: UiConfig service (buildUiConfig) | §3.6 | UC-STRM-01 | §7.4 (mock DB → widgets per zone) |
+| SDUI: SDUIRenderer widget dispatch | §3.7 | UC-HVAC-01, UC-LGT-01, UC-SEC-01 | §7.4 (widget registry, type→component mapping) |
+| SDUI: UiConfig API route | §3.8 | — | §3.6 (ETag, x-schema-version, Zod body) |
+| SDUI: useWidgetSSE hook | §2.6 | UC-STRM-01 | §7.3 (EventSource per widget config) |

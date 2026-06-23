@@ -1,4 +1,5 @@
-# AGENTS.md
+[UPDATED 2026-06-23]
+# AGENTS.md (web-validated 2026-06-23)
 
 > **Architecture Authority:** `DESIGN.md` (12 sections, 2 appendices)
 > **Testing Mandate:** `TESTING.md` (10 sections, 2 appendices — TDD compulsory, checklist at §10)
@@ -106,34 +107,65 @@ All device integration through the protocol abstraction layer. BACnet/IP for com
 ```
 bmc/
 ├── app/
-│   ├── (routes)/              # Route groups (building, analytics, settings)
-│   ├── api/                   # REST endpoints + SSE streams
+│   ├── (routes)/                  # Route groups (building, analytics, settings)
+│   │   └── building/dashboard/    # Smart Dashboard page (SDUI-powered)
+│   ├── api/
+│   │   ├── buildings/[id]/ui-config/  # SDUI: GET UiConfigResponse (ETag, version)
+│   │   │   └── __tests__/             # 4 API tests
+│   │   └── ...                     # Other REST endpoints + SSE streams
 │   ├── components/
-│   │   └── ui/                # Shared UI primitives
-│   ├── lib/                   # Utilities, Server Actions, hooks, auth, inference
-│   │   ├── prisma.ts          # Prisma singleton
-│   │   ├── actions.ts         # Server Actions (DESIGN.md §3.4)
-│   │   ├── useSSE.ts          # Real-time hook (DESIGN.md §7.3)
-│   │   ├── auth.ts            # checkAccess (DESIGN.md §6.3)
-│   │   └── inference.ts       # ML inference (DESIGN.md §8.4)
+│   │   ├── dynamic/                # SDUI: dynamic widget renderer
+│   │   │   ├── DashboardGrid.tsx       # Server Component: calls buildUiConfig, version gates
+│   │   │   ├── DashboardClient.tsx     # Client Component: orchestrates widgets + SSE
+│   │   │   ├── SDUIRenderer.tsx        # Dispatches WidgetConfig to registered widget
+│   │   │   ├── UnknownWidget.tsx       # Fallback for unknown widget types
+│   │   │   └── widgets/               # Widget registry (widgetRegistry map)
+│   │   │       ├── index.ts
+│   │   │       ├── HvacCard.tsx
+│   │   │       ├── LightingCard.tsx
+│   │   │       ├── DoorCard.tsx
+│   │   │       ├── SensorReadout.tsx
+│   │   │       ├── AlarmList.tsx
+│   │   │       ├── MeterGauge.tsx
+│   │   │       └── FirePanelCard.tsx
+│   │   └── ui/                    # Shared UI primitives
+│   ├── hooks/                     # Custom React hooks
+│   │   ├── useWidgetSSE.ts            # Widget-specific SSE (wraps useSSE)
+│   │   └── __tests__/
+│   │       └── useWidgetSSE.test.ts   # 10 tests
+│   ├── lib/                       # Utilities, Server Actions, hooks, auth, inference
+│   │   ├── ui-config/                 # SDUI: config layer
+│   │   │   ├── types.ts               # UiConfigResponse, WidgetConfig, SensorField, NavLink
+│   │   │   ├── schema.ts              # Zod schemas (WidgetCapabilitySchema, WidgetConfigSchema, UiConfigResponseSchema)
+│   │   │   ├── service.ts             # buildUiConfig(buildingId) — DB introspection → widget configs
+│   │   │   └── __tests__/
+│   │   │       ├── schema.test.ts      # 18 tests
+│   │   │       └── service.test.ts     # 10 tests
+│   │   ├── prisma.ts              # Prisma singleton
+│   │   ├── actions.ts             # Server Actions (DESIGN.md §3.4)
+│   │   ├── useSSE.ts              # Real-time hook (DESIGN.md §7.3)
+│   │   ├── auth.ts                # checkAccess (DESIGN.md §6.3)
+│   │   └── inference.ts           # ML inference (DESIGN.md §8.4)
 │   ├── __tests__/
-│   │   ├── setup.ts           # jest-dom, auto cleanup
-│   │   └── helpers.ts         # Test factories (TESTING.md §8.1)
+│   │   ├── setup.ts               # jest-dom, auto cleanup
+│   │   └── helpers.ts             # Test factories (TESTING.md §8.1)
 │   └── globals.css
 ├── prisma/
-│   └── schema.prisma          # DESIGN.md §2.2
-├── e2e/                       # Playwright tests (TESTING.md §2.5)
+│   └── schema.prisma              # DESIGN.md §2.2
+├── e2e/                           # Playwright tests (TESTING.md §2.5)
 ├── public/
-├── DESIGN.md                  # Architecture design document
-├── USECASE.md                 # Requirements, actors, scenarios, flows
-├── TESTING.md                 # Testing strategy (TDD compulsory)
-├── AGENTS.md                  # This file
-├── vitest.config.ts           # TESTING.md §4
+├── DESIGN.md                      # Architecture design document
+├── USECASE.md                     # Requirements, actors, scenarios, flows
+├── TESTING.md                     # Testing strategy (TDD compulsory)
+├── AGENTS.md                      # This file
+├── vitest.config.ts               # TESTING.md §4
 ├── playwright.config.ts
 ├── vercel.json
 ├── next.config.ts
 └── package.json
 ```
+
+**SDUI cumulative test count:** 95 tests, 0 failures (lib/ui-config: 28, app/api/ui-config: 4, app/hooks: 10, existing: 53).
 
 ### 9. Before modifying existing code
 
@@ -183,6 +215,11 @@ pnpm test:all         # vitest + playwright
 | ML inference | ONNX Runtime (Node.js) | §8.4 | §3.5 | UC-SYS-04 |
 | Verification gate | Checklist before marking complete | — | §10 | — |
 | Web-validate FOUR.md | Search current API docs before authoring | D1 | D1 | D1 |
+| **SDUI config types** | **Zod-validated UiConfigResponse, DB introspection per zone** | **—** | **lib/ui-config/__tests__/schema.test.ts, service.test.ts** | **—** |
+| **SDUI widget dispatch** | **Server Component resolves config, Client renders via widgetRegistry** | **—** | **—** | **—** |
+| **SDUI dashboard grid** | **DashboardGrid (SC) + DashboardClient (CC) + version gates** | **—** | **—** | **—** |
+| **SDUI widget SSE** | **useWidgetSSE wraps useSSE, dispatches per-widget type** | **—** | **app/hooks/__tests__/useWidgetSSE.test.ts** | **UC-STRM-01** |
+| **SDUI API endpoint** | **GET /api/buildings/[id]/ui-config with ETag + version header** | **—** | **app/api/buildings/[id]/__tests__/ui-config.test.ts** | **—** |
 
 ---
 
@@ -204,3 +241,7 @@ Every DESIGN.md section maps through USECASE.md to TESTING.md:
 | §8 ML Pipeline | UC-SYS-04 | §3.5 (inference tests) |
 | §9 Deployment | UC-ALM-05 (cron) | §4.3 (CI workflow) |
 | §11 Security | UC-AUTH-02, UC-AUDIT-01 | §2.3, §3.3 |
+| **§? SDUI Config API** | **—** | **lib/ui-config/__tests__/schema.test.ts (18), service.test.ts (10)** |
+| **§? SDUI API Route** | **—** | **app/api/buildings/[id]/__tests__/ui-config.test.ts (4)** |
+| **§? SDUI Widget Renderer** | **UC-STRM-01 (widget SSE)** | **app/hooks/__tests__/useWidgetSSE.test.ts (10)** |
+| **§? SDUI Dashboard** | **—** | **—** |
