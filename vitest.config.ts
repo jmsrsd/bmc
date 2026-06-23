@@ -32,12 +32,10 @@ export default defineConfig({
   },
   resolve: {
     alias: {
-      '@/components': path.resolve(__dirname, 'app/components'),
-      '@/lib': path.resolve(__dirname, 'lib'),
-      '@': path.resolve(__dirname, 'app'),
+      '@': path.resolve(__dirname, '.'),
       '@app': path.resolve(__dirname, 'app'),
       '@components': path.resolve(__dirname, 'app/components'),
-      '@lib': path.resolve(__dirname, 'lib'),
+      '@lib': path.resolve(__dirname, 'app/lib'),
       '@prisma': path.resolve(__dirname, 'prisma'),
     },
   },

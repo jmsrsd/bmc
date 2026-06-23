@@ -1,6 +1,6 @@
 import { getSession } from '@/lib/auth'
 import { prisma } from '@/lib/prisma'
-import { Building2, Bell, Wind, Zap, Thermometer, Shield, Lightbulb, Gauge, Sparkles } from 'lucide-react'
+import { Building2, Bell, Wind, Zap, Thermometer, Shield, Lightbulb, Gauge } from 'lucide-react'
 import Link from 'next/link'
 import { redirect } from 'next/navigation'
 import { AlarmAckForm } from '@/components/ui/alarm-ack-form'
@@ -197,12 +197,6 @@ export default async function DashboardPage() {
       <section>
         <h2 className="text-xl font-semibold text-white mb-4">Quick Actions</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-          <QuickActionCard
-            href="/building/dashboard"
-            icon={<Sparkles className="w-6 h-6 text-cyan-400" />}
-            title="Smart Dashboard"
-            description="Auto-configures widgets based on installed devices"
-          />
           <QuickActionCard
             href="/building/hvac"
             icon={<Thermometer className="w-6 h-6 text-cyan-400" />}

@@ -54,19 +54,19 @@ describe('setTemperature', () => {
   it('rejects setpoint below 16', async () => {
     const { setTemperature } = await getActions()
     const res = await setTemperature(null, fd({ zoneId: 'z1', setpoint: 10 }))
-    expect(res).toHaveProperty('error')
+    expect(res).toEqual({ error: 'Invalid input: setpoint must be 16-30°C' })
   })
 
   it('rejects setpoint above 30', async () => {
     const { setTemperature } = await getActions()
     const res = await setTemperature(null, fd({ zoneId: 'z1', setpoint: 35 }))
-    expect(res).toHaveProperty('error')
+    expect(res).toEqual({ error: 'Invalid input: setpoint must be 16-30°C' })
   })
 
   it('rejects missing zoneId', async () => {
     const { setTemperature } = await getActions()
     const res = await setTemperature(null, fd({ zoneId: '', setpoint: 22 }))
-    expect(res).toHaveProperty('error')
+    expect(res).toEqual({ error: 'Invalid input: setpoint must be 16-30°C' })
   })
 
   it('succeeds with valid input', async () => {
@@ -96,7 +96,7 @@ describe('setFanSpeed', () => {
   it('rejects invalid speed', async () => {
     const { setFanSpeed } = await getActions()
     const res = await setFanSpeed(null, fd({ zoneId: 'z1', speed: 'INSANE' }))
-    expect(res).toHaveProperty('error')
+    expect(res).toEqual({ error: 'Invalid fan speed' })
   })
 
   it('succeeds with AUTO', async () => {
@@ -114,7 +114,7 @@ describe('setHvacMode', () => {
   it('rejects invalid mode', async () => {
     const { setHvacMode } = await getActions()
     const res = await setHvacMode(null, fd({ zoneId: 'z1', mode: 'BOOST' }))
-    expect(res).toHaveProperty('error')
+    expect(res).toEqual({ error: 'Invalid HVAC mode' })
   })
 
   it('succeeds with HEAT', async () => {
@@ -134,7 +134,7 @@ describe('setDimLevel', () => {
   it('rejects dim level over 100', async () => {
     const { setDimLevel } = await getActions()
     const res = await setDimLevel(null, fd({ zoneId: 'z1', level: 120 }))
-    expect(res).toHaveProperty('error')
+    expect(res).toEqual({ error: 'Invalid dim level (0-100)' })
   })
 
   it('succeeds with 75%', async () => {
@@ -153,7 +153,7 @@ describe('toggleLight', () => {
   it('rejects invalid state', async () => {
     const { toggleLight } = await getActions()
     const res = await toggleLight(null, fd({ zoneId: 'z1', newState: 'FLASH' }))
-    expect(res).toHaveProperty('error')
+    expect(res).toEqual({ error: 'Invalid light state' })
   })
 
   it('turns lights off', async () => {
@@ -173,7 +173,7 @@ describe('setDoorState', () => {
   it('rejects invalid door state', async () => {
     const { setDoorState } = await getActions()
     const res = await setDoorState(null, fd({ doorId: 'd1', newState: 'AJAR' }))
-    expect(res).toHaveProperty('error')
+    expect(res).toEqual({ error: 'Invalid door state' })
   })
 
   it('locks a door', async () => {
@@ -197,7 +197,7 @@ describe('recallElevator', () => {
   it('rejects out of range floor', async () => {
     const { recallElevator } = await getActions()
     const res = await recallElevator(null, fd({ carId: 'c1', targetFloor: 99 }))
-    expect(res).toHaveProperty('error')
+    expect(res).toEqual({ error: 'Invalid recall target' })
   })
 
   it('recalls elevator car', async () => {
@@ -215,7 +215,7 @@ describe('clearElevatorRecall', () => {
   it('requires carId', async () => {
     const { clearElevatorRecall } = await getActions()
     const res = await clearElevatorRecall(null, fd({ carId: '' }))
-    expect(res).toHaveProperty('error')
+    expect(res).toEqual({ error: 'Missing car ID' })
   })
 
   it('clears recall', async () => {
@@ -239,7 +239,7 @@ describe('clearFireAlarm', () => {
   it('requires panelId', async () => {
     const { clearFireAlarm } = await getActions()
     const res = await clearFireAlarm(null, fd({ panelId: '' }))
-    expect(res).toHaveProperty('error')
+    expect(res).toEqual({ error: 'Missing panel ID' })
   })
 
   it('clears fire alarm and devices', async () => {
@@ -268,7 +268,7 @@ describe('acknowledgeAlarm', () => {
   it('requires alarmId', async () => {
     const { acknowledgeAlarm } = await getActions()
     const res = await acknowledgeAlarm(null, fd({ alarmId: '' }))
-    expect(res).toHaveProperty('error')
+    expect(res).toEqual({ error: 'Missing alarm ID' })
   })
 
   it('rejects already-acknowledged alarm', async () => {

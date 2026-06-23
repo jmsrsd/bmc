@@ -1,4 +1,4 @@
-# BMC — Design Document [UPDATED 2026-06-23]
+# BMC — Design Document
 
 > **Status:** Active — MVP deployed
 > **Building:** Biomedical Campus (BMC) — Indonesia's first integrated smart building for healthcare, technology, and education. Dual-tower (Knowledge Tower + Science Tower), Digital Hub SEZ, BSD City.
@@ -15,7 +15,6 @@
 > **Directive D1:** When modifying this doc, web-search all referenced library APIs and patterns for current correctness. Append "(web-validated YYYY-MM-DD)" to header after doing so.
 > **Testing Context:** See `TESTING.md` for verification contracts and test patterns
 > **Use Case Context:** See `USECASE.md` for actor workflows, pre/post conditions, and scenario outputs
-> **Web-Validated:** (2026-06-23)
 
 ---
 
@@ -73,14 +72,12 @@ The system follows a **layered architecture** with clear separation of concerns:
 
 | Layer | Technology | Responsibility |
 |-------|-----------|---------------|
-| Client | React 19, Server Components | UI rendering, SSE consumption, SDUI dynamic widget rendering |
+| Client | React 19, Server Components | UI rendering, SSE consumption |
 | Edge | Vercel CDN, Edge Middleware | Auth checks, redirects, caching |
-| Application | Next.js 16 App Router | Server Actions, API routes, RSC data fetching, SDUI ui-config endpoint |
+| Application | Next.js 16 App Router | Server Actions, API routes, RSC data fetching |
 | Data | Prisma ORM, SQLite | Persistent state, audit logs, entity relationships |
 | IoT Gateway | Python, Docker/RPi4 | Protocol translation (BACnet/Modbus → MQTT) |
 | Devices | BACnet/IP, Modbus RTU/TCP | Physical actuators and sensors |
-
-> **Note:** The dashboard layout and widgets are dynamically assembled via Server-Driven UI (SDUI). The `GET /api/buildings/[id]/ui-config` endpoint returns a typed `UiConfigResponse` (zones, widgets, global stats, nav links) that drives component selection from a widget registry. See §7.4 for details.
 
 ### 1.2 Architectural Philosophy
 
@@ -447,7 +444,6 @@ model Tenant {
 |--------|-----|---------|------|
 | GET | `/api/buildings` | List all buildings | Viewer+ |
 | GET | `/api/buildings/[id]` | Get building with zones, sensors, HVAC | Viewer+ |
-| GET | `/api/buildings/[id]/ui-config` | SDUI: dynamic dashboard config (UiConfigResponse) | Viewer+ |
 | GET | `/api/stream/building/[id]` | SSE telemetry stream | Viewer+ |
 | POST | `/api/login` | Authenticate (password gate) | Public |
 | POST | `/api/logout` | Clear session | Authenticated |
@@ -950,177 +946,6 @@ export function useSSE<T>(url: string, initial: T): T {
 > **Use case alignment:** UC-STRM-01 (subscribe to telemetry stream)
 > **Testing alignment:** TESTING.md §3.1 (mock EventSource, verify lifecycle)
 
-### 7.4 Server-Driven UI (SDUI) Pipeline
-
-> **Use case alignment:** UC-HVAC-01 (HVAC controls), UC-LGT-01 (lighting controls), UC-SEC-01 (door controls), UC-ALM-01 (alarm list), UC-ENR-01 (energy dashboard), UC-FIR-01 (fire panel)
-> **Testing alignment:** TESTING.md §2.2 (component tests), §2.4 (API route tests for ui-config)
-
-The SDUI pipeline dynamically assembles the dashboard from a server-driven configuration rather than hard-coded page layouts. The pipeline flow:
-
-```
-Types → Service → API → Registry → Renderer → Grid → SSE → Page
-```
-
-#### 7.4.1 Types (`lib/ui-config/types.ts`)
-
-```typescript
-interface UiConfigResponse {
-  version: number          // SUPPORTED_SCHEMA_VERSION = 1
-  buildingId: string
-  buildingName: string
-  zones: WidgetConfig[]    // Zone-level widgets
-  global: WidgetConfig[]   // Building-wide widgets (alarms, energy, fire)
-  navLinks: NavLink[]      // Navigation bar items
-}
-
-interface WidgetConfig {
-  id: string
-  type: string             // Matches registry key, e.g. "hvac", "lighting", "door"
-  title: string
-  zoneId?: string
-  deviceId?: string
-  deviceType?: string
-  capabilities: WidgetCapability[]
-  span?: number            // Grid column span (default: 1)
-  minRole?: Role           // Minimum role to view/interact
-  subscriptions?: string[] // SSE event types to subscribe to
-  sensors?: SensorField[]  // Sensor readings to display
-}
-
-type WidgetCapability =
-  | 'setpoint' | 'fan-speed' | 'hvac-mode'
-  | 'dim-level' | 'on-off' | 'lock-unlock'
-  | 'scene-select' | 'alarm-ack' | 'recall' | 'meter-read'
-
-interface SensorField {
-  type: string   // e.g. "TEMPERATURE", "HUMIDITY"
-  label: string  // Display label
-  unit: string   // Unit string
-}
-```
-
-**Versioning:** `UiConfigResponse.version` is set to `SUPPORTED_SCHEMA_VERSION = 1`. The `DashboardGrid` Server Component checks this version and renders only supported schemas, providing forward/backward compatibility.
-
-#### 7.4.2 Service (`lib/ui-config/service.ts`)
-
-`buildUiConfig(buildingId: string): Promise<UiConfigResponse>` — introspects the Prisma database per building and derives widgets from:
-
-- **Zone devices:** Each zone with HVAC, lights, doors, sensors generates zone-level `WidgetConfig` entries (HvacCard, LightingCard, DoorCard, SensorReadout)
-- **Alarms:** Open alarms generate `AlarmList` global widgets
-- **Meters:** Energy meters generate `MeterGauge` widgets
-- **Fire panels:** Fire panels generate `FirePanelCard` widgets
-- **Nav links:** Building zones produce navigation links
-
-The service maps DB entities to widget configs, sets `capabilities` based on device type, populates `sensors` for sensor data displays, and assigns `minRole` per widget type.
-
-#### 7.4.3 API (`app/api/buildings/[id]/ui-config/route.ts`)
-
-`GET /api/buildings/[id]/ui-config` returns `UiConfigResponse` with:
-
-- **ETag header:** Content-based hash for HTTP caching
-- **X-Schema-Version header:** `SUPPORTED_SCHEMA_VERSION` for client-side validation
-- **Cache strategy:** `public, s-maxage=60, stale-while-revalidate=300`
-- **Response:** JSON body matching `UiConfigResponse` Zod schema
-
-The endpoint calls `buildUiConfig(buildingId)` internally and handles 404 for unknown buildings.
-
-#### 7.4.4 Registry (`components/dynamic/widgets/index.ts`)
-
-A `Map<string, ComponentType>` — the widget registry maps widget type strings to React components:
-
-```typescript
-export const widgetRegistry: Record<string, React.ComponentType<WidgetProps>> = {
-  hvac:        HvacCard,
-  lighting:    LightingCard,
-  door:        DoorCard,
-  sensor:      SensorReadout,
-  alarmList:   AlarmList,
-  meterGauge:  MeterGauge,
-  firePanel:   FirePanelCard,
-}
-```
-
-Each widget receives `WidgetProps: { config: WidgetConfig; buildingId: string }` and is responsible for its own data fetching (Server Components) or SSE subscription (Client Components).
-
-#### 7.4.5 Renderer (`components/dynamic/SDUIRenderer.tsx`)
-
-The renderer dispatches a `WidgetConfig` to its registered component:
-
-```typescript
-function SDUIRenderer({ config, buildingId }: { config: WidgetConfig; buildingId: string }) {
-  const Widget = widgetRegistry[config.type]
-  if (!Widget) return <UnknownWidget type={config.type} />
-  return (
-    <ErrorBoundary fallback={<WidgetError type={config.type} />}>
-      <Widget config={config} buildingId={buildingId} />
-    </ErrorBoundary>
-  )
-}
-```
-
-- **UnknownWidget:** Fallback rendering showing widget type name + "not available" message
-- **Error boundaries:** Each widget is independently wrapped; one failing widget does not crash the dashboard
-
-#### 7.4.6 Grid (`components/dynamic/DashboardGrid.tsx`, `DashboardClient.tsx`)
-
-**DashboardGrid** (Server Component): Calls `buildUiConfig()`, checks version compatibility, renders the grid layout with `SDUIRenderer` for each widget:
-
-```
-DashboardGrid (RSC)
-├── builds UiConfigResponse via buildUiConfig()
-├── checks version ≥ SUPPORTED_SCHEMA_VERSION
-└── renders DashboardClient (Client)
-    ├── SDUIRenderer (HvacCard)
-    ├── SDUIRenderer (LightingCard)
-    ├── SDUIRenderer (DoorCard)
-    ├── SDUIRenderer (SensorReadout)
-    ├── SDUIRenderer (AlarmList)
-    ├── SDUIRenderer (MeterGauge)
-    └── SDUIRenderer (FirePanelCard)
-```
-
-**DashboardClient** (`'use client'`): Manages SSE subscriptions via `useWidgetSSE`, passes real-time data down to widgets, coordinates layout (CSS grid, responsive breakpoints).
-
-#### 7.4.7 SSE Integration (`hooks/useWidgetSSE.ts`)
-
-Widget-specific SSE wrapper around the generic `useSSE` hook:
-
-```typescript
-function useWidgetSSE(widget: WidgetConfig, buildingId: string) {
-  const url = `/api/stream/building/${buildingId}`
-  const events = useSSE<SSEEvent>(url, {})
-  // Filter events by widget.subscriptions (event types)
-  // Return only relevant telemetry for this widget
-}
-```
-
-Each widget subscribes only to the event types listed in its `WidgetConfig.subscriptions` array, reducing unnecessary re-renders.
-
-#### 7.4.8 Backward Compatibility & Deployment Safety
-
-| Mechanism | Detail |
-|-----------|--------|
-| **Schema version** | `UiConfigResponse.version` (currently 1); client renders only supported versions |
-| **ETag caching** | API returns ETag based on content hash; 304 responses reduce bandwidth |
-| **UnknownWidget fallback** | Unregistered widget types render a placeholder with type name instead of crashing |
-| **Error boundaries** | Per-widget error boundaries isolate failures to individual cards |
-| **Graceful degradation** | Missing SSE data shows last-known values; widget remains interactive for controls |
-
-#### 7.4.9 Widget Components
-
-| Widget | Type Key | Renders | Capabilities | SSE Events |
-|--------|----------|---------|-------------|------------|
-| HvacCard | `hvac` | Temperature setpoint slider, fan speed, mode, current temp/return temp | setpoint, fan-speed, hvac-mode | telemetry (temp), state (mode/fan) |
-| LightingCard | `lighting` | Dim slider, on/off toggle, scene selector | dim-level, on-off, scene-select | state (dim) |
-| DoorCard | `door` | Lock/unlock button, status indicator | lock-unlock | state (door) |
-| SensorReadout | `sensor` | Sensor value display with label + unit | — (read-only) | telemetry (sensor) |
-| AlarmList | `alarmList` | Alarm table with ack button | alarm-ack | alarm |
-| MeterGauge | `meterGauge` | Energy meter gauge + cumulative total | meter-read | meter |
-| FirePanelCard | `firePanel` | Panel status, device count, clear button | recall | fire |
-
-> **Use case alignment:** UC-HVAC-01 (HvacCard), UC-LGT-01 (LightingCard), UC-SEC-01 (DoorCard), UC-ALM-01 (AlarmList), UC-ENR-01 (MeterGauge), UC-FIR-01 (FirePanelCard)
-> **Testing alignment:** TESTING.md §2.2 (widget component tests), §2.4 (ui-config API tests), §3.1 (useWidgetSSE tests)
-
 ---
 
 ## 8. AI/ML Pipeline
@@ -1289,9 +1114,8 @@ jobs:
 | **D2** | **Single database** | SQLite (MVP), PostgreSQL (production) | MongoDB, TimescaleDB, InfluxDB | Zero-ops for MVP; Prisma ORM provides type safety; relational model fits building hierarchy; SQLite sufficient for single-building MVP | Write throughput limits at scale; no built-in replication; SQLite WAL mode for concurrent reads | UC-SYS-01, UC-ENR-01 |
 | **D3** | **Next.js as application framework** | Next.js 16 App Router | Remix, Express, Fastify, NestJS | React Server Components for zero-JS-default pages; Server Actions eliminate API layer for mutations; Vercel-native deployment; Edge Middleware for auth | Vercel lock-in risk; RSC learning curve; App Router is still evolving | UC-HVAC-01, UC-STRM-01 |
 | **D4** | **Monorepo (single package) vs multi-package** | Single package (`bmc/`) | Turborepo monorepo, separate gateway repo | Simpler for MVP; single `pnpm` project; gateway is separate Python service anyway; fewer config files | Gateway code not colocated; shared types (telemetry schema) duplicated between TypeScript and Python | UC-SYS-01, UC-SYS-02 |
-| **D5** | **Server-Driven UI (SDUI) for dashboard** | Dynamic widget config from `GET /api/buildings/[id]/ui-config` + registry pattern | Static pages per category, fully client-drawn dashboard | Server controls widget layout per building; widgets discoverable by type registry; versioned schema allows backward-compat UI evolution; unknown widget types fallback gracefully; error boundaries isolate per widget | Latency: dashboard requires ui-config fetch before rendering; widget registry coupling means adding new widget type requires code deploy + registry update; schema version drift between deploy cycles | UC-HVAC-01, UC-LGT-01, UC-SEC-01, UC-ALM-01, UC-ENR-01, UC-FIR-01 |
 
-> **Use case alignment:** Decisions D1-D5 affect architecture across all modules
+> **Use case alignment:** Decisions D1-D4 affect architecture across all modules
 > **Testing alignment:** TESTING.md §1 (TDD for implementation of each decision)
 
 ---
