@@ -3,11 +3,12 @@
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useState } from 'react'
-import { LayoutDashboard, Building2, Bell, Zap, Flame, ArrowUpFromLine, LogOut, Menu, X } from 'lucide-react'
+import { LayoutDashboard, Building2, Bell, Zap, Flame, ArrowUpFromLine, LogOut, Menu, X, Sparkles } from 'lucide-react'
 
 const navLinks = [
   { href: '/', label: 'Dashboard', icon: LayoutDashboard },
   { href: '/building', label: 'Building', icon: Building2 },
+  { href: '/building/dashboard', label: 'Smart', icon: Sparkles },
   { href: '/alarms', label: 'Alarms', icon: Bell },
   { href: '/energy', label: 'Energy', icon: Zap },
   { href: '/fire', label: 'Fire Safety', icon: Flame },

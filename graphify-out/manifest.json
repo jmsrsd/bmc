@@ -155,8 +155,8 @@
     "semantic_hash": ""
   },
   "app/components/ui/navigation.tsx": {
-    "mtime": 1782114260.143832,
-    "ast_hash": "046e279737dde8bda92f977bb78e5e82",
+    "mtime": 1782176462.1116705,
+    "ast_hash": "098a720c6a9641e5885b1a82012cc5ae",
     "semantic_hash": ""
   },
   "app/error.tsx": {
@@ -190,13 +190,13 @@
     "semantic_hash": ""
   },
   "app/page.tsx": {
-    "mtime": 1782114979.942689,
-    "ast_hash": "4c1550cdfc1d963500423ed89885f1d0",
+    "mtime": 1782176470.2687268,
+    "ast_hash": "7073c6942f511ab428d48e68e73fc7e2",
     "semantic_hash": ""
   },
   "lib/__tests__/actions.test.ts": {
-    "mtime": 1782117026.3733613,
-    "ast_hash": "d3192a234eb4734f10a986b49905468b",
+    "mtime": 1782138698.8415165,
+    "ast_hash": "a4333616d939366e6a2771f11499f12e",
     "semantic_hash": ""
   },
   "lib/__tests__/auth.test.ts": {
@@ -210,8 +210,8 @@
     "semantic_hash": ""
   },
   "lib/actions.ts": {
-    "mtime": 1782114150.3828695,
-    "ast_hash": "fca5ee5d31766fffc65a136cc6fecada",
+    "mtime": 1782138478.6094017,
+    "ast_hash": "0fc39ea52c4aff5f5ef27382ada6544d",
     "semantic_hash": ""
   },
   "lib/auth.ts": {
@@ -255,8 +255,8 @@
     "semantic_hash": ""
   },
   "package.json": {
-    "mtime": 1782114778.7863317,
-    "ast_hash": "42da2a4720134c7fd21db3b4faa1f82a",
+    "mtime": 1782138133.2476978,
+    "ast_hash": "a14d0226f716730afc9421f84dae3448",
     "semantic_hash": ""
   },
   "postcss.config.mjs": {
@@ -290,8 +290,8 @@
     "semantic_hash": ""
   },
   "DESIGN.md": {
-    "mtime": 1782136923.7805338,
-    "ast_hash": "e645838033c4ed6e23a73cf60ab595d0",
+    "mtime": 1782138326.6330035,
+    "ast_hash": "96bbbcfa1782145e23366b8cf557a06a",
     "semantic_hash": ""
   },
   "REVISION_PLAN.md": {
@@ -312,6 +312,136 @@
   "pnpm-workspace.yaml": {
     "mtime": 1782112004.0155933,
     "ast_hash": "1dd2cdce48132cf6e5f21f0f8622b76b",
+    "semantic_hash": ""
+  },
+  "app/(routes)/building/dashboard/page.tsx": {
+    "mtime": 1782176345.2286816,
+    "ast_hash": "2642aeb6f15c8f4c5654f83fc038ea37",
+    "semantic_hash": ""
+  },
+  "app/api/buildings/[id]/__tests__/ui-config.test.ts": {
+    "mtime": 1782176258.2646427,
+    "ast_hash": "4aba90f35f199f6465457eb825cdd420",
+    "semantic_hash": ""
+  },
+  "app/api/buildings/[id]/ui-config/route.ts": {
+    "mtime": 1782176231.8380997,
+    "ast_hash": "54f87aaf8228049b5b410cfd903e5db9",
+    "semantic_hash": ""
+  },
+  "app/components/dynamic/DashboardClient.tsx": {
+    "mtime": 1782176345.1898599,
+    "ast_hash": "85c6d76aca6211812ca7884175eea836",
+    "semantic_hash": ""
+  },
+  "app/components/dynamic/DashboardGrid.tsx": {
+    "mtime": 1782176345.20486,
+    "ast_hash": "a7f3c60298ffc09929c3b0a666a3ae40",
+    "semantic_hash": ""
+  },
+  "app/components/dynamic/SDUIRenderer.tsx": {
+    "mtime": 1782175972.1633985,
+    "ast_hash": "9b055dfcc6e1970fbb7470e088b32e30",
+    "semantic_hash": ""
+  },
+  "app/components/dynamic/UnknownWidget.tsx": {
+    "mtime": 1782175972.0033975,
+    "ast_hash": "f6184c7149bdf5b68776f8b97a6bdeb8",
+    "semantic_hash": ""
+  },
+  "app/components/dynamic/widgets/AlarmList.tsx": {
+    "mtime": 1782175972.2693992,
+    "ast_hash": "1d74d6a3125c7d0daba9ed8b51936f36",
+    "semantic_hash": ""
+  },
+  "app/components/dynamic/widgets/DoorCard.tsx": {
+    "mtime": 1782175972.075398,
+    "ast_hash": "fa1270a16e95ca9a9f015aed59b5e765",
+    "semantic_hash": ""
+  },
+  "app/components/dynamic/widgets/FirePanelCard.tsx": {
+    "mtime": 1782175973.623408,
+    "ast_hash": "76bc05115637adb583b10010c3b52d36",
+    "semantic_hash": ""
+  },
+  "app/components/dynamic/widgets/HvacCard.tsx": {
+    "mtime": 1782175972.2463992,
+    "ast_hash": "da63a4ab9813ac246e65a648c16ea1f3",
+    "semantic_hash": ""
+  },
+  "app/components/dynamic/widgets/LightingCard.tsx": {
+    "mtime": 1782175972.0053976,
+    "ast_hash": "6af92f06e810d14ef00769b41885cf2e",
+    "semantic_hash": ""
+  },
+  "app/components/dynamic/widgets/MeterGauge.tsx": {
+    "mtime": 1782175973.2494056,
+    "ast_hash": "de382cde7f5c222080100c18f46b35e5",
+    "semantic_hash": ""
+  },
+  "app/components/dynamic/widgets/SensorReadout.tsx": {
+    "mtime": 1782175972.068398,
+    "ast_hash": "3c58e5867e650b2a9098f719977439a5",
+    "semantic_hash": ""
+  },
+  "app/components/dynamic/widgets/index.ts": {
+    "mtime": 1782175972.0023975,
+    "ast_hash": "0a0643a3b626bb96c2e3541415bc470a",
+    "semantic_hash": ""
+  },
+  "app/hooks/__tests__/useWidgetSSE.test.ts": {
+    "mtime": 1782176420.6673832,
+    "ast_hash": "36df72dbebe49a2f4527d47000dda0b8",
+    "semantic_hash": ""
+  },
+  "app/hooks/useWidgetSSE.ts": {
+    "mtime": 1782176391.2991796,
+    "ast_hash": "d169b8dc9957c8360e06952273689ab9",
+    "semantic_hash": ""
+  },
+  "e2e/smoke.spec.ts": {
+    "mtime": 1782138165.7675328,
+    "ast_hash": "81fd77997b14a6e0c2f6835c37780f7a",
+    "semantic_hash": ""
+  },
+  "lib/schemas.ts": {
+    "mtime": 1782138778.8450568,
+    "ast_hash": "44c4b7313d5ba4d02512392933f87199",
+    "semantic_hash": ""
+  },
+  "lib/ui-config/__tests__/schema.test.ts": {
+    "mtime": 1782176069.6970375,
+    "ast_hash": "ef55ef6481fbcfd64d84116e687a2ed9",
+    "semantic_hash": ""
+  },
+  "lib/ui-config/__tests__/service.test.ts": {
+    "mtime": 1782176224.678053,
+    "ast_hash": "b1d86c0059267b5983848af0aa40c1f0",
+    "semantic_hash": ""
+  },
+  "lib/ui-config/schema.ts": {
+    "mtime": 1782176019.6077094,
+    "ast_hash": "b3b217144a8867af1648cb3cb4c469e0",
+    "semantic_hash": ""
+  },
+  "lib/ui-config/service.ts": {
+    "mtime": 1782176196.8008702,
+    "ast_hash": "0b130b216f2b25fdb58334722366a219",
+    "semantic_hash": ""
+  },
+  "lib/ui-config/types.ts": {
+    "mtime": 1782176019.6077094,
+    "ast_hash": "ba9f23ad560432feea21053bd5420ead",
+    "semantic_hash": ""
+  },
+  "playwright.config.ts": {
+    "mtime": 1782138148.8288028,
+    "ast_hash": "872ca016c39386c46384a805b71dc69f",
+    "semantic_hash": ""
+  },
+  "vercel.json": {
+    "mtime": 1782159373.422725,
+    "ast_hash": "d18ec4b6f0e4af38a8cae4e020c97889",
     "semantic_hash": ""
   }
 }
