@@ -13,16 +13,16 @@ export function AcknowledgeButton({ alarmId }: { alarmId: string }) {
       <button
         type="submit"
         disabled={pending}
-        className="inline-flex items-center gap-1.5 px-3 py-1.5 text-sm font-medium rounded-md bg-blue-600 hover:bg-blue-500 text-white disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+        className="inline-flex items-center gap-1.5 px-3 py-1.5 text-sm font-medium rounded-md bg-status-active hover:opacity-90 text-white disabled:opacity-50 disabled:cursor-not-allowed transition-opacity"
       >
         <Check className="h-3.5 w-3.5" />
         {pending ? 'Acknowledging...' : 'Acknowledge'}
       </button>
       {state?.success && (
-        <p className="text-xs text-green-400 mt-1">Acknowledged</p>
+        <p className="text-xs text-status-normal mt-1">Acknowledged</p>
       )}
       {state?.error && (
-        <p className="text-xs text-red-400 mt-1">{state.error}</p>
+        <p className="text-xs text-status-critical mt-1">{state.error}</p>
       )}
     </form>
   )

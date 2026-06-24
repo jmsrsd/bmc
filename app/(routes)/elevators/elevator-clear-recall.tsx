@@ -13,16 +13,16 @@ export function ElevatorClearRecallButton({ carId }: { carId: string }) {
       <button
         type="submit"
         disabled={pending}
-        className="inline-flex items-center gap-1 px-2.5 py-1 text-xs font-medium rounded-md bg-amber-600 hover:bg-amber-500 text-white transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+        className="inline-flex items-center gap-1 px-2.5 py-1 text-xs font-medium rounded-md bg-status-warning hover:opacity-90 text-white transition-opacity disabled:opacity-50 disabled:cursor-not-allowed"
       >
         <X className="w-3.5 h-3.5" />
         {pending ? '...' : 'Clear Recall'}
       </button>
       {state?.success && (
-        <span className="text-xs text-green-400">✓</span>
+        <span className="text-xs text-status-normal">✓</span>
       )}
       {state?.error && (
-        <span className="text-xs text-red-400">{state.error}</span>
+        <span className="text-xs text-status-critical">{state.error}</span>
       )}
     </form>
   )

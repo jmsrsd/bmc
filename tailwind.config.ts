@@ -15,6 +15,21 @@ const config: Config = {
     },
     extend: {
       colors: {
+        // Editorial Charcoal design system
+        'status-critical': '#FF453A',
+        'status-warning': '#FF9F0A',
+        'status-normal': '#32D74B',
+        'status-active': '#0A84FF',
+        
+        // Editorial Charcoal background surfaces
+        'bg-canvas': '#0B0B0C',
+        'bg-surface': '#121214',
+        'bg-elevated': '#1C1C1E',
+        
+        // Editorial Charcoal borders
+        'border-hairline': '#242427',
+        
+        // Keep existing semantic tokens for backwards compatibility
         border: 'hsl(var(--border))',
         input: 'hsl(var(--input))',
         ring: 'hsl(var(--ring))',
@@ -49,6 +64,11 @@ const config: Config = {
         lg: 'var(--radius)',
         md: 'calc(var(--radius) - 2px)',
         sm: 'calc(var(--radius) - 4px)',
+      },
+      fontFamily: {
+        sans: ['Inter', 'sans-serif'],
+        mono: ['"JetBrains Mono"', 'monospace'],
+        display: ['"SF Pro Display"', 'sans-serif'],
       },
       keyframes: {
         'accordion-down': {

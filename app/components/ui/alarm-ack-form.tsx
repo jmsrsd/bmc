@@ -16,12 +16,12 @@ export function AlarmAckForm({ alarmId }: AlarmAckFormProps) {
       <button
         type="submit"
         disabled={pending}
-        className="px-3 py-1 text-xs font-medium bg-blue-600 hover:bg-blue-500 text-white rounded-md transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+        className="px-3 py-1 text-xs font-medium bg-status-active hover:opacity-90 text-white rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
       >
         {pending ? '...Acking' : 'Acknowledge'}
       </button>
-      {state?.success && <span className="text-xs text-green-400 ml-2">✓</span>}
-      {state?.error && <span className="text-xs text-red-400 ml-2">{state.error}</span>}
+      {state?.success && <span className="text-xs text-status-normal ml-2">✓</span>}
+      {state?.error && <span className="text-xs text-status-critical ml-2">{state.error}</span>}
     </form>
   )
 }

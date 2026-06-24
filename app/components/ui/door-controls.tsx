@@ -23,8 +23,8 @@ export function DoorLockButton({
         disabled={pending}
         className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-colors disabled:opacity-50 ${
           isLocked
-            ? 'bg-amber-500/20 text-amber-400 border border-amber-500/30 hover:bg-amber-500/30'
-            : 'bg-green-500/20 text-green-400 border border-green-500/30 hover:bg-green-500/30'
+            ? 'bg-status-warning/20 text-status-warning border border-status-warning/30 hover:bg-status-warning/30'
+            : 'bg-status-normal/20 text-status-normal border border-status-normal/30 hover:bg-status-normal/30'
         }`}
       >
         {isLocked ? (
@@ -33,7 +33,7 @@ export function DoorLockButton({
           <><Lock className="w-4 h-4" />Lock</>
         )}
       </button>
-      {state?.error && <p className="text-xs text-red-400 mt-1">{state.error}</p>}
+      {state?.error && <p className="text-xs text-status-critical mt-1">{state.error}</p>}
     </form>
   )
 }

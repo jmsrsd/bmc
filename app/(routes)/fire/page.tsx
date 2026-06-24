@@ -1,9 +1,9 @@
 import { getSession } from '@/lib/auth'
 import { prisma } from '@/lib/prisma'
 import { redirect } from 'next/navigation'
-import Link from 'next/link'
-import { ArrowLeft, Flame, TriangleAlert, CircleX, WifiOff } from 'lucide-react'
+import { Flame, TriangleAlert, CircleX, WifiOff } from 'lucide-react'
 import { FireClearForm } from './fire-clear-form'
+import { BackLink, PageHeader, StatusBadge, EmptyState } from '@/components/ui/primitives'
 
 export const dynamic = 'force-dynamic'
 
@@ -12,18 +12,17 @@ export const metadata = {
   description: 'Fire alarm panel status and device monitoring',
 }
 
-const stateBorder: Record<string, string> = {
-  NORMAL: 'border-l-green-500',
-  ALARM: 'border-l-red-500',
-  FAULT: 'border-l-yellow-500',
-  DISCONNECTED: 'border-l-gray-500',
+function stateStatus(state: string): 'normal' | 'warning' | 'critical' {
+  if (state === 'ALARM') return 'critical'
+  if (state === 'FAULT' || state === 'DISCONNECTED') return 'warning'
+  return 'normal'
 }
 
-const stateBadge: Record<string, string> = {
-  NORMAL: 'bg-green-500/10 text-green-400',
-  ALARM: 'bg-red-500/10 text-red-400',
-  FAULT: 'bg-yellow-500/10 text-yellow-400',
-  DISCONNECTED: 'bg-gray-500/10 text-gray-400',
+const stateBorder: Record<string, string> = {
+  NORMAL: 'border-l-status-normal',
+  ALARM: 'border-l-status-critical',
+  FAULT: 'border-l-status-warning',
+  DISCONNECTED: 'border-l-border-hairline',
 }
 
 const deviceIcons: Record<string, React.ReactNode> = {
@@ -32,12 +31,6 @@ const deviceIcons: Record<string, React.ReactNode> = {
   FLOW: <CircleX className="w-4 h-4" />,
   TAMPER: <WifiOff className="w-4 h-4" />,
   MCP: <TriangleAlert className="w-4 h-4" />,
-}
-
-const deviceStateBadge: Record<string, string> = {
-  NORMAL: 'bg-green-500/10 text-green-400',
-  ALARM: 'bg-red-500/10 text-red-400',
-  FAULT: 'bg-yellow-500/10 text-yellow-400',
 }
 
 const deviceTypeLabel: Record<string, string> = {
@@ -58,52 +51,35 @@ export default async function FirePage() {
   })
 
   const alarmCount = panels.filter((p) => p.state === 'ALARM').length
+  const subtitle = `${panels.length} panel${panels.length !== 1 ? 's' : ''} · ${alarmCount} active alarm${alarmCount !== 1 ? 's' : ''}`
 
   return (
     <div className="space-y-6">
-      {/* Back Link */}
-      <Link
-        href="/"
-        className="inline-flex items-center gap-2 text-sm text-gray-400 hover:text-white transition-colors"
-      >
-        <ArrowLeft className="w-4 h-4" />
-        Dashboard
-      </Link>
+      <BackLink href="/" />
 
-      {/* Header */}
-      <div>
-        <h1 className="text-3xl font-bold text-white">Fire Safety</h1>
-        <p className="text-gray-400 mt-1">
-          {panels.length} panel{panels.length !== 1 ? 's' : ''} · {alarmCount} active alarm{alarmCount !== 1 ? 's' : ''}
-        </p>
-      </div>
+      <PageHeader title="Fire Safety" subtitle={subtitle} />
 
-      {/* Panels */}
       {panels.length === 0 ? (
-        <div className="bg-gray-800/50 backdrop-blur border border-gray-700 rounded-xl p-12 text-center">
-          <Flame className="w-12 h-12 text-gray-600 mx-auto mb-4" />
-          <h2 className="text-xl font-semibold text-white mb-2">No Fire Panels</h2>
-          <p className="text-gray-400">No fire alarm panels configured.</p>
-        </div>
+        <EmptyState
+          icon={<Flame className="w-12 h-12" />}
+          title="No Fire Panels"
+          description="No fire alarm panels configured."
+        />
       ) : (
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           {panels.map((panel) => (
             <div
               key={panel.id}
-              className={`bg-gray-800/50 backdrop-blur border border-gray-700 border-l-4 ${stateBorder[panel.state] ?? 'border-l-gray-700'} rounded-xl p-6`}
+              className={`bg-bg-surface/50 backdrop-blur border border-border-hairline border-l-4 ${stateBorder[panel.state] ?? 'border-l-border-hairline'} rounded-xl p-6`}
             >
               {/* Panel Header */}
               <div className="flex items-center justify-between mb-4">
                 <div>
                   <h3 className="text-lg font-semibold text-white">{panel.name}</h3>
                 </div>
-                <span
-                  className={`inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium ${
-                    stateBadge[panel.state] ?? 'bg-gray-500/10 text-gray-400'
-                  }`}
-                >
+                <StatusBadge status={stateStatus(panel.state)}>
                   {panel.state}
-                </span>
+                </StatusBadge>
               </div>
 
               {/* Devices */}
@@ -112,33 +88,31 @@ export default async function FirePage() {
                   {panel.devices.map((device) => (
                     <div
                       key={device.id}
-                      className="flex items-center gap-3 bg-gray-900/40 rounded-lg px-3 py-2"
+                      className="flex items-center gap-3 bg-bg-elevated/40 rounded-lg px-3 py-2"
                     >
-                      <span className="text-gray-500">
+                      <span className="text-muted-foreground">
                         {deviceIcons[device.type] ?? <TriangleAlert className="w-4 h-4" />}
                       </span>
                       <div className="flex-1 min-w-0">
-                        <p className="text-sm font-medium text-gray-200 truncate">
+                        <p className="text-sm font-medium text-foreground truncate">
                           {deviceTypeLabel[device.type] ?? device.type}
                         </p>
                         {device.zone && (
-                          <p className="text-xs text-gray-500">Zone: {device.zone}</p>
+                          <p className="text-xs text-muted-foreground">Zone: {device.zone}</p>
                         )}
                       </div>
-                      <span
-                        className={`inline-flex items-center px-2 py-0.5 rounded text-xs font-medium ${
-                          deviceStateBadge[device.state] ?? 'bg-gray-500/10 text-gray-400'
-                        }`}
+                      <StatusBadge
+                        status={device.state === 'ALARM' ? 'critical' : device.state === 'FAULT' ? 'warning' : 'normal'}
                       >
                         {device.state}
-                      </span>
+                      </StatusBadge>
                     </div>
                   ))}
                 </div>
               )}
 
               {panel.devices.length === 0 && (
-                <p className="text-sm text-gray-500 mb-4">No devices</p>
+                <p className="text-sm text-muted-foreground mb-4">No devices</p>
               )}
 
               {/* Clear Alarm Action */}
