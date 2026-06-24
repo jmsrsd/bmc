@@ -1,6 +1,6 @@
 'use client'
 
-import { DoorLockButton } from '@/components/ui/door-controls'
+import { DoorLockButton } from '../door-controls'
 import { StatusBadge, StatusLed, Card } from '.'
 
 interface DoorCardDoor {

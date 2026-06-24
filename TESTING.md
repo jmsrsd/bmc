@@ -1,4 +1,4 @@
-# BMC — Testing Strategy
+# BMC — Testing Strategy (web-validated 2026-06-24)
 
 > **Practice:** TDD (RED-GREEN-REFACTOR) — compulsory for all code
 > **Framework:** Vitest + Testing Library + Playwright
