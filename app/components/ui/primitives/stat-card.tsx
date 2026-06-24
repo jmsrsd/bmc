@@ -20,7 +20,7 @@ export function StatCard({ icon, label, value, highlight, children }: StatCardPr
       )}
       <div>
         <p className="text-sm text-muted-foreground">{label}</p>
-        <p className={`text-2xl font-bold font-mono ${highlight ? 'text-status-critical' : 'text-white'}`}>
+        <p className={`text-2xl font-light font-mono ${highlight ? 'text-status-critical' : 'text-white'}`}>
           {value ?? children}
         </p>
       </div>

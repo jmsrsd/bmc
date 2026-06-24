@@ -143,7 +143,7 @@ export default async function HVACPage({ searchParams }: PageProps) {
                       <MetricTile
                         label="Return"
                         value={hvac.returnTemp?.toFixed(1) ?? '--'}
-                        valueColor="text-orange-400"
+                        valueColor="text-status-warning"
                         unit="°C"
                       />
                     </div>

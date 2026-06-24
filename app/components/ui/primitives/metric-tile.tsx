@@ -11,7 +11,7 @@ export function MetricTile({ label, value, valueColor = 'text-white', unit }: Me
   return (
     <div className="bg-bg-elevated/50 rounded-lg p-3 text-center">
       <p className="text-xs text-muted-foreground mb-1">{label}</p>
-      <p className={`text-xl font-bold font-mono ${valueColor}`}>{value}</p>
+      <p className={`text-xl font-light font-mono ${valueColor}`}>{value}</p>
       {unit && <p className="text-xs text-muted-foreground">{unit}</p>}
     </div>
   )

@@ -21,12 +21,6 @@ export const metadata = {
 
 type SearchParams = Promise<{ [key: string]: string | string[] | undefined }>
 
-const severityBorder: Record<string, string> = {
-  critical: 'border-l-status-critical',
-  warning: 'border-l-status-warning',
-  info: 'border-l-status-active',
-}
-
 export default async function AlarmsPage(props: { searchParams: SearchParams }) {
   const session = await getSession()
   if (!session) redirect('/login')
@@ -75,7 +69,7 @@ export default async function AlarmsPage(props: { searchParams: SearchParams }) 
           {alarms.map((alarm) => (
             <div
               key={alarm.id}
-              className={`bg-bg-surface/50 backdrop-blur border border-border-hairline border-l-4 ${severityBorder[alarm.severity] ?? 'border-l-border-hairline'} rounded-xl p-4`}
+              className={`bg-bg-surface/50 backdrop-blur border border-border-hairline rounded-xl p-4`}
             >
               <div className="flex items-start justify-between gap-4">
                 <div className="flex-1 min-w-0">

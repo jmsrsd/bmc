@@ -51,7 +51,7 @@ export default async function EnergyPage() {
 
   return (
     <div className="space-y-6">
-      <BackLink href="/" />
+      <BackLink href="/" label="Dashboard" />
 
       <PageHeader
         title="Energy Management"

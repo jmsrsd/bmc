@@ -18,13 +18,6 @@ function stateStatus(state: string): 'normal' | 'warning' | 'critical' {
   return 'normal'
 }
 
-const stateBorder: Record<string, string> = {
-  NORMAL: 'border-l-status-normal',
-  ALARM: 'border-l-status-critical',
-  FAULT: 'border-l-status-warning',
-  DISCONNECTED: 'border-l-border-hairline',
-}
-
 const deviceIcons: Record<string, React.ReactNode> = {
   SMOKE: <Flame className="w-4 h-4" />,
   HEAT: <TriangleAlert className="w-4 h-4" />,
@@ -70,7 +63,7 @@ export default async function FirePage() {
           {panels.map((panel) => (
             <div
               key={panel.id}
-              className={`bg-bg-surface/50 backdrop-blur border border-border-hairline border-l-4 ${stateBorder[panel.state] ?? 'border-l-border-hairline'} rounded-xl p-6`}
+              className={`bg-bg-surface/50 backdrop-blur border border-border-hairline rounded-xl p-6`}
             >
               {/* Panel Header */}
               <div className="flex items-center justify-between mb-4">
