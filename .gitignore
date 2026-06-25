@@ -46,3 +46,6 @@ coverage/
 
 # Generated assets
 prisma/prisma/
+
+# TypeScript incremental build info
+*.tsbuildinfo
