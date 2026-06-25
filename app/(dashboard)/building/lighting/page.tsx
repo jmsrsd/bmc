@@ -1,16 +1,15 @@
 import { prisma } from '@/lib/prisma'
 import { PageHeader } from '@/components/ui/page-header'
-import { DimSlider } from './dim-slider'
-import { ToggleButton } from './toggle-button'
+import { DataTable, type Column } from '@/components/ui/data-table'
+import { LightingControls } from './lighting-controls'
+import { stripTowerPrefix } from '@/lib/zone-group'
 
 export default async function LightingPage() {
   const building = await prisma.building.findUnique({
     where: { id: 'b1' },
     include: {
       zones: {
-        include: {
-          lightZones: true,
-        },
+        include: { lightZones: true },
       },
     },
   })
@@ -23,40 +22,36 @@ export default async function LightingPage() {
     )
   }
 
+  // Build table rows
+  const rows: any[] = building.zones.map((zone: any) => {
+    const light = zone.lightZones[0]
+    return {
+      id: zone.id,
+      zoneName: stripTowerPrefix(zone.name),
+      floor: zone.floor,
+      state: light?.state ?? 'OFF',
+      dimLevel: light?.dimLevel ?? 0,
+      scene: light?.scene ?? 'NORMAL',
+    }
+  })
+
+  const columns: Column<any>[] = [
+    { header: 'Zone', cell: (z) => <span className="text-[14px] font-medium text-white">{z.zoneName}</span> },
+    { header: 'Floor', cell: (z) => <span className="text-[12px] text-[#8E8E93]">{z.floor >= 0 ? `F${z.floor}` : `B${Math.abs(z.floor)}`}</span> },
+    { header: 'Scene', cell: (z) => <span className="text-[12px] text-[#AEAEB2]">{z.scene}</span> },
+    { header: 'Controls', cell: (z) => <LightingControls zoneId={z.id} initialDim={z.dimLevel} initialState={z.state} /> },
+  ]
+
   return (
     <div>
-      <PageHeader title="Lighting Control" subtitle="Zone dimming &amp; scene control" />
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-6">
-        {building.zones.map((zone) => {
-          const light = zone.lightZones[0]
-
-          return (
-            <div
-              key={zone.id}
-              className="bg-[#121214]/50 backdrop-blur border border-[#242427] rounded-xl p-5"
-            >
-              <div className="flex items-center justify-between mb-3">
-                <h3 className="text-[16px] font-semibold text-white">{zone.name}</h3>
-                <span className="text-[11px] text-[#8E8E93] uppercase tracking-wider">{zone.floor}F</span>
-              </div>
-
-              <div className="flex items-center justify-between mb-4">
-                <span className="text-[12px] text-[#8E8E93]">State</span>
-                <ToggleButton zoneId={zone.id} currentState={light?.state ?? 'OFF'} />
-              </div>
-
-              <div className="mb-4">
-                <label className="text-[12px] text-[#8E8E93] block mb-2">Dim Level</label>
-                <DimSlider zoneId={zone.id} initialDim={light?.dimLevel ?? 0} />
-              </div>
-
-              <div className="flex items-center justify-between">
-                <span className="text-[12px] text-[#8E8E93]">Scene</span>
-                <span className="text-[13px] font-medium text-white">{light?.scene ?? 'NORMAL'}</span>
-              </div>
-            </div>
-          )
-        })}
+      <PageHeader title="Lighting Control" subtitle="Zone dimming & scene control" />
+      <div className="mt-6">
+        <DataTable
+          columns={columns}
+          data={rows}
+          keyExtractor={(z) => z.id}
+          emptyMessage="No zones found"
+        />
       </div>
     </div>
   )

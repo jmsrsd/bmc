@@ -1,8 +1,8 @@
 import { prisma } from '@/lib/prisma'
 import { PageHeader } from '@/components/ui/page-header'
-import { TemperatureSlider } from './temperature-slider'
-import { FanSpeedSelector } from './fan-speed-selector'
-import { ModeSwitcher } from './mode-switcher'
+import { DataTable, type Column } from '@/components/ui/data-table'
+import { HvacControls } from './hvac-controls'
+import { stripTowerPrefix } from '@/lib/zone-group'
 
 export default async function HvacPage() {
   const building = await prisma.building.findUnique({
@@ -29,49 +29,56 @@ export default async function HvacPage() {
     )
   }
 
+  // Build table rows
+  const rows: any[] = building.zones.map((zone: any) => {
+    const hvac = zone.hvacUnits[0]
+    const tempSensor = zone.sensors[0]
+    return {
+      id: zone.id,
+      zoneName: stripTowerPrefix(zone.name),
+      floor: zone.floor,
+      currentTemp: tempSensor?.value ?? null,
+      setpoint: hvac?.setpoint ?? 22,
+      state: hvac?.state ?? 'OFF',
+      mode: hvac?.mode ?? 'AUTO',
+      fanSpeed: hvac?.fanSpeed ?? 'AUTO',
+    }
+  })
+
+  const columns: Column<any>[] = [
+    { header: 'Zone', cell: (z) => <span className="text-[14px] font-medium text-white">{z.zoneName}</span> },
+    { header: 'Floor', cell: (z) => <span className="text-[12px] text-[#8E8E93]">{z.floor >= 0 ? `F${z.floor}` : `B${Math.abs(z.floor)}`}</span> },
+    { header: 'Temp', cell: (z) => (
+      <span className="text-[14px] font-['JetBrains_Mono'] text-white">
+        {z.currentTemp !== null ? `${z.currentTemp.toFixed(1)}°C` : '--°C'}
+      </span>
+    )},
+    { header: 'Setpoint', cell: (z) => <span className="text-[12px] text-[#8E8E93]">{z.setpoint}°C</span> },
+    { header: 'State', cell: (z) => {
+      const on = z.state === 'ON'
+      return <span className={`text-[12px] ${on ? 'text-[#32D74B]' : 'text-[#6B7280]'}`}>{z.state}</span>
+    }},
+    { header: 'Controls', cell: (z) => (
+      <HvacControls
+        zoneId={z.id}
+        initialSetpoint={z.setpoint}
+        currentTemp={z.currentTemp}
+        currentSpeed={z.fanSpeed}
+        currentMode={z.mode}
+      />
+    )},
+  ]
+
   return (
     <div>
       <PageHeader title="HVAC Control" subtitle="Zone temperature, fan speed & mode" />
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-6">
-        {building.zones.map((zone) => {
-          const hvacUnit = zone.hvacUnits[0]
-          const tempSensor = zone.sensors[0]
-          const currentTemp = tempSensor?.value ?? null
-          const setpoint = hvacUnit?.setpoint ?? 22
-          const fanSpeed = hvacUnit?.fanSpeed ?? 'AUTO'
-          const mode = hvacUnit?.mode ?? 'AUTO'
-
-          return (
-            <div
-              key={zone.id}
-              className="bg-[#121214]/50 backdrop-blur border border-[#242427] rounded-xl p-5"
-            >
-              <div className="flex items-center justify-between mb-3">
-                <h3 className="text-[16px] font-semibold text-white">{zone.name}</h3>
-                <span className="text-[11px] text-[#8E8E93] uppercase tracking-wider">{zone.floor}F</span>
-              </div>
-
-              <div className="text-[32px] font-[family-name:var(--font-jetbrains-mono)] font-light text-white leading-tight">
-                {currentTemp !== null ? `${currentTemp.toFixed(1)}°C` : '--°C'}
-              </div>
-
-              <div className="mt-5">
-                <label className="text-[12px] text-[#8E8E93] block mb-2">Setpoint</label>
-                <TemperatureSlider zoneId={zone.id} initialSetpoint={setpoint} />
-              </div>
-
-              <div className="mt-5">
-                <label className="text-[12px] text-[#8E8E93] block mb-2">Fan Speed</label>
-                <FanSpeedSelector zoneId={zone.id} currentSpeed={fanSpeed} />
-              </div>
-
-              <div className="mt-5">
-                <label className="text-[12px] text-[#8E8E93] block mb-2">Mode</label>
-                <ModeSwitcher zoneId={zone.id} currentMode={mode} />
-              </div>
-            </div>
-          )
-        })}
+      <div className="mt-6">
+        <DataTable
+          columns={columns}
+          data={rows}
+          keyExtractor={(z) => z.id}
+          emptyMessage="No zones found"
+        />
       </div>
     </div>
   )
