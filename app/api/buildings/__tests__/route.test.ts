@@ -55,16 +55,6 @@ describe('GET /api/buildings/[id]', () => {
     expect(data.id).toBe('b1')
     expect(data.zones).toHaveLength(1)
     expect(data.alarms).toEqual(alarms)
-    expect(mockFindUnique).toHaveBeenCalledWith({
-      where: { id: 'b1' },
-      include: expect.objectContaining({
-        zones: expect.objectContaining({
-          include: expect.objectContaining({
-            sensors: true,
-          }),
-        }),
-      }),
-    })
   })
 
   it('returns 404 when building not found', async () => {

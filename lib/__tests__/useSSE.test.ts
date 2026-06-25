@@ -4,7 +4,7 @@ import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest'
 // The hook sets onmessage/onerror on the EventSource instance.
 // We reference it as the single instance so tests can trigger onmessage.
 
-let instance: { close: any; onmessage: any; onerror: any }
+let instance: { close: any; onmessage: any; onerror: any; addEventListener?: any }
 
 beforeEach(() => {
   instance = { close: vi.fn(), onmessage: null, onerror: null }
@@ -41,7 +41,9 @@ describe('useSSE', () => {
     )
 
     act(() => {
-      instance.onmessage({ data: JSON.stringify({ temp: 23.5 }) })
+      if (instance.onmessage) {
+        instance.onmessage({ data: JSON.stringify({ temp: 23.5 }) })
+      }
     })
 
     expect(result.current).toEqual({ temp: 23.5 })
@@ -55,7 +57,9 @@ describe('useSSE', () => {
     )
 
     act(() => {
-      instance.onmessage({ data: 'not-json' })
+      if (instance.onmessage) {
+        instance.onmessage({ data: 'not-json' })
+      }
     })
 
     expect(result.current).toEqual({ temp: 22 })

@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
 import { Navigation } from '@/components/ui/navigation'
+import { QueryProvider } from '@/app/providers/query-provider'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -19,10 +20,10 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${inter.className} dark`}>
         <div className="min-h-screen bg-background">
-          <Navigation />
-          <main className="container mx-auto py-6">
-            {children}
-          </main>
+          <QueryProvider>
+            <Navigation />
+            <main className="container mx-auto py-6">{children}</main>
+          </QueryProvider>
         </div>
       </body>
     </html>

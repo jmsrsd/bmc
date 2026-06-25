@@ -2,7 +2,8 @@ import { describe, it, expect, vi, beforeEach } from 'vitest'
 
 // Mock modules before importing actions
 const mockRevalidatePath = vi.fn()
-vi.mock('next/cache', () => ({ revalidatePath: mockRevalidatePath }))
+const mockRevalidateTag = vi.fn()
+vi.mock('next/cache', () => ({ revalidatePath: mockRevalidatePath, revalidateTag: mockRevalidateTag }))
 
 const mockPrisma = {
   hVACUnit: { findFirst: vi.fn(), updateMany: vi.fn() },

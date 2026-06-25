@@ -1,11 +1,16 @@
 import { NextResponse } from 'next/server'
 import { prisma } from '@/lib/prisma'
 
+// Cache for 5 minutes, stale-while-revalidate for 60s
+export const dynamic = 'force-dynamic'
+
 export async function GET(
-  _request: Request,
+  request: Request,
   { params }: { params: Promise<{ id: string }> }
 ) {
   const { id } = await params
+  const ifNoneMatch = request.headers.get('if-none-match')
+  
   try {
     const building = await prisma.building.findUnique({
       where: { id },
@@ -18,15 +23,9 @@ export async function GET(
             doors: true,
           },
         },
-        elevators: {
-          include: { cars: true },
-        },
-        firePanels: {
-          include: { devices: true },
-        },
-        meters: {
-          include: { readings: { orderBy: { timestamp: 'desc' }, take: 48 } },
-        },
+        elevators: { include: { cars: true } },
+        firePanels: { include: { devices: true } },
+        meters: { include: { readings: { orderBy: { timestamp: 'desc' }, take: 48 } } },
         cameras: true,
         tenants: true,
       },
@@ -43,9 +42,31 @@ export async function GET(
       take: 50,
     })
 
-    return NextResponse.json({ ...building, alarms })
+    const data = { ...building, alarms }
+    const etag = generateETag(data)
+
+    if (ifNoneMatch === etag) {
+      return new NextResponse(null, { status: 304 })
+    }
+
+    const response = NextResponse.json(data)
+    response.headers.set('Cache-Control', 'public, s-maxage=300, stale-while-revalidate=60')
+    response.headers.set('ETag', etag)
+
+    return response
   } catch (error) {
     console.error('Failed to fetch building:', error)
     return NextResponse.json({ error: 'Failed to fetch building' }, { status: 500 })
   }
+}
+
+function generateETag(data: unknown): string {
+  const str = JSON.stringify(data)
+  let hash = 0
+  for (let i = 0; i < str.length; i++) {
+    const char = str.charCodeAt(i)
+    hash = ((hash << 5) - hash) + char
+    hash = hash & hash
+  }
+  return `"${hash.toString(16)}"`
 }

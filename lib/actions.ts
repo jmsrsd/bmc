@@ -5,7 +5,7 @@
 // USECASE.md: UC-HVAC-01, UC-HVAC-02, UC-HVAC-03, UC-LGT-01, UC-LGT-02, UC-SEC-01, UC-ALM-02
 
 import { prisma } from '@/lib/prisma'
-import { revalidatePath } from 'next/cache'
+import { revalidatePath, revalidateTag } from 'next/cache'
 import { getSession, checkAccess } from '@/lib/auth'
 import { BUILDING_ID } from '@/lib/types'
 
@@ -41,6 +41,8 @@ export async function setTemperature(prevState: any, formData: FormData) {
       },
     })
 
+    // Invalidate all building-related caches
+    revalidateTag('building')
     revalidatePath(`/building/hvac`)
     return { success: true, setpoint, zoneId }
   } catch (e: any) {
@@ -78,6 +80,7 @@ export async function setFanSpeed(prevState: any, formData: FormData) {
       },
     })
 
+    revalidateTag('building')
     revalidatePath(`/building/hvac`)
     return { success: true, speed, zoneId }
   } catch (e: any) {
@@ -115,6 +118,7 @@ export async function setHvacMode(prevState: any, formData: FormData) {
       },
     })
 
+    revalidateTag('building')
     revalidatePath(`/building/hvac`)
     return { success: true, mode, zoneId }
   } catch (e: any) {
@@ -153,6 +157,7 @@ export async function setDimLevel(prevState: any, formData: FormData) {
       },
     })
 
+    revalidateTag('building')
     revalidatePath(`/building/lighting`)
     return { success: true, level, zoneId }
   } catch (e: any) {
@@ -189,6 +194,7 @@ export async function toggleLight(prevState: any, formData: FormData) {
       },
     })
 
+    revalidateTag('building')
     revalidatePath(`/building/lighting`)
     return { success: true, state: newState, zoneId }
   } catch (e: any) {
@@ -228,6 +234,7 @@ export async function setDoorState(prevState: any, formData: FormData) {
       },
     })
 
+    revalidateTag('building')
     revalidatePath(`/building/security`)
     return { success: true, state: newState, doorId }
   } catch (e: any) {
@@ -235,7 +242,7 @@ export async function setDoorState(prevState: any, formData: FormData) {
   }
 }
 
-// ─── Elevator Actions ─────────────────────────────────────────
+// ─── Elevator Actions ───────────────────────────────────────────
 
 export async function recallElevator(prevState: any, formData: FormData) {
   const session = await getSession()
@@ -267,6 +274,7 @@ export async function recallElevator(prevState: any, formData: FormData) {
       },
     })
 
+    revalidateTag('building')
     revalidatePath(`/elevators`)
     return { success: true, carId, targetFloor }
   } catch (e: any) {
@@ -300,6 +308,7 @@ export async function clearElevatorRecall(prevState: any, formData: FormData) {
       },
     })
 
+    revalidateTag('building')
     revalidatePath(`/elevators`)
     return { success: true, carId }
   } catch (e: any) {
@@ -307,7 +316,7 @@ export async function clearElevatorRecall(prevState: any, formData: FormData) {
   }
 }
 
-// ─── Fire Safety Actions ──────────────────────────────────────
+// ─── Fire Safety Actions ────────────────────────────────────────
 
 export async function clearFireAlarm(prevState: any, formData: FormData) {
   const session = await getSession()
@@ -343,6 +352,7 @@ export async function clearFireAlarm(prevState: any, formData: FormData) {
       },
     })
 
+    revalidateTag('building')
     revalidatePath(`/fire`)
     return { success: true, panelId }
   } catch (e: any) {
@@ -350,7 +360,7 @@ export async function clearFireAlarm(prevState: any, formData: FormData) {
   }
 }
 
-// ─── Alarm Actions ────────────────────────────────────────────
+// ─── Alarm Actions ──────────────────────────────────────────────
 
 export async function acknowledgeAlarm(prevState: any, formData: FormData) {
   const session = await getSession()
@@ -387,6 +397,7 @@ export async function acknowledgeAlarm(prevState: any, formData: FormData) {
       },
     })
 
+    revalidateTag('building')
     revalidatePath(`/`)
     return { success: true, alarmId }
   } catch (e: any) {

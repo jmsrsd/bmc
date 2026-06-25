@@ -1,5 +1,6 @@
 import { getSession } from '@/lib/auth'
 import { prisma } from '@/lib/prisma'
+import { getCachedBuilding, CACHE_TTL } from '@/lib/cache'
 import { redirect } from 'next/navigation'
 import Link from 'next/link'
 import {
@@ -21,7 +22,9 @@ import {
 } from 'lucide-react'
 import type { Metadata } from 'next'
 
-export const dynamic = 'force-dynamic'
+// Cache for 5 minutes, stale-while-revalidate for 60s
+export const revalidate = 300
+export const dynamic = 'force-static'
 
 export const metadata: Metadata = {
   title: 'Building Overview | BMC',
@@ -146,21 +149,9 @@ export default async function BuildingOverviewPage() {
   const session = await getSession()
   if (!session) redirect('/login')
 
+  // Use cached building fetch
   const [building, activeAlarmCount] = await Promise.all([
-    prisma.building.findUnique({
-      where: { id: 'b1' },
-      include: {
-        zones: {
-          include: {
-            hvacUnits: { select: { state: true, mode: true, setpoint: true } },
-            sensors: { select: { type: true, value: true, unit: true } },
-            lightZones: { select: { state: true, dimLevel: true } },
-            doors: { select: { state: true } },
-          },
-          orderBy: { floor: 'asc' },
-        },
-      },
-    }),
+    getCachedBuilding('b1'),
     prisma.alarm.count({ where: { buildingId: 'b1', status: 'open' } }),
   ])
 
