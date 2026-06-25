@@ -4,7 +4,7 @@ import { GET, POST } from '../building/route'
 const mockFindMany = vi.hoisted(() => vi.fn())
 const mockCreate = vi.hoisted(() => vi.fn())
 
-vi.mock('@/lib/prisma', () => ({
+vi.mock('@/lib/mock-db', () => ({
   prisma: {
     building: {
       findMany: mockFindMany,

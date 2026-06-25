@@ -102,13 +102,13 @@ export default async function ElevatorsPage() {
       {building.elevators.length === 0 ? (
         <p className="text-[14px] text-[#8E8E93] mt-6">No elevators configured</p>
       ) : (
-        building.elevators.map((elevator) => (
+        building.elevators.map((elevator: any) => (
           <div key={elevator.id} className="mt-6 first:mt-6">
             {elevator.cars.length === 0 ? (
               <p className="text-[12px] text-[#8E8E93]">{elevator.name} — No cars</p>
             ) : (
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                {elevator.cars.map((car) => (
+                {elevator.cars.map((car: any) => (
                   <ElevatorCarCard
                     key={car.id}
                     car={car}

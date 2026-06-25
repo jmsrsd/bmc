@@ -60,8 +60,8 @@ export default async function BuildingOverviewPage() {
   }
 
   const totalZones = building.zones.length
-  const totalSensors = building.zones.reduce((a, z) => a + z.sensors.length, 0)
-  const totalEnergy = building.meters.reduce((a, m) => a + m.value, 0).toFixed(1)
+  const totalSensors = building.zones.reduce((a: number, z: any) => a + z.sensors.length, 0)
+  const totalEnergy = building.meters.reduce((a: number, m: any) => a + m.value, 0).toFixed(1)
 
   // Flatten zones into table rows
   const zoneRows: ZoneRow[] = building.zones.map((zone: any) => {

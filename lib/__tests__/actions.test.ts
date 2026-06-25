@@ -15,7 +15,7 @@ const mockPrisma = {
   alarm: { findUnique: vi.fn(), update: vi.fn() },
   auditLog: { create: vi.fn() },
 }
-vi.mock('@/lib/prisma', () => ({ prisma: mockPrisma }))
+vi.mock('@/lib/mock-db', () => ({ prisma: mockPrisma }))
 
 let mockSession: any = { user: { id: 'test-user', role: 'admin', name: 'Test' } }
 vi.mock('@/lib/auth', () => ({

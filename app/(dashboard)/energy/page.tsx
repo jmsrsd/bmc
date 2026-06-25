@@ -2,7 +2,7 @@ import { prisma } from '@/lib/prisma'
 import { PageHeader } from '@/components/ui/page-header'
 
 export default async function EnergyPage() {
-  const building = await prisma.building.findUnique({
+  const building: any = await prisma.building.findUnique({
     where: { id: 'b1' },
     include: {
       meters: {
@@ -25,10 +25,10 @@ export default async function EnergyPage() {
   }
 
   const totalKw = building.meters
-    .reduce((sum, m) => sum + m.value, 0)
+    .reduce((sum: number, m: any) => sum + m.value, 0)
     .toFixed(1)
   const totalCumulativeKwh = building.meters
-    .reduce((sum, m) => sum + m.cumulative, 0)
+    .reduce((sum: number, m: any) => sum + m.cumulative, 0)
     .toLocaleString('en-US', { maximumFractionDigits: 0 })
   const meterCount = building.meters.length
 
@@ -60,10 +60,10 @@ export default async function EnergyPage() {
 
       {/* Meter Cards Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-6">
-        {building.meters.map((meter) => {
+        {building.meters.map((meter: any) => {
           const readings = meter.readings
           const maxReading = readings.length > 0
-            ? Math.max(...readings.map((r) => r.value), 0.001)
+            ? Math.max(...readings.map((r: any) => r.value), 0.001)
             : 1
 
           return (
@@ -97,7 +97,7 @@ export default async function EnergyPage() {
               {/* Inline bar chart */}
               {readings.length > 0 ? (
                 <div className="flex items-end gap-[2px] h-12 mt-3">
-                  {readings.slice(0, 48).map((r, i) => (
+                  {readings.slice(0, 48).map((r: any, i: number) => (
                     <div
                       key={i}
                       className="w-[3px] bg-[#0A84FF]/60 rounded-t"

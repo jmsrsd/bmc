@@ -4,7 +4,7 @@
 // DESIGN.md §3.4 pattern: Zod + Auth + Prisma + Audit + revalidate
 // USECASE.md: UC-HVAC-01, UC-HVAC-02, UC-HVAC-03, UC-LGT-01, UC-LGT-02, UC-SEC-01, UC-ALM-02
 
-import { prisma } from '@/lib/prisma'
+import { prisma } from '@/lib/mock-db'
 import { revalidatePath, revalidateTag } from 'next/cache'
 import { getSession, checkAccess } from '@/lib/auth'
 import { BUILDING_ID } from '@/lib/types'
@@ -24,7 +24,7 @@ export async function setTemperature(prevState: any, formData: FormData) {
     }
 
     // Read current value for audit
-    const current = await prisma.hVACUnit.findFirst({ where: { zoneId }, select: { setpoint: true } })
+    const current: any = await prisma.hVACUnit.findFirst({ where: { zoneId }, select: { setpoint: true } })
 
     await prisma.hVACUnit.updateMany({
       where: { zoneId },
@@ -63,7 +63,7 @@ export async function setFanSpeed(prevState: any, formData: FormData) {
       return { error: 'Invalid fan speed' }
     }
 
-    const current = await prisma.hVACUnit.findFirst({ where: { zoneId }, select: { fanSpeed: true } })
+    const current: any = await prisma.hVACUnit.findFirst({ where: { zoneId }, select: { fanSpeed: true } })
 
     await prisma.hVACUnit.updateMany({
       where: { zoneId },
@@ -101,7 +101,7 @@ export async function setHvacMode(prevState: any, formData: FormData) {
       return { error: 'Invalid HVAC mode' }
     }
 
-    const current = await prisma.hVACUnit.findFirst({ where: { zoneId }, select: { mode: true } })
+    const current: any = await prisma.hVACUnit.findFirst({ where: { zoneId }, select: { mode: true } })
 
     await prisma.hVACUnit.updateMany({
       where: { zoneId },
@@ -140,7 +140,7 @@ export async function setDimLevel(prevState: any, formData: FormData) {
       return { error: 'Invalid dim level (0-100)' }
     }
 
-    const current = await prisma.lightZone.findFirst({ where: { zoneId }, select: { dimLevel: true } })
+    const current: any = await prisma.lightZone.findFirst({ where: { zoneId }, select: { dimLevel: true } })
 
     await prisma.lightZone.updateMany({
       where: { zoneId },
@@ -177,7 +177,7 @@ export async function toggleLight(prevState: any, formData: FormData) {
       return { error: 'Invalid light state' }
     }
 
-    const current = await prisma.lightZone.findFirst({ where: { zoneId }, select: { state: true } })
+    const current: any = await prisma.lightZone.findFirst({ where: { zoneId }, select: { state: true } })
 
     await prisma.lightZone.updateMany({
       where: { zoneId },
@@ -216,7 +216,7 @@ export async function setDoorState(prevState: any, formData: FormData) {
       return { error: 'Invalid door state' }
     }
 
-    const current = await prisma.door.findUnique({ where: { id: doorId }, select: { state: true, name: true } })
+    const current: any = await prisma.door.findUnique({ where: { id: doorId }, select: { state: true, name: true } })
     if (!current) return { error: 'Door not found' }
 
     await prisma.door.update({
@@ -256,7 +256,7 @@ export async function recallElevator(prevState: any, formData: FormData) {
       return { error: 'Invalid recall target' }
     }
 
-    const car = await prisma.elevatorCar.findUnique({ where: { id: carId } })
+    const car: any = await prisma.elevatorCar.findUnique({ where: { id: carId } })
     if (!car) return { error: 'Elevator car not found' }
 
     await prisma.elevatorCar.update({
@@ -290,7 +290,7 @@ export async function clearElevatorRecall(prevState: any, formData: FormData) {
     const carId = formData.get('carId') as string
     if (!carId) return { error: 'Missing car ID' }
 
-    const car = await prisma.elevatorCar.findUnique({ where: { id: carId } })
+    const car: any = await prisma.elevatorCar.findUnique({ where: { id: carId } })
     if (!car) return { error: 'Elevator car not found' }
 
     await prisma.elevatorCar.update({
@@ -328,7 +328,7 @@ export async function clearFireAlarm(prevState: any, formData: FormData) {
 
     if (!panelId) return { error: 'Missing panel ID' }
 
-    const panel = await prisma.firePanel.findUnique({ where: { id: panelId } })
+    const panel: any = await prisma.firePanel.findUnique({ where: { id: panelId } })
     if (!panel) return { error: 'Panel not found' }
 
     await prisma.firePanel.update({
@@ -372,7 +372,7 @@ export async function acknowledgeAlarm(prevState: any, formData: FormData) {
 
     if (!alarmId) return { error: 'Missing alarm ID' }
 
-    const alarm = await prisma.alarm.findUnique({ where: { id: alarmId } })
+    const alarm: any = await prisma.alarm.findUnique({ where: { id: alarmId } })
     if (!alarm || alarm.status !== 'open') {
       return { error: 'Alarm not found or already acknowledged' }
     }

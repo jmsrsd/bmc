@@ -60,7 +60,7 @@ export default async function FirePage() {
     <div>
       <PageHeader title="Fire Safety" subtitle="Panel status &amp; device monitoring" />
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-6">
-        {building.firePanels.map((panel) => (
+        {building.firePanels.map((panel: any) => (
           <div
             key={panel.id}
             className="bg-[#121214]/50 backdrop-blur border border-[#242427] rounded-xl p-5"
@@ -83,7 +83,7 @@ export default async function FirePage() {
               {panel.devices.length === 0 ? (
                 <p className="text-[12px] text-[#8E8E93]">No devices</p>
               ) : (
-                panel.devices.map((device) => (
+                panel.devices.map((device: any) => (
                   <div
                     key={device.id}
                     className="flex items-center justify-between text-[12px]"

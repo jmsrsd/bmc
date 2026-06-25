@@ -87,9 +87,9 @@ export default async function SecurityPage() {
   }
 
   const rows: DoorRow[] = building.zones
-    .filter((z) => z.doors.length > 0)
-    .flatMap((zone) =>
-      zone.doors.map((door) => ({
+    .filter((z: any) => z.doors.length > 0)
+    .flatMap((zone: any) =>
+      zone.doors.map((door: any) => ({
         id: door.id,
         doorName: door.name,
         zoneName: zone.name,
