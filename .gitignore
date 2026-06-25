@@ -37,5 +37,12 @@ screenshots/
 # Coverage
 coverage/
 
+# Agent files
+.hermes/
+.claude/
+.gemini/
+.opencode/
+.vite/
+
 # Generated assets
 prisma/prisma/

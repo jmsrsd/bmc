@@ -1,6 +1,10 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest'
 import { middleware } from '../../middleware'
 
+function createNextResponse(init?: ResponseInit) {
+  return new Response(null, init)
+}
+
 vi.mock('next/server', () => {
   const redirect = vi.fn((url) => ({
     status: 307,
@@ -30,12 +34,6 @@ describe('middleware', () => {
     vi.clearAllMocks()
   })
 
-  it('allows /login path (public)', () => {
-    const req = mockRequest('/login')
-    const result = middleware(req)
-    expect(result.status).toBe(200) // NextResponse.next()
-  })
-
   it('allows /api/login path (public)', () => {
     const req = mockRequest('/api/login')
     const result = middleware(req)
@@ -60,24 +58,20 @@ describe('middleware', () => {
     expect(result.status).toBe(200)
   })
 
-  it('redirects to /login when no session cookie', () => {
-    const req = mockRequest('/dashboard')
+  it('returns 401 when no session cookie', () => {
+    const req = mockRequest('/api/buildings/b1')
     const result = middleware(req)
-    expect(result.status).toBe(307)
-    const location = result.headers.get('Location')
-    expect(location).toBe('http://localhost:3000/login')
+    expect(result.status).toBe(401)
   })
 
-  it('redirects to /login when session cookie has wrong value', () => {
-    const req = mockRequest('/dashboard', 'not-authenticated')
+  it('returns 401 when session cookie has wrong value', () => {
+    const req = mockRequest('/api/buildings/b1', 'not-authenticated')
     const result = middleware(req)
-    expect(result.status).toBe(307)
-    const location = result.headers.get('Location')
-    expect(location).toBe('http://localhost:3000/login')
+    expect(result.status).toBe(401)
   })
 
   it('passes through when authenticated session cookie exists', () => {
-    const req = mockRequest('/dashboard', 'authenticated')
+    const req = mockRequest('/api/buildings/b1', 'authenticated')
     const result = middleware(req)
     expect(result.status).toBe(200) // NextResponse.next()
   })
