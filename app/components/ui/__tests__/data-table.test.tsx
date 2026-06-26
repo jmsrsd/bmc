@@ -1,23 +1,43 @@
 import React from 'react'
-import { describe, it, expect } from 'vitest'
+import { describe, it, expect, vi } from 'vitest'
 import { renderToString } from 'react-dom/server'
 import { DataTable } from '../data-table'
 
-type TestItem = { id: string; name: string; value: number }
+// Mock react-virtuoso for node-environment SSR tests.
+vi.mock('react-virtuoso', () => {
+  const React = require('react')
+  return {
+    TableVirtuoso: ({ data, fixedHeaderContent, itemContent }: any) => {
+      const header = fixedHeaderContent ? fixedHeaderContent() : null
+      const rows = data && data.length > 0
+        ? data.map((item: any, i: number) =>
+            React.createElement('tr', { key: i },
+              itemContent(i, item)
+            )
+          )
+        : null
+      return React.createElement('div', { className: 'mock-virtuoso' },
+        React.createElement('table', { style: { borderSpacing: 0 } },
+          React.createElement('thead', null, header),
+          React.createElement('tbody', null, rows),
+        ),
+      )
+    },
+  }
+})
 
 describe('DataTable', () => {
   const columns = [
-    { header: 'ID', cell: (item: TestItem) => React.createElement('span', null, item.id) },
-    { header: 'Name', cell: (item: TestItem) => React.createElement('span', null, item.name) },
-    { header: 'Value', cell: (item: TestItem) => React.createElement('span', null, String(item.value)) },
+    { header: 'ID' },
+    { header: 'Name' },
+    { header: 'Value' },
   ]
 
   it('renders column headers', () => {
     const html = renderToString(
       React.createElement(DataTable, {
         columns,
-        data: [{ id: '1', name: 'Test', value: 42 }],
-        keyExtractor: (item: TestItem) => item.id,
+        data: [{ id: '1', cells: [React.createElement('span', { key: 1 }, '1'), React.createElement('span', { key: 2 }, 'Test'), React.createElement('span', { key: 3 }, '42')] }],
       }),
     )
     expect(html).toContain('ID')
@@ -30,10 +50,9 @@ describe('DataTable', () => {
       React.createElement(DataTable, {
         columns,
         data: [
-          { id: '1', name: 'Alpha', value: 10 },
-          { id: '2', name: 'Beta', value: 20 },
+          { id: '1', cells: [React.createElement('span', { key: 1 }, 'Alpha'), React.createElement('span', { key: 2 }, '10')] },
+          { id: '2', cells: [React.createElement('span', { key: 1 }, 'Beta'), React.createElement('span', { key: 2 }, '20')] },
         ],
-        keyExtractor: (item: TestItem) => item.id,
       }),
     )
     expect(html).toContain('Alpha')
@@ -47,7 +66,6 @@ describe('DataTable', () => {
       React.createElement(DataTable, {
         columns,
         data: [],
-        keyExtractor: (item: TestItem) => item.id,
         emptyMessage: 'Nothing here',
       }),
     )
@@ -58,31 +76,11 @@ describe('DataTable', () => {
     const html = renderToString(
       React.createElement(DataTable, {
         columns,
-        data: [{ id: '1', name: 'Test', value: 42 }],
-        keyExtractor: (item: TestItem) => item.id,
+        data: [{ id: '1', cells: [React.createElement('span', { key: 1 }, '1')] }],
       }),
     )
     expect(html).toContain('<table')
     expect(html).toContain('<thead')
     expect(html).toContain('<tbody')
-  })
-
-  it('renders custom JSX cell content', () => {
-    const customColumns = [
-      {
-        header: 'With Badge',
-        cell: (item: TestItem) =>
-          React.createElement('span', { className: 'badge' }, item.name, ' badge'),
-      },
-    ]
-    const html = renderToString(
-      React.createElement(DataTable, {
-        columns: customColumns,
-        data: [{ id: '1', name: 'Alert', value: 1 }],
-        keyExtractor: (item: TestItem) => item.id,
-      }),
-    )
-    expect(html).toContain('Alert')
-    expect(html).toContain('badge')
   })
 })

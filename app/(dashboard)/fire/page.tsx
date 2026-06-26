@@ -1,19 +1,8 @@
 import { prisma } from '@/lib/prisma'
 import { PageHeader } from '@/components/ui/page-header'
+import { EmptyState } from '@/components/ui/empty-state'
 import { FireClearForm } from './fire-clear-form'
-
-const PANEL_STATE_COLORS: Record<string, string> = {
-  NORMAL: '#32D74B',
-  ALARM: '#FF453A',
-  FAULT: '#FF9F0A',
-  DISCONNECTED: '#6B7280',
-}
-
-const DEVICE_STATE_COLORS: Record<string, string> = {
-  NORMAL: '#32D74B',
-  ALARM: '#FF453A',
-  FAULT: '#FF9F0A',
-}
+import { PANEL_STATE_COLORS, DEVICE_STATE_COLORS } from '@/lib/ui-tokens/status'
 
 function PanelStatusLed({ state }: { state: string }) {
   const color = PANEL_STATE_COLORS[state] ?? '#6B7280'
@@ -48,13 +37,7 @@ export default async function FirePage() {
     },
   })
 
-  if (!building) {
-    return (
-      <div className="flex items-center justify-center min-h-[40vh]">
-        <p className="text-[#8E8E93] text-[14px]">Building not found</p>
-      </div>
-    )
-  }
+  if (!building) return <EmptyState message="Building not found" />
 
   return (
     <div>

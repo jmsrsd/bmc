@@ -2,6 +2,7 @@
 
 import { useActionState } from 'react'
 import { setDimLevel, toggleLight } from '@/lib/actions'
+import { Slider } from '@/components/ui/slider'
 
 type Props = {
   zoneId: string
@@ -37,43 +38,15 @@ export function LightingControls({ zoneId, initialDim, initialState }: Props) {
       </form>
 
       {/* Dim Slider */}
-      <form action={dimAction} className="relative">
-        <input type="hidden" name="zoneId" value={zoneId} />
-        <input
-          type="range"
-          name="level"
-          min="0"
-          max="100"
-          step="1"
-          defaultValue={dimLevel}
-          className="w-full h-[6px] rounded-full appearance-none cursor-pointer bg-[#242427]
-            [&::-webkit-slider-thumb]:appearance-none
-            [&::-webkit-slider-thumb]:w-[18px]
-            [&::-webkit-slider-thumb]:h-[18px]
-            [&::-webkit-slider-thumb]:rounded-full
-            [&::-webkit-slider-thumb]:bg-[#0A84FF]
-            [&::-webkit-slider-thumb]:shadow-md
-            [&::-webkit-slider-thumb]:cursor-pointer
-            [&::-moz-range-thumb]:w-[18px]
-            [&::-moz-range-thumb]:h-[18px]
-            [&::-moz-range-thumb]:rounded-full
-            [&::-moz-range-thumb]:bg-[#0A84FF]
-            [&::-moz-range-thumb]:border-0
-            [&::-moz-range-thumb]:shadow-md
-            [&::-moz-range-thumb]:cursor-pointer"
-          onChange={(e) => {
-            if (!dimPending) {
-              e.currentTarget.form?.requestSubmit()
-            }
-          }}
-        />
-        <div className="flex justify-between mt-1">
-          <span className="text-[11px] text-[#8E8E93]">0%</span>
-          <span className="text-[13px] font-medium text-white">{dimLevel}%</span>
-          <span className="text-[11px] text-[#8E8E93]">100%</span>
-        </div>
-        <button type="submit" className="hidden" />
-      </form>
+      <Slider
+        name="level"
+        min={0}
+        max={100}
+        step={1}
+        value={dimLevel}
+        unit="%"
+        disabled={dimPending}
+      />
     </div>
   )
 }

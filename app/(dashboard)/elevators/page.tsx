@@ -1,13 +1,9 @@
 import { prisma } from '@/lib/prisma'
 import { PageHeader } from '@/components/ui/page-header'
+import { EmptyState } from '@/components/ui/empty-state'
 import { ElevatorRecallForm } from './elevator-recall-form'
 import { ElevatorClearRecall } from './elevator-clear-recall'
-
-const STATE_COLORS: Record<string, string> = {
-  NORMAL: '#32D74B',
-  RECALL: '#FF9F0A',
-  FAULT: '#FF453A',
-}
+import { ELEVATOR_STATE_COLORS } from '@/lib/ui-tokens/status'
 
 function Arrow({ direction }: { direction: string }) {
   if (direction === 'UP') return <span className="text-[#32D74B] text-[16px]">↑</span>
@@ -16,7 +12,7 @@ function Arrow({ direction }: { direction: string }) {
 }
 
 function StatusDot({ state }: { state: string }) {
-  const color = STATE_COLORS[state] ?? '#6B7280'
+  const color = ELEVATOR_STATE_COLORS[state] ?? '#6B7280'
   return (
     <span
       className="inline-block w-2 h-2 rounded-full"
@@ -37,7 +33,7 @@ function ElevatorCarCard({ car, elevatorName }: { car: any; elevatorName: string
         <div className="flex items-center gap-2">
           <span
             className="text-[11px] font-medium uppercase tracking-wider"
-            style={{ color: STATE_COLORS[car.state] ?? '#6B7280' }}
+            style={{ color: ELEVATOR_STATE_COLORS[car.state] ?? '#6B7280' }}
           >
             {car.state}
           </span>
@@ -88,13 +84,7 @@ export default async function ElevatorsPage() {
     },
   })
 
-  if (!building) {
-    return (
-      <div className="flex items-center justify-center min-h-[40vh]">
-        <p className="text-[#8E8E93] text-[14px]">Building not found</p>
-      </div>
-    )
-  }
+  if (!building) return <EmptyState message="Building not found" />
 
   return (
     <div>

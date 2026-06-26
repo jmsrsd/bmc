@@ -3,6 +3,7 @@ import { PageHeader } from '@/components/ui/page-header'
 import { DataTable, type Column } from '@/components/ui/data-table'
 import { LightingControls } from './lighting-controls'
 import { stripTowerPrefix } from '@/lib/zone-group'
+import { EmptyState } from '@/components/ui/empty-state'
 
 export default async function LightingPage() {
   const building = await prisma.building.findUnique({
@@ -14,33 +15,27 @@ export default async function LightingPage() {
     },
   })
 
-  if (!building) {
-    return (
-      <div className="flex items-center justify-center min-h-[40vh]">
-        <p className="text-[#8E8E93] text-[14px]">Building not found</p>
-      </div>
-    )
-  }
+  if (!building) return <EmptyState message="Building not found" />
 
-  // Build table rows
-  const rows: any[] = building.zones.map((zone: any) => {
+  const columns: Column[] = [
+    { header: 'Zone' },
+    { header: 'Floor' },
+    { header: 'Scene' },
+    { header: 'Controls' },
+  ]
+
+  const rows = building.zones.map((zone: any) => {
     const light = zone.lightZones[0]
     return {
       id: zone.id,
-      zoneName: stripTowerPrefix(zone.name),
-      floor: zone.floor,
-      state: light?.state ?? 'OFF',
-      dimLevel: light?.dimLevel ?? 0,
-      scene: light?.scene ?? 'NORMAL',
+      cells: [
+        <span key="n" className="text-[14px] font-medium text-white">{stripTowerPrefix(zone.name)}</span>,
+        <span key="f" className="text-[12px] text-[#8E8E93]">{zone.floor >= 0 ? `F${zone.floor}` : `B${Math.abs(zone.floor)}`}</span>,
+        <span key="s" className="text-[12px] text-[#AEAEB2]">{light?.scene ?? 'NORMAL'}</span>,
+        <LightingControls key="c" zoneId={zone.id} initialDim={light?.dimLevel ?? 0} initialState={light?.state ?? 'OFF'} />,
+      ],
     }
   })
-
-  const columns: Column<any>[] = [
-    { header: 'Zone', cell: (z) => <span className="text-[14px] font-medium text-white">{z.zoneName}</span> },
-    { header: 'Floor', cell: (z) => <span className="text-[12px] text-[#8E8E93]">{z.floor >= 0 ? `F${z.floor}` : `B${Math.abs(z.floor)}`}</span> },
-    { header: 'Scene', cell: (z) => <span className="text-[12px] text-[#AEAEB2]">{z.scene}</span> },
-    { header: 'Controls', cell: (z) => <LightingControls zoneId={z.id} initialDim={z.dimLevel} initialState={z.state} /> },
-  ]
 
   return (
     <div>
@@ -49,7 +44,6 @@ export default async function LightingPage() {
         <DataTable
           columns={columns}
           data={rows}
-          keyExtractor={(z) => z.id}
           emptyMessage="No zones found"
         />
       </div>
