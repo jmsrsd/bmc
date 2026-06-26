@@ -37,7 +37,7 @@ export default async function EnergyPage() {
       <PageHeader title="Energy" subtitle="Power consumption &amp; analytics" />
 
       {/* Summary Stat Cards */}
-      <div className="grid grid-cols-3 gap-4 mt-6">
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-6">
         <div className="bg-[#121214]/50 backdrop-blur border border-[#242427] rounded-xl p-5">
           <p className="font-['JetBrains_Mono'] text-[32px] font-light text-white leading-none tracking-[-0.02em]">
             {totalKw}

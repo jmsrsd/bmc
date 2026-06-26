@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import { MobileNav } from '@/components/mobile-nav'
 
 const navItems = [
   { href: '/building', label: 'Building' },
@@ -18,7 +19,8 @@ export default function DashboardLayout({
 }) {
   return (
     <div className="flex min-h-screen">
-      <nav className="w-56 shrink-0 border-r border-[#242427] bg-[#0B0B0C] p-4 flex flex-col gap-1">
+      <MobileNav items={navItems} />
+      <nav className="hidden md:flex md:flex-col w-56 shrink-0 border-r border-[#242427] bg-[#0B0B0C] p-4 gap-1">
         <div className="mb-6 px-3">
           <h2 className="text-h2">BMC</h2>
         </div>
@@ -26,7 +28,7 @@ export default function DashboardLayout({
           <Link
             key={item.href}
             href={item.href}
-            className="text-body rounded-lg px-3 py-2 transition-colors hover:bg-[#1C1C1E] hover:text-[#FFFFFF]"
+            className="text-body rounded-lg px-3 py-3 transition-colors hover:bg-[#1C1C1E] hover:text-[#FFFFFF]"
           >
             {item.label}
           </Link>
