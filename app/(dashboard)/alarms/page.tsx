@@ -2,7 +2,15 @@ import { prisma } from '@/lib/prisma'
 import { PageHeader } from '@/components/ui/page-header'
 import { DataTable, type Column } from '@/components/ui/data-table'
 import { AckButton } from './ack-button'
-import { ALARM_SEVERITY_COLORS } from '@/lib/ui-tokens/status'
+
+function severityColor(severity: string) {
+  switch (severity) {
+    case 'critical': return '#FF453A'
+    case 'warning': return '#FF9F0A'
+    case 'info': return '#0A84FF'
+    default: return '#8E8E93'
+  }
+}
 
 function relativeTime(date: Date) {
   const now = Date.now()
@@ -17,33 +25,59 @@ function relativeTime(date: Date) {
   return date.toLocaleDateString('en-ID', { month: 'short', day: 'numeric' })
 }
 
-const columns: Column[] = [
-  { header: 'Severity', className: 'w-12' },
-  { header: 'Message' },
-  { header: 'Zone', className: 'w-40' },
-  { header: 'Source', className: 'w-32' },
-  { header: 'Time', className: 'w-28' },
-  { header: '', className: 'w-28 text-right' },
+type AlarmRow = {
+  id: string
+  severity: string
+  message: string
+  zoneName: string
+  source: string
+  createdAt: Date
+  showAck?: boolean
+}
+
+const columns: Column<AlarmRow>[] = [
+  {
+    header: 'Severity',
+    cell: (alarm) => (
+      <span
+        className="inline-block w-2.5 h-2.5 rounded-full shrink-0"
+        style={{ backgroundColor: severityColor(alarm.severity) }}
+      />
+    ),
+    className: 'w-12',
+  },
+  {
+    header: 'Message',
+    cell: (alarm) => alarm.message,
+  },
+  {
+    header: 'Zone',
+    cell: (alarm) => alarm.zoneName,
+    className: 'w-40',
+  },
+  {
+    header: 'Source',
+    cell: (alarm) => alarm.source,
+    className: 'w-32',
+  },
+  {
+    header: 'Time',
+    cell: (alarm) => (
+      <span className="text-[12px] text-[#8E8E93] whitespace-nowrap">
+        {relativeTime(alarm.createdAt)}
+      </span>
+    ),
+    className: 'w-28',
+  },
+  {
+    header: '',
+    cell: (alarm) => alarm.showAck ? <AckButton alarmId={alarm.id} /> : null,
+    className: 'w-28 text-right',
+  },
 ]
 
 function AlarmSection({ title, alarms, showAck }: { title: string; alarms: any[]; showAck?: boolean }) {
-  const rows = alarms.map((a: any) => ({
-    id: a.id,
-    cells: [
-      <span
-        key="sev"
-        className="inline-block w-2.5 h-2.5 rounded-full shrink-0"
-        style={{ backgroundColor: ALARM_SEVERITY_COLORS[a.severity] ?? '#8E8E93' }}
-      />,
-      a.message,
-      a.zoneName,
-      a.source,
-      <span key="time" className="text-[12px] text-[#8E8E93] whitespace-nowrap">
-        {relativeTime(a.createdAt)}
-      </span>,
-      showAck ? <AckButton alarmId={a.id} /> : null,
-    ],
-  }))
+  const rows: AlarmRow[] = alarms.map((a) => ({ ...a, showAck }))
 
   return (
     <div className="mt-6 first:mt-0">
@@ -56,6 +90,7 @@ function AlarmSection({ title, alarms, showAck }: { title: string; alarms: any[]
       <DataTable
         columns={columns}
         data={rows}
+        keyExtractor={(a) => a.id}
         emptyMessage="No alarms"
       />
     </div>

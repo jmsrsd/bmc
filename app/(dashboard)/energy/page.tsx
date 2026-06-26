@@ -1,9 +1,5 @@
 import { prisma } from '@/lib/prisma'
 import { PageHeader } from '@/components/ui/page-header'
-import { MetricValue } from '@/components/ui/metric-value'
-import { EmptyState } from '@/components/ui/empty-state'
-import { Card } from '@/components/ui/card'
-import { GRID } from '@/lib/ui-tokens/layout'
 
 export default async function EnergyPage() {
   const building: any = await prisma.building.findUnique({
@@ -20,7 +16,13 @@ export default async function EnergyPage() {
     },
   })
 
-  if (!building) return <EmptyState message="Building not found" />
+  if (!building) {
+    return (
+      <div className="flex items-center justify-center min-h-[40vh]">
+        <p className="text-[#8E8E93] text-[14px]">Building not found</p>
+      </div>
+    )
+  }
 
   const totalKw = building.meters
     .reduce((sum: number, m: any) => sum + m.value, 0)
@@ -35,14 +37,29 @@ export default async function EnergyPage() {
       <PageHeader title="Energy" subtitle="Power consumption &amp; analytics" />
 
       {/* Summary Stat Cards */}
-      <div className={GRID.statGrid + ' mt-6'}>
-        <MetricValue value={totalKw} label="Total kW" />
-        <MetricValue value={totalCumulativeKwh} label="Total cumulative kWh" />
-        <MetricValue value={meterCount} label="Meters" />
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-6">
+        <div className="bg-[#121214]/50 backdrop-blur border border-[#242427] rounded-xl p-5">
+          <p className="font-['JetBrains_Mono'] text-[32px] font-light text-white leading-none tracking-[-0.02em]">
+            {totalKw}
+          </p>
+          <p className="text-[#AEAEB2] text-xs mt-1.5">Total kW</p>
+        </div>
+        <div className="bg-[#121214]/50 backdrop-blur border border-[#242427] rounded-xl p-5">
+          <p className="font-['JetBrains_Mono'] text-[32px] font-light text-white leading-none tracking-[-0.02em]">
+            {totalCumulativeKwh}
+          </p>
+          <p className="text-[#AEAEB2] text-xs mt-1.5">Total cumulative kWh</p>
+        </div>
+        <div className="bg-[#121214]/50 backdrop-blur border border-[#242427] rounded-xl p-5">
+          <p className="font-['JetBrains_Mono'] text-[32px] font-light text-white leading-none tracking-[-0.02em]">
+            {meterCount}
+          </p>
+          <p className="text-[#AEAEB2] text-xs mt-1.5">Meters</p>
+        </div>
       </div>
 
       {/* Meter Cards Grid */}
-      <div className={`${GRID.cardGrid} mt-6`}>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-6">
         {building.meters.map((meter: any) => {
           const readings = meter.readings
           const maxReading = readings.length > 0
@@ -50,7 +67,10 @@ export default async function EnergyPage() {
             : 1
 
           return (
-            <Card key={meter.id}>
+            <div
+              key={meter.id}
+              className="bg-[#121214]/50 backdrop-blur border border-[#242427] rounded-xl p-5"
+            >
               {/* Meter name + type */}
               <div className="flex items-center justify-between gap-2">
                 <h3 className="text-[14px] font-medium text-white truncate">
@@ -90,7 +110,7 @@ export default async function EnergyPage() {
                   <p className="text-[11px] text-[#6B7280]">No readings</p>
                 </div>
               )}
-            </Card>
+            </div>
           )
         })}
       </div>
