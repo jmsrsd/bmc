@@ -872,7 +872,7 @@ app/
 
 ```
 RootLayout
-├── Navigation (ui/navigation.tsx)              ← Client Component
+├── Navigation (ui/navigation.tsx)              ← Client Component (static usage)
 ├── PageWrapper
 │   ├── Building Overview (RSC)
 │   │   ├── Zone Cards (RSC)
