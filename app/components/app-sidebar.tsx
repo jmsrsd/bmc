@@ -4,11 +4,11 @@ import { usePathname } from 'next/navigation'
 import Link from 'next/link'
 import { useSidebar } from './sidebar-context'
 import { NAV_ITEMS } from '../components/ui/nav-items'
-import { Menu, X, PanelLeftClose, PanelLeftOpen } from 'lucide-react'
+import { X, PanelLeftClose, PanelLeftOpen } from 'lucide-react'
 
 export function AppSidebar() {
   const pathname = usePathname()
-  const { collapsed, mobileOpen, toggleCollapsed, toggleMobile, closeMobile } = useSidebar()
+  const { collapsed, mobileOpen, toggleCollapsed, closeMobile } = useSidebar()
 
   const navList = (onClick?: () => void) =>
     NAV_ITEMS.map((item) => {
@@ -69,15 +69,6 @@ export function AppSidebar() {
 
       {/* ─── Mobile off-canvas ─── */}
       <div className="md:hidden">
-        {/* Burger */}
-        <button
-          onClick={toggleMobile}
-          className="fixed top-4 left-4 z-50 p-2 rounded-lg text-white hover:bg-[#1C1C1E] transition-colors"
-          aria-label="Open navigation menu"
-        >
-          <Menu size={24} />
-        </button>
-
         {/* Overlay */}
         {mobileOpen && (
           <div className="fixed inset-0 z-40 bg-black/50" onClick={closeMobile} aria-hidden="true" />

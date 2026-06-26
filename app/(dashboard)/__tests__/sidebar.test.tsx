@@ -68,7 +68,6 @@ describe('SidebarProvider', () => {
   })
 
   it('throws when useSidebar is used outside provider', () => {
-    // Can't catch errors from renderToString directly - use try/catch pattern
     expect(() => renderToString(React.createElement(TestConsumer))).toThrow(
       'useSidebar must be used within SidebarProvider',
     )
@@ -78,7 +77,6 @@ describe('SidebarProvider', () => {
 describe('AppSidebar - Desktop', () => {
   it('renders desktop sidebar with md:flex class', () => {
     const html = renderSidebar()
-    // The desktop <aside> has hidden md:flex
     const asidePos = html.indexOf('<aside')
     const asideSection = html.slice(asidePos, html.indexOf('</aside>'))
     expect(asideSection).toContain('hidden')
@@ -94,7 +92,6 @@ describe('AppSidebar - Desktop', () => {
 
   it('renders all 8 nav items in desktop sidebar and mobile drawer (16 total)', () => {
     const html = renderSidebar()
-    // Desktop nav + mobile drawer both render <a> — always in DOM, mobile hidden by CSS
     const links = html.match(/<a\s/g) || []
     expect(links.length).toBe(16)
     expect(html).toContain('Building')
@@ -132,11 +129,9 @@ describe('AppSidebar - Desktop', () => {
 })
 
 describe('AppSidebar - Mobile off-canvas', () => {
-  it('renders burger button with md:hidden', () => {
+  it('renders md:hidden wrapper', () => {
     const html = renderSidebar()
     expect(html).toContain('md:hidden')
-    expect(html).toContain('Open navigation menu')
-    expect(html).toContain('data-testid="icon-menu"')
   })
 
   it('drawer is hidden by default (-translate-x-full)', () => {
@@ -156,5 +151,11 @@ describe('AppSidebar - Mobile off-canvas', () => {
     expect(links.length).toBe(16)
     expect(html).toContain('Building')
     expect(html).toContain('Energy')
+  })
+
+  it('does NOT contain burger button (moved to MobileTopBar)', () => {
+    const html = renderSidebar()
+    expect(html).not.toContain('Open navigation menu')
+    expect(html).not.toContain('data-testid="icon-menu"')
   })
 })

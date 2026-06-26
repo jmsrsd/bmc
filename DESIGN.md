@@ -987,7 +987,18 @@ export function useSSE<T>(url: string, initial: T): T {
 .grid-span-8 { grid-column: span 8; }  /* 66% width */
 ```
 
-#### 7.4.4 Component Patterns
+#### 7.4.5 Layout & Chrome Safety
+
+The design system must guarantee that **no fixed-position UI element overlaps primary content** at any viewport width (375px minimum).
+
+**Structural rule:** `fixed`/`sticky` chrome elements (burger buttons, top bars, FABs) must be housed inside a dedicated chrome bar that structurally offsets scrollable content. They must NOT float freely inside `AppSidebar` or other non-chrome components.
+
+| Anti-Pattern | Why | Correct |
+|-------------|-----|---------|
+| `fixed top-4 left-4` burger floating over `<main>` | No structural offset → content overlapped on mobile | `MobileTopBar` with `sticky` inside `<main>` — overlap structurally impossible |
+| `position: fixed` element without sibling padding | Fixed element taken out of flow → consumer must manually add padding | Chrome bar component that includes its own layout slot |
+
+**Verification:** Run `pnpm test:e2e -- e2e/mobile-overlap.spec.ts` after any layout/sidebar/chrome change. The Playwright test asserts spatial invariance at 375×812 viewport.
 
 **Status LED (replacing badges):**
 ```tsx

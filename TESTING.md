@@ -568,6 +568,7 @@ Before marking any code complete:
 - [ ] No snapshot tests added
 - [ ] No `// istanbul ignore` (unless genuinely unreachable)
 - [ ] Tests use public API surface (no internals)
+- [ ] Mobile viewport (375px): no fixed element overlaps or occludes primary content — `pnpm test:e2e -- e2e/mobile-overlap.spec.ts`
 - [ ] Bug fixes include a test reproducing the bug
 - [ ] Auth `checkAccess` is tested at the role boundary (UC-AUTH-02)
 - [ ] AI/ML inference tested with timeout guard (UC-SYS-04)

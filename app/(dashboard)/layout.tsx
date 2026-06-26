@@ -1,16 +1,6 @@
 import { SidebarProvider } from '@/components/sidebar-context'
 import { AppSidebar } from '@/components/app-sidebar'
-
-const navItems = [
-  { href: '/building', label: 'Building' },
-  { href: '/building/hvac', label: 'HVAC' },
-  { href: '/building/lighting', label: 'Lighting' },
-  { href: '/building/security', label: 'Security' },
-  { href: '/alarms', label: 'Alarms' },
-  { href: '/fire', label: 'Fire' },
-  { href: '/elevators', label: 'Elevators' },
-  { href: '/energy', label: 'Energy' },
-]
+import { MobileTopBar } from '@/components/mobile-top-bar'
 
 export default function DashboardLayout({
   children,
@@ -21,7 +11,10 @@ export default function DashboardLayout({
     <SidebarProvider>
       <div className="flex min-h-screen">
         <AppSidebar />
-        <main className="flex-1 min-w-0 bg-[#0B0B0C] p-6">{children}</main>
+        <main className="flex-1 min-w-0 bg-[#0B0B0C]">
+          <MobileTopBar />
+          <div className="p-6">{children}</div>
+        </main>
       </div>
     </SidebarProvider>
   )

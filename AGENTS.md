@@ -43,6 +43,8 @@ Dirty graph files are NOT a reason to skip graphify. Only skip if the task is sp
 
 ## Agent Rules (sorted by precedence)
 
+> **Anti-pattern:** `fixed` chrome element (burger, FAB, top bar) that floats over `<main>` without offsetting it. Every fixed-position UI element must have a corresponding padding/margin on its nearest scrollable sibling, OR be housed inside a dedicated chrome bar that structurally offsets content (e.g. `MobileTopBar` inside `<main>`). Violation at 375px viewport is a P0 regression — caught by `pnpm test:e2e -- e2e/mobile-overlap.spec.ts`.
+
 ### 0. TDD is compulsory — never write code without a failing test first
 
 See TESTING.md §1 (Iron Law) and §6 (Workflow). Every feature, bug fix, and refactor follows RED-GREEN-REFACTOR. Before dispatching subagents, read TESTING.md §6.3 for the TDD-enforcing delegation template.
