@@ -85,4 +85,53 @@ describe('DataTable', () => {
     expect(html).toContain('Alert')
     expect(html).toContain('badge')
   })
+
+  it('shows pagination footer when data exceeds pageSize', () => {
+    const html = renderToString(
+      React.createElement(DataTable, {
+        columns,
+        data: Array.from({ length: 25 }, (_, i) => ({
+          id: String(i + 1),
+          name: `Item ${i + 1}`,
+          value: i * 10,
+        })),
+        keyExtractor: (item: TestItem) => item.id,
+        pageSize: 10,
+      }),
+    )
+    expect(html).toContain('border-t border-[#242427]')
+    expect(html).toContain('text-[#8E8E93]')
+    expect(html).toContain('25')
+    expect(html).toContain('class="flex gap-2"')
+  })
+
+  it('hides pagination footer when data fits on one page', () => {
+    const html = renderToString(
+      React.createElement(DataTable, {
+        columns,
+        data: [{ id: '1', name: 'Test', value: 42 }],
+        keyExtractor: (item: TestItem) => item.id,
+        pageSize: 10,
+      }),
+    )
+    expect(html).not.toContain('border-t border-[#242427]')
+    expect(html).not.toContain('flex gap-2')
+  })
+
+  it('matches golden snapshot for Page 1', () => {
+    const data = Array.from({ length: 25 }, (_, i) => ({
+      id: String(i + 1),
+      name: `Item ${i + 1}`,
+      value: i * 10,
+    }))
+    const html = renderToString(
+      React.createElement(DataTable, {
+        columns,
+        data,
+        keyExtractor: (item: TestItem) => item.id,
+        pageSize: 10,
+      }),
+    )
+    expect(html).toMatchSnapshot()
+  })
 })

@@ -49,3 +49,5 @@ prisma/prisma/
 
 # TypeScript incremental build info
 *.tsbuildinfo
+playwright-report/
+test-results/
