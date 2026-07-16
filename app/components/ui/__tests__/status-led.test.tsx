@@ -30,7 +30,7 @@ describe('StatusLed', () => {
 
   it('renders with unknown status (gray)', () => {
     const html = renderToString(React.createElement(StatusLed, { status: 'unknown' }))
-    expect(html).toContain('#6B7280')
+    expect(html).toContain('#8E8E93')
     expect(html).toContain('Status: unknown')
   })
 

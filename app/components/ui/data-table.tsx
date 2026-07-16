@@ -25,7 +25,7 @@ export function DataTable<T>({
 
   if (data.length === 0) {
     return (
-      <p className="text-[14px] text-[#8E8E93]">{emptyMessage}</p>
+      <p className="text-[14px] text-secondary">{emptyMessage}</p>
     )
   }
 
@@ -42,11 +42,11 @@ export function DataTable<T>({
       <div className="overflow-x-auto">
         <table className="w-full border-collapse">
           <thead>
-            <tr className="border-b border-[#242427]">
+            <tr className="border-b border-hairline">
               {columns.map((col) => (
                 <th
                   key={col.header}
-                  className="text-left text-[12px] font-medium text-[#8E8E93] uppercase tracking-wider py-3 px-3 first:pl-0 last:pr-0"
+                  className="text-left text-[12px] font-medium text-secondary uppercase tracking-wider py-3 px-3 first:pl-0 last:pr-0"
                 >
                   {col.header}
                 </th>
@@ -57,7 +57,7 @@ export function DataTable<T>({
             {paginatedData.map((item) => (
               <tr
                 key={keyExtractor(item)}
-                className="border-b border-[#242427]/50 last:border-b-0 hover:bg-[#121214]/30 transition-colors"
+                className="border-b border-hairline/50 last:border-b-0 hover:bg-surface/30 transition-colors"
               >
                 {columns.map((col) => (
                   <td
@@ -76,22 +76,22 @@ export function DataTable<T>({
       </div>
 
       {totalPages > 1 && (
-        <div className="flex items-center justify-between py-3 border-t border-[#242427] mt-1">
-          <span className="text-[12px] text-[#8E8E93]">
+        <div className="flex items-center justify-between py-3 border-t border-hairline mt-1">
+          <span className="text-[12px] text-secondary">
             Showing {startIndex + 1}-{endIndex} of {data.length}
           </span>
           <div className="flex gap-2">
             <button
               onClick={handlePrev}
               disabled={currentPage === 1}
-              className="px-2 py-1 text-[12px] text-[#8E8E93] hover:bg-[#242427] disabled:opacity-30 disabled:cursor-not-allowed rounded transition-colors"
+              className="px-2 py-1 min-h-[44px] text-[12px] text-secondary hover:bg-hairline disabled:opacity-30 disabled:cursor-not-allowed rounded transition-colors"
             >
               ← Prev
             </button>
             <button
               onClick={handleNext}
               disabled={currentPage === totalPages}
-              className="px-2 py-1 text-[12px] text-[#8E8E93] hover:bg-[#242427] disabled:opacity-30 disabled:cursor-not-allowed rounded transition-colors"
+              className="px-2 py-1 min-h-[44px] text-[12px] text-secondary hover:bg-hairline disabled:opacity-30 disabled:cursor-not-allowed rounded transition-colors"
             >
               Next →
             </button>

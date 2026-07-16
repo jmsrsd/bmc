@@ -99,8 +99,8 @@ describe('DataTable', () => {
         pageSize: 10,
       }),
     )
-    expect(html).toContain('border-t border-[#242427]')
-    expect(html).toContain('text-[#8E8E93]')
+    expect(html).toContain('border-t border-hairline')
+    expect(html).toContain('text-secondary')
     expect(html).toContain('25')
     expect(html).toContain('class="flex gap-2"')
   })
@@ -114,7 +114,7 @@ describe('DataTable', () => {
         pageSize: 10,
       }),
     )
-    expect(html).not.toContain('border-t border-[#242427]')
+    expect(html).not.toContain('border-t border-hairline')
     expect(html).not.toContain('flex gap-2')
   })
 

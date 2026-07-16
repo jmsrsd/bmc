@@ -11,17 +11,17 @@ describe('Button', () => {
 
   it('defaults to primary variant', () => {
     const html = renderToString(React.createElement(Button, null, 'test'))
-    expect(html).toContain('bg-[#0A84FF]')
+    expect(html).toContain('bg-active/10')
   })
 
   it('renders danger variant', () => {
     const html = renderToString(React.createElement(Button, { variant: 'danger' }, 'Delete'))
-    expect(html).toContain('bg-[#FF453A]')
+    expect(html).toContain('bg-critical/10')
   })
 
   it('renders warning variant', () => {
     const html = renderToString(React.createElement(Button, { variant: 'warning' }, 'Warn'))
-    expect(html).toContain('bg-[#FF9F0A]')
+    expect(html).toContain('bg-warning/10')
   })
 
   it('renders ghost variant', () => {
@@ -31,7 +31,7 @@ describe('Button', () => {
 
   it('renders normal variant', () => {
     const html = renderToString(React.createElement(Button, { variant: 'normal' }, 'Normal'))
-    expect(html).toContain('bg-[#32D74B]')
+    expect(html).toContain('bg-normal/10')
   })
 
   it('renders default size (md)', () => {

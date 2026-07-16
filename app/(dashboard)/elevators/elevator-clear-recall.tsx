@@ -16,7 +16,7 @@ export function ElevatorClearRecall({ carId, carName }: Props) {
 
   if (success) {
     return (
-      <p className="text-[12px] text-[#32D74B] mt-4">
+      <p className="text-[12px] text-normal mt-4">
         Cleared — {carName} returned to NORMAL
       </p>
     )
@@ -28,11 +28,11 @@ export function ElevatorClearRecall({ carId, carName }: Props) {
       <button
         type="submit"
         disabled={pending}
-        className="text-[13px] font-semibold px-3 py-2 rounded-lg bg-[#32D74B]/10 text-[#32D74B] border border-[#32D74B]/20 transition-colors hover:bg-[#32D74B]/20 disabled:opacity-50"
+        className="text-[13px] font-semibold px-3 py-2 rounded-lg bg-normal/10 text-normal border border-normal/20 transition-colors hover:bg-normal/20 disabled:opacity-50"
       >
         {pending ? 'Clearing...' : 'Clear Recall'}
       </button>
-      {error && <p className="text-[12px] text-[#FF453A] mt-1">{error}</p>}
+      {error && <p className="text-[12px] text-critical mt-1">{error}</p>}
     </form>
   )
 }

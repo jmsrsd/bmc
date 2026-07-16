@@ -19,7 +19,8 @@ describe('MetricValue', () => {
   it('has glassmorphism card wrapper', () => {
     const html = renderToString(React.createElement(MetricValue, { value: 1, label: 'x' }))
     expect(html).toContain('rounded-xl')
-    expect(html).toContain('backdrop-blur')
+    expect(html).toContain('bg-surface/50')
+    expect(html).toContain('border border-hairline')
   })
 
   it('applies custom className', () => {

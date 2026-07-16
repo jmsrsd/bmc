@@ -14,18 +14,18 @@ export function StatCard({ label, value, trend, className = '' }: StatCardProps)
       <p className="font-['JetBrains_Mono'] text-[32px] font-light text-white leading-none tracking-[-0.02em]">
         {value}
       </p>
-      <p className="text-[#AEAEB2] text-xs mt-1.5">{label}</p>
+      <p className="text-body text-xs mt-1.5">{label}</p>
       {trend !== undefined && (
         <div className="flex items-center gap-1 mt-2">
           {trend > 0 ? (
             <>
-              <TrendingUp size={14} className="text-[#32D74B]" />
-              <span className="text-[#32D74B] text-xs">+{trend}%</span>
+              <TrendingUp size={14} className="text-normal" />
+              <span className="text-normal text-xs">+{trend}%</span>
             </>
           ) : trend < 0 ? (
             <>
-              <TrendingDown size={14} className="text-[#FF453A]" />
-              <span className="text-[#FF453A] text-xs">{trend}%</span>
+              <TrendingDown size={14} className="text-critical" />
+              <span className="text-critical text-xs">{trend}%</span>
             </>
           ) : null}
         </div>

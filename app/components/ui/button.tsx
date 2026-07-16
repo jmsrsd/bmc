@@ -13,11 +13,11 @@ type ButtonProps = {
 } & React.ButtonHTMLAttributes<HTMLButtonElement>
 
 const VARIANT_CLASSES: Record<ButtonVariant, string> = {
-  primary: 'bg-[#0A84FF]/10 text-[#0A84FF] hover:bg-[#0A84FF]/20',
-  danger: 'bg-[#FF453A]/10 text-[#FF453A] hover:bg-[#FF453A]/20',
-  warning: 'bg-[#FF9F0A]/10 text-[#FF9F0A] hover:bg-[#FF9F0A]/20',
-  normal: 'bg-[#32D74B]/10 text-[#32D74B] hover:bg-[#32D74B]/20',
-  ghost: 'bg-transparent text-[#AEAEB2] hover:bg-[#242427]',
+  primary: 'bg-active/10 text-active hover:bg-active/20',
+  danger: 'bg-critical/10 text-critical hover:bg-critical/20',
+  warning: 'bg-warning/10 text-warning hover:bg-warning/20',
+  normal: 'bg-normal/10 text-normal hover:bg-normal/20',
+  ghost: 'bg-transparent text-body hover:bg-hairline',
 }
 
 const SIZE_CLASSES: Record<ButtonSize, string> = {

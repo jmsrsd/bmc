@@ -11,28 +11,28 @@ describe('Badge', () => {
 
   it('defaults to neutral variant', () => {
     const html = renderToString(React.createElement(Badge, null, 'test'))
-    expect(html).toContain('bg-[#242427]')
-    expect(html).toContain('text-[#AEAEB2]')
+    expect(html).toContain('bg-hairline')
+    expect(html).toContain('text-body')
   })
 
   it('renders critical variant', () => {
     const html = renderToString(React.createElement(Badge, { variant: 'critical' }, 'Critical'))
-    expect(html).toContain('bg-[#FF453A]')
+    expect(html).toContain('bg-critical/10')
   })
 
   it('renders warning variant', () => {
     const html = renderToString(React.createElement(Badge, { variant: 'warning' }, 'Warning'))
-    expect(html).toContain('bg-[#FF9F0A]')
+    expect(html).toContain('bg-warning/10')
   })
 
   it('renders normal variant', () => {
     const html = renderToString(React.createElement(Badge, { variant: 'normal' }, 'Normal'))
-    expect(html).toContain('bg-[#32D74B]')
+    expect(html).toContain('bg-normal/10')
   })
 
   it('renders active variant', () => {
     const html = renderToString(React.createElement(Badge, { variant: 'active' }, 'Active'))
-    expect(html).toContain('bg-[#0A84FF]')
+    expect(html).toContain('bg-active/10')
   })
 
   it('renders rounded-full inline-flex span', () => {

@@ -11,7 +11,7 @@ export default function DashboardLayout({
     <SidebarProvider>
       <div className="flex min-h-screen">
         <AppSidebar />
-        <main className="flex-1 min-w-0 bg-[#0B0B0C]">
+        <main className="flex-1 min-w-0 bg-canvas">
           <MobileTopBar />
           <div className="p-6">{children}</div>
         </main>

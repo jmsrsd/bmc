@@ -15,7 +15,7 @@ export function AckButton({ alarmId }: Props) {
 
   if (acknowledged) {
     return (
-      <span className="text-[12px] text-[#8E8E93]">Acknowledged</span>
+      <span className="text-[12px] text-secondary">Acknowledged</span>
     )
   }
 
@@ -26,11 +26,11 @@ export function AckButton({ alarmId }: Props) {
       <button
         type="submit"
         disabled={pending}
-        className="text-[13px] font-semibold px-3 py-1 rounded-lg transition-colors disabled:opacity-50 bg-[#0A84FF]/10 text-[#0A84FF]"
+        className="text-[13px] font-semibold px-3 py-1 rounded-lg transition-colors disabled:opacity-50 bg-active/10 text-active"
       >
         {pending ? '...' : 'Acknowledge'}
       </button>
-      {error && <p className="text-[12px] text-[#FF453A] mt-1">{error}</p>}
+      {error && <p className="text-[12px] text-critical mt-1">{error}</p>}
     </form>
   )
 }

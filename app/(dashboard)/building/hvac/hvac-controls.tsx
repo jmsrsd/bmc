@@ -26,7 +26,7 @@ export function HvacControls({ zoneId, initialSetpoint, currentTemp, currentSpee
     <div className="flex flex-col gap-3">
       {/* Temperature Display + Setpoint Slider */}
       <div>
-        <span className="text-[12px] text-[#8E8E93] block mb-1">Temp: {currentTemp !== null ? `${currentTemp.toFixed(1)}°C` : '—'}</span>
+        <span className="text-[12px] text-secondary block mb-1">Temp: {currentTemp !== null ? `${currentTemp.toFixed(1)}°C` : '—'}</span>
         <form action={tempAction} className="relative">
           <input type="hidden" name="zoneId" value={zoneId} />
           <input
@@ -36,12 +36,12 @@ export function HvacControls({ zoneId, initialSetpoint, currentTemp, currentSpee
             max="30"
             step="0.5"
             defaultValue={setpoint}
-            className="w-full h-[6px] rounded-full appearance-none cursor-pointer bg-[#242427]
+            className="w-full h-[6px] rounded-full appearance-none cursor-pointer bg-hairline
               [&::-webkit-slider-thumb]:appearance-none
               [&::-webkit-slider-thumb]:w-[18px]
               [&::-webkit-slider-thumb]:h-[18px]
               [&::-webkit-slider-thumb]:rounded-full
-              [&::-webkit-slider-thumb]:bg-[#0A84FF]
+              [&::-webkit-slider-thumb]:bg-active
               [&::-webkit-slider-thumb]:shadow-md
               [&::-webkit-slider-thumb]:cursor-pointer"
             onChange={(e) => {
@@ -51,9 +51,9 @@ export function HvacControls({ zoneId, initialSetpoint, currentTemp, currentSpee
             }}
           />
           <div className="flex justify-between mt-1">
-            <span className="text-[11px] text-[#8E8E93]">16°</span>
+            <span className="text-[11px] text-secondary">16°</span>
             <span className="text-[13px] font-medium text-white">{setpoint}°C</span>
-            <span className="text-[11px] text-[#8E8E93]">30°</span>
+            <span className="text-[11px] text-secondary">30°</span>
           </div>
         </form>
       </div>
@@ -70,7 +70,7 @@ export function HvacControls({ zoneId, initialSetpoint, currentTemp, currentSpee
               name="speed"
               value={s}
               disabled={speedPending}
-              className={`px-2 py-1 text-[11px] font-medium rounded-md transition-colors ${active ? 'bg-[#0A84FF] text-white' : 'bg-[#1C1C1E] text-[#8E8E93] hover:bg-[#242427] hover:text-white'}`}
+              className={`px-2 py-1 text-[11px] font-medium rounded-md transition-colors ${active ? 'bg-active text-white' : 'bg-elevated text-secondary hover:bg-hairline hover:text-white'}`}
             >
               {s}
             </button>
@@ -90,7 +90,7 @@ export function HvacControls({ zoneId, initialSetpoint, currentTemp, currentSpee
               name="mode"
               value={m}
               disabled={modePending}
-              className={`px-2 py-1 text-[11px] font-medium rounded-md transition-colors ${active ? 'bg-[#0A84FF] text-white' : 'bg-[#1C1C1E] text-[#8E8E93] hover:bg-[#242427] hover:text-white'}`}
+              className={`px-2 py-1 text-[11px] font-medium rounded-md transition-colors ${active ? 'bg-active text-white' : 'bg-elevated text-secondary hover:bg-hairline hover:text-white'}`}
             >
               {m}
             </button>

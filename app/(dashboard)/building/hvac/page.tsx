@@ -4,6 +4,26 @@ import { DataTable, type Column } from '@/components/ui/data-table'
 import { HvacControls } from './hvac-controls'
 import { stripTowerPrefix } from '@/lib/zone-group'
 
+export function buildHvacRows(building: any): any[] {
+  if (!building) return []
+  return building.zones.map((zone: any) => {
+    const hvacUnits = zone.hvacUnits ?? []
+    const sensors = zone.sensors ?? []
+    const hvac = hvacUnits[0]
+    const tempSensor = sensors[0]
+    return {
+      id: zone.id,
+      zoneName: stripTowerPrefix(zone.name),
+      floor: zone.floor,
+      currentTemp: tempSensor?.value ?? null,
+      setpoint: hvac?.setpoint ?? 22,
+      state: hvac?.state ?? 'OFF',
+      mode: hvac?.mode ?? 'AUTO',
+      fanSpeed: hvac?.fanSpeed ?? 'AUTO',
+    }
+  })
+}
+
 export default async function HvacPage() {
   const building = await prisma.building.findUnique({
     where: { id: 'b1' },
@@ -24,39 +44,26 @@ export default async function HvacPage() {
   if (!building) {
     return (
       <div className="flex items-center justify-center min-h-[40vh]">
-        <p className="text-[#8E8E93] text-[14px]">Building not found</p>
+        <p className="text-secondary text-[14px]">Building not found</p>
       </div>
     )
   }
 
-  // Build table rows
-  const rows: any[] = building.zones.map((zone: any) => {
-    const hvac = zone.hvacUnits[0]
-    const tempSensor = zone.sensors[0]
-    return {
-      id: zone.id,
-      zoneName: stripTowerPrefix(zone.name),
-      floor: zone.floor,
-      currentTemp: tempSensor?.value ?? null,
-      setpoint: hvac?.setpoint ?? 22,
-      state: hvac?.state ?? 'OFF',
-      mode: hvac?.mode ?? 'AUTO',
-      fanSpeed: hvac?.fanSpeed ?? 'AUTO',
-    }
-  })
+  const rows = buildHvacRows(building)
+  // ... rest unchanged
 
   const columns: Column<any>[] = [
     { header: 'Zone', cell: (z) => <span className="text-[14px] font-medium text-white">{z.zoneName}</span> },
-    { header: 'Floor', cell: (z) => <span className="text-[12px] text-[#8E8E93]">{z.floor >= 0 ? `F${z.floor}` : `B${Math.abs(z.floor)}`}</span> },
+    { header: 'Floor', cell: (z) => <span className="text-[12px] text-secondary">{z.floor >= 0 ? `F${z.floor}` : `B${Math.abs(z.floor)}`}</span> },
     { header: 'Temp', cell: (z) => (
       <span className="text-[14px] font-['JetBrains_Mono'] text-white">
         {z.currentTemp !== null ? `${z.currentTemp.toFixed(1)}°C` : '--°C'}
       </span>
     )},
-    { header: 'Setpoint', cell: (z) => <span className="text-[12px] text-[#8E8E93]">{z.setpoint}°C</span> },
+    { header: 'Setpoint', cell: (z) => <span className="text-[12px] text-secondary">{z.setpoint}°C</span> },
     { header: 'State', cell: (z) => {
       const on = z.state === 'ON'
-      return <span className={`text-[12px] ${on ? 'text-[#32D74B]' : 'text-[#6B7280]'}`}>{z.state}</span>
+      return <span className={`text-[12px] ${on ? 'text-normal' : 'text-secondary'}`}>{z.state}</span>
     }},
     { header: 'Controls', cell: (z) => (
       <HvacControls

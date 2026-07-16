@@ -20,13 +20,13 @@ describe('StatCard', () => {
   it('renders positive trend', () => {
     const html = renderToString(React.createElement(StatCard, { label: 'Energy', value: 85, trend: 12 }))
     expect(html).toContain('data-testid="trending-up"')
-    expect(html).toContain('text-[#32D74B]')
+    expect(html).toContain('text-normal')
   })
 
   it('renders negative trend', () => {
     const html = renderToString(React.createElement(StatCard, { label: 'Energy', value: 50, trend: -8 }))
     expect(html).toContain('data-testid="trending-down"')
-    expect(html).toContain('text-[#FF453A]')
+    expect(html).toContain('text-critical')
   })
 
   it('renders zero trend as no trend indicator', () => {
@@ -46,7 +46,8 @@ describe('StatCard', () => {
   it('renders Card wrapper with glassmorphism', () => {
     const html = renderToString(React.createElement(StatCard, { label: 'Test', value: 1 }))
     expect(html).toContain('rounded-xl')
-    expect(html).toContain('backdrop-blur')
+    expect(html).toContain('bg-surface/50')
+    expect(html).toContain('border border-hairline')
   })
 
   it('applies custom className', () => {

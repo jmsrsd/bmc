@@ -5,7 +5,7 @@ const STATUS_COLORS: Record<StatusLedStatus, string> = {
   warning: '#FF9F0A',
   critical: '#FF453A',
   active: '#0A84FF',
-  unknown: '#6B7280',
+  unknown: '#8E8E93',
 }
 
 type StatusLedProps = {

@@ -2,21 +2,50 @@ import { prisma } from '@/lib/prisma'
 import { PageHeader } from '@/components/ui/page-header'
 import { FireClearForm } from './fire-clear-form'
 
-const PANEL_STATE_COLORS: Record<string, string> = {
+export const PANEL_STATE_COLORS: Record<string, string> = {
   NORMAL: '#32D74B',
   ALARM: '#FF453A',
   FAULT: '#FF9F0A',
-  DISCONNECTED: '#6B7280',
+  DISCONNECTED: '#8E8E93',
 }
 
-const DEVICE_STATE_COLORS: Record<string, string> = {
+export const DEVICE_STATE_COLORS: Record<string, string> = {
   NORMAL: '#32D74B',
   ALARM: '#FF453A',
   FAULT: '#FF9F0A',
+}
+
+export function getPanelStatusColor(state: string): string {
+  return PANEL_STATE_COLORS[state] ?? '#8E8E93'
+}
+
+export function getDeviceStatusColor(state: string): string {
+  return DEVICE_STATE_COLORS[state] ?? '#8E8E93'
+}
+
+export function buildFireRows(building: any): any[] {
+  if (!building) return []
+  return building.firePanels.map((panel: any) => {
+    const devices = panel.devices ?? []
+    return {
+      id: panel.id,
+      name: panel.name,
+      state: panel.state,
+      statusColor: getPanelStatusColor(panel.state),
+      deviceCount: devices.length,
+      devices: devices.map((device: any) => ({
+        id: device.id,
+        type: device.type,
+        state: device.state,
+        zone: device.zone,
+        statusColor: getDeviceStatusColor(device.state),
+      })),
+    }
+  })
 }
 
 function PanelStatusLed({ state }: { state: string }) {
-  const color = PANEL_STATE_COLORS[state] ?? '#6B7280'
+  const color = PANEL_STATE_COLORS[state] ?? '#8E8E93'
   return (
     <span
       className="inline-block w-2 h-2 rounded-full"
@@ -27,7 +56,7 @@ function PanelStatusLed({ state }: { state: string }) {
 }
 
 function DeviceDot({ state }: { state: string }) {
-  const color = DEVICE_STATE_COLORS[state] ?? '#6B7280'
+  const color = DEVICE_STATE_COLORS[state] ?? '#8E8E93'
   return (
     <span
       className="inline-block w-1.5 h-1.5 rounded-full shrink-0"
@@ -51,19 +80,21 @@ export default async function FirePage() {
   if (!building) {
     return (
       <div className="flex items-center justify-center min-h-[40vh]">
-        <p className="text-[#8E8E93] text-[14px]">Building not found</p>
+        <p className="text-secondary text-[14px]">Building not found</p>
       </div>
     )
   }
 
+  const panels = buildFireRows(building)
+
   return (
     <div>
-      <PageHeader title="Fire Safety" subtitle="Panel status &amp; device monitoring" />
+      <PageHeader title="Fire Safety" subtitle="Panel status & device monitoring" />
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-6">
-        {building.firePanels.map((panel: any) => (
+        {panels.map((panel: any) => (
           <div
             key={panel.id}
-            className="bg-[#121214]/50 backdrop-blur border border-[#242427] rounded-xl p-5"
+            className="bg-surface/50 border border-hairline rounded-xl p-5"
           >
             <div className="flex items-center justify-between mb-3">
               <div className="flex items-center gap-2">
@@ -72,16 +103,16 @@ export default async function FirePage() {
               </div>
               <span
                 className="text-[11px] font-medium uppercase tracking-wider"
-                style={{ color: PANEL_STATE_COLORS[panel.state] ?? '#6B7280' }}
+                style={{ color: panel.statusColor }}
               >
                 {panel.state}
               </span>
             </div>
 
             <div className="space-y-2 mt-4">
-              <p className="text-[11px] text-[#8E8E93] uppercase tracking-wider">Devices</p>
+              <p className="text-[11px] text-secondary uppercase tracking-wider">Devices</p>
               {panel.devices.length === 0 ? (
-                <p className="text-[12px] text-[#8E8E93]">No devices</p>
+                <p className="text-[12px] text-secondary">No devices</p>
               ) : (
                 panel.devices.map((device: any) => (
                   <div
@@ -90,14 +121,14 @@ export default async function FirePage() {
                   >
                     <div className="flex items-center gap-2">
                       <DeviceDot state={device.state} />
-                      <span className="text-[#AEAEB2]">{device.type}</span>
+                      <span className="text-body">{device.type}</span>
                       {device.zone && (
-                        <span className="text-[#8E8E93]">· {device.zone}</span>
+                        <span className="text-secondary">· {device.zone}</span>
                       )}
                     </div>
                     <span
                       className="font-medium"
-                      style={{ color: DEVICE_STATE_COLORS[device.state] ?? '#6B7280' }}
+                      style={{ color: device.statusColor }}
                     >
                       {device.state}
                     </span>

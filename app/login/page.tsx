@@ -36,12 +36,12 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="bg-[#121214]/50 backdrop-blur border border-[#242427] rounded-xl p-8 w-full max-w-sm">
+    <div className="bg-surface/50 border border-hairline rounded-xl p-8 w-full max-w-sm">
       <div className="text-center mb-8">
         <h1 className="text-[24px] font-semibold text-white tracking-[-0.02em]">
           BMC
         </h1>
-        <p className="text-[14px] font-medium text-[#8E8E93] mt-1">
+        <p className="text-[14px] font-medium text-secondary mt-1">
           Biomedical Campus
         </p>
       </div>
@@ -54,19 +54,19 @@ export default function LoginPage() {
             onChange={(e) => setPassword(e.target.value)}
             placeholder="Password"
             required
-            className="w-full px-3 py-2.5 bg-[#1C1C1E] border border-[#242427] rounded-lg text-[14px] text-white placeholder-[#8E8E93] focus:outline-none focus:border-[#0A84FF] transition-colors"
+            className="w-full px-3 py-2.5 bg-elevated border border-hairline rounded-lg text-[14px] text-white placeholder-secondary focus:outline-none focus:border-active transition-colors"
             autoFocus
           />
         </div>
 
         {error && (
-          <p className="text-[12px] text-[#FF453A]">{error}</p>
+          <p className="text-[12px] text-critical">{error}</p>
         )}
 
         <button
           type="submit"
           disabled={loading || !password}
-          className="w-full py-2.5 bg-[#0A84FF] text-white text-[14px] font-medium rounded-lg hover:bg-[#0A84FF]/90 disabled:opacity-50 disabled:cursor-not-allowed transition-colors flex items-center justify-center gap-2"
+          className="w-full py-2.5 bg-active text-white text-[14px] font-medium rounded-lg hover:bg-active/90 disabled:opacity-50 disabled:cursor-not-allowed transition-colors flex items-center justify-center gap-2"
         >
           {loading ? 'Signing in...' : 'Sign In'}
           <ArrowRight size={16} />

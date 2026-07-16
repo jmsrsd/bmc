@@ -91,6 +91,13 @@ describe('setTemperature', () => {
     })
     expect(mockRevalidatePath).toHaveBeenCalledWith('/building/hvac')
   })
+
+  it('handles prisma error in catch', async () => {
+    mockPrisma.hVACUnit.findFirst.mockRejectedValue(new Error('db error'))
+    const { setTemperature } = await getActions()
+    const res = await setTemperature(null, fd({ zoneId: 'z1', setpoint: 24 }))
+    expect(res).toHaveProperty('error')
+  })
 })
 
 describe('setFanSpeed', () => {
@@ -109,6 +116,13 @@ describe('setFanSpeed', () => {
     const res = await setFanSpeed(null, fd({ zoneId: 'z1', speed: 'AUTO' }))
     expect(res).toEqual({ success: true, speed: 'AUTO', zoneId: 'z1' })
   })
+
+  it('handles prisma error in catch', async () => {
+    mockPrisma.hVACUnit.findFirst.mockRejectedValue(new Error('db error'))
+    const { setFanSpeed } = await getActions()
+    const res = await setFanSpeed(null, fd({ zoneId: 'z1', speed: 'AUTO' }))
+    expect(res).toHaveProperty('error')
+  })
 })
 
 describe('setHvacMode', () => {
@@ -126,6 +140,13 @@ describe('setHvacMode', () => {
     const { setHvacMode } = await getActions()
     const res = await setHvacMode(null, fd({ zoneId: 'z1', mode: 'HEAT' }))
     expect(res).toEqual({ success: true, mode: 'HEAT', zoneId: 'z1' })
+  })
+
+  it('handles prisma error in catch', async () => {
+    mockPrisma.hVACUnit.findFirst.mockRejectedValue(new Error('db error'))
+    const { setHvacMode } = await getActions()
+    const res = await setHvacMode(null, fd({ zoneId: 'z1', mode: 'HEAT' }))
+    expect(res).toHaveProperty('error')
   })
 })
 
@@ -148,6 +169,13 @@ describe('setDimLevel', () => {
     expect(res).toEqual({ success: true, level: 75, zoneId: 'z1' })
     expect(mockRevalidatePath).toHaveBeenCalledWith('/building/lighting')
   })
+
+  it('handles prisma error in catch', async () => {
+    mockPrisma.lightZone.findFirst.mockRejectedValue(new Error('db error'))
+    const { setDimLevel } = await getActions()
+    const res = await setDimLevel(null, fd({ zoneId: 'z1', level: 75 }))
+    expect(res).toHaveProperty('error')
+  })
 })
 
 describe('toggleLight', () => {
@@ -165,6 +193,13 @@ describe('toggleLight', () => {
     const { toggleLight } = await getActions()
     const res = await toggleLight(null, fd({ zoneId: 'z1', newState: 'OFF' }))
     expect(res).toEqual({ success: true, state: 'OFF', zoneId: 'z1' })
+  })
+
+  it('handles prisma error in catch', async () => {
+    mockPrisma.lightZone.findFirst.mockRejectedValue(new Error('db error'))
+    const { toggleLight } = await getActions()
+    const res = await toggleLight(null, fd({ zoneId: 'z1', newState: 'OFF' }))
+    expect(res).toHaveProperty('error')
   })
 })
 
@@ -190,6 +225,13 @@ describe('setDoorState', () => {
       data: { state: 'LOCKED' },
     })
   })
+
+  it('handles prisma error in catch', async () => {
+    mockPrisma.door.findUnique.mockRejectedValue(new Error('db error'))
+    const { setDoorState } = await getActions()
+    const res = await setDoorState(null, fd({ doorId: 'd1', newState: 'LOCKED' }))
+    expect(res).toHaveProperty('error')
+  })
 })
 
 // ─── Elevator Actions ──────────────────────────────────────
@@ -209,6 +251,13 @@ describe('recallElevator', () => {
     const { recallElevator } = await getActions()
     const res = await recallElevator(null, fd({ carId: 'c1', targetFloor: 1 }))
     expect(res).toEqual({ success: true, carId: 'c1', targetFloor: 1 })
+  })
+
+  it('handles prisma error in catch', async () => {
+    mockPrisma.elevatorCar.findUnique.mockRejectedValue(new Error('db error'))
+    const { recallElevator } = await getActions()
+    const res = await recallElevator(null, fd({ carId: 'c1', targetFloor: 1 }))
+    expect(res).toHaveProperty('error')
   })
 })
 
@@ -231,6 +280,13 @@ describe('clearElevatorRecall', () => {
       where: { id: 'c1' },
       data: { recallFloor: 0, direction: 'IDLE', doorState: 'CLOSED' },
     })
+  })
+
+  it('handles prisma error in catch', async () => {
+    mockPrisma.elevatorCar.findUnique.mockRejectedValue(new Error('db error'))
+    const { clearElevatorRecall } = await getActions()
+    const res = await clearElevatorRecall(null, fd({ carId: 'c1' }))
+    expect(res).toHaveProperty('error')
   })
 })
 
@@ -260,6 +316,13 @@ describe('clearFireAlarm', () => {
       where: { panelId: 'p1' },
       data: { state: 'NORMAL' },
     })
+  })
+
+  it('handles prisma error in catch', async () => {
+    mockPrisma.firePanel.findUnique.mockRejectedValue(new Error('db error'))
+    const { clearFireAlarm } = await getActions()
+    const res = await clearFireAlarm(null, fd({ panelId: 'p1' }))
+    expect(res).toHaveProperty('error')
   })
 })
 
@@ -296,5 +359,12 @@ describe('acknowledgeAlarm', () => {
       }),
     })
     expect(mockRevalidatePath).toHaveBeenCalledWith('/')
+  })
+
+  it('handles prisma error in catch', async () => {
+    mockPrisma.alarm.findUnique.mockRejectedValue(new Error('db error'))
+    const { acknowledgeAlarm } = await getActions()
+    const res = await acknowledgeAlarm(null, fd({ alarmId: 'a1' }))
+    expect(res).toHaveProperty('error')
   })
 })

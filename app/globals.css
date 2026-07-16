@@ -1,25 +1,24 @@
 @import "tailwindcss";
 
 @theme inline {
-  --color-bg-canvas: #0B0B0C;
-  --color-bg-surface: #121214;
-  --color-bg-elevated: #1C1C1E;
-  --color-border-hairline: #242427;
-  --color-status-critical: #FF453A;
-  --color-status-warning: #FF9F0A;
-  --color-status-normal: #32D74B;
-  --color-status-active: #0A84FF;
-  --color-text-primary: #FFFFFF;
-  --color-text-secondary: #8E8E93;
-  --color-text-body: #AEAEB2;
-  --color-text-active: #0A84FF;
+  --color-canvas: #0B0B0C;
+  --color-surface: #121214;
+  --color-elevated: #1C1C1E;
+  --color-hairline: #242427;
+  --color-critical: #FF453A;
+  --color-warning: #FF9F0A;
+  --color-normal: #32D74B;
+  --color-active: #0A84FF;
+  --color-primary: #FFFFFF;
+  --color-secondary: #8E8E93;
+  --color-body: #AEAEB2;
   --font-family-inter: 'Inter', sans-serif;
   --font-family-jetbrains: 'JetBrains Mono', monospace;
 }
 
 body {
-  background-color: #0B0B0C;
-  color: #AEAEB2;
+  background-color: var(--color-canvas);
+  color: var(--color-body);
   font-family: 'Inter', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -29,7 +28,7 @@ body {
   font-family: 'Inter', sans-serif;
   font-size: 24px;
   font-weight: 600;
-  color: #FFFFFF;
+  color: var(--color-primary);
   letter-spacing: -0.02em;
   line-height: 1.2;
 }
@@ -38,7 +37,7 @@ body {
   font-family: 'Inter', sans-serif;
   font-size: 14px;
   font-weight: 500;
-  color: #8E8E93;
+  color: var(--color-secondary);
   letter-spacing: normal;
   line-height: 1.4;
   text-transform: uppercase;
@@ -48,7 +47,7 @@ body {
   font-family: 'JetBrains Mono', monospace;
   font-size: 32px;
   font-weight: 300;
-  color: #FFFFFF;
+  color: var(--color-primary);
   line-height: 1.1;
 }
 
@@ -56,7 +55,7 @@ body {
   font-family: 'Inter', sans-serif;
   font-size: 12px;
   font-weight: 400;
-  color: #AEAEB2;
+  color: var(--color-body);
   line-height: 1.5;
 }
 
@@ -64,7 +63,7 @@ body {
   background-color: rgba(18, 18, 20, 0.5);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
-  border: 1px solid #242427;
+  border: 1px solid var(--color-hairline);
   border-radius: 12px;
   padding: 1.25rem;
 }

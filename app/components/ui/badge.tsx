@@ -7,12 +7,12 @@ type BadgeProps = {
 }
 
 const VARIANT_CLASSES: Record<BadgeVariant, string> = {
-  critical: 'bg-[#FF453A]/10 text-[#FF453A]',
-  warning: 'bg-[#FF9F0A]/10 text-[#FF9F0A]',
-  normal: 'bg-[#32D74B]/10 text-[#32D74B]',
-  active: 'bg-[#0A84FF]/10 text-[#0A84FF]',
-  info: 'bg-[#0A84FF]/10 text-[#0A84FF]',
-  neutral: 'bg-[#242427] text-[#AEAEB2]',
+  critical: 'bg-critical/10 text-critical',
+  warning: 'bg-warning/10 text-warning',
+  normal: 'bg-normal/10 text-normal',
+  active: 'bg-active/10 text-active',
+  info: 'bg-active/10 text-active',
+  neutral: 'bg-hairline text-body',
 }
 
 export function Badge({ variant = 'neutral', className = '', children }: BadgeProps) {

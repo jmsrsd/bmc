@@ -3,7 +3,7 @@ import { PageHeader } from '@/components/ui/page-header'
 import { DataTable, type Column } from '@/components/ui/data-table'
 import { AckButton } from './ack-button'
 
-function severityColor(severity: string) {
+export function severityColor(severity: string) {
   switch (severity) {
     case 'critical': return '#FF453A'
     case 'warning': return '#FF9F0A'
@@ -12,7 +12,7 @@ function severityColor(severity: string) {
   }
 }
 
-function relativeTime(date: Date) {
+export function relativeTime(date: Date) {
   const now = Date.now()
   const diff = now - date.getTime()
   const mins = Math.floor(diff / 60000)
@@ -35,7 +35,7 @@ type AlarmRow = {
   showAck?: boolean
 }
 
-const columns: Column<AlarmRow>[] = [
+export const columns: Column<AlarmRow>[] = [
   {
     header: 'Severity',
     cell: (alarm) => (
@@ -63,7 +63,7 @@ const columns: Column<AlarmRow>[] = [
   {
     header: 'Time',
     cell: (alarm) => (
-      <span className="text-[12px] text-[#8E8E93] whitespace-nowrap">
+      <span className="text-[12px] text-secondary whitespace-nowrap">
         {relativeTime(alarm.createdAt)}
       </span>
     ),
@@ -76,14 +76,14 @@ const columns: Column<AlarmRow>[] = [
   },
 ]
 
-function AlarmSection({ title, alarms, showAck }: { title: string; alarms: any[]; showAck?: boolean }) {
+export function AlarmSection({ title, alarms, showAck }: { title: string; alarms: any[]; showAck?: boolean }) {
   const rows: AlarmRow[] = alarms.map((a) => ({ ...a, showAck }))
 
   return (
     <div className="mt-6 first:mt-0">
       <div className="flex items-center gap-2 mb-3">
         <h2 className="text-[18px] font-semibold text-white">{title}</h2>
-        <span className="text-[12px] font-medium text-[#8E8E93] bg-[#1C1C1E] px-2 py-0.5 rounded-full">
+        <span className="text-[12px] font-medium text-secondary bg-elevated px-2 py-0.5 rounded-full">
           {alarms.length}
         </span>
       </div>

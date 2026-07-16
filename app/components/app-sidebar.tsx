@@ -19,12 +19,13 @@ export function AppSidebar() {
           key={item.href}
           href={item.href}
           onClick={onClick}
-          className={`flex items-center gap-3 mx-2 px-3 py-2 rounded-lg text-sm transition-colors ${
+          className={`flex items-center gap-3 mx-2 px-3 py-2 min-h-[44px] rounded-lg text-sm transition-colors ${
             isActive
-              ? 'bg-[#1C1C1E] text-white'
-              : 'text-[#AEAEB2] hover:text-white hover:bg-[#242427]'
+              ? 'bg-elevated text-white'
+              : 'text-body hover:text-white hover:bg-hairline'
           } ${collapsed ? 'justify-center px-0 mx-1' : ''}`}
           title={collapsed ? item.label : undefined}
+          aria-current={isActive ? 'page' : undefined}
         >
           <span className="shrink-0">{item.icon}</span>
           {!collapsed && <span>{item.label}</span>}
@@ -36,7 +37,7 @@ export function AppSidebar() {
     <>
       {/* ─── Desktop sidebar ─── */}
       <aside
-        className={`hidden md:flex md:flex-col border-r border-[#242427] bg-[#0B0B0C] overflow-hidden transition-all duration-200 ${
+        className={`hidden md:flex md:flex-col border-r border-hairline bg-canvas overflow-hidden transition-all duration-200 ${
           collapsed ? 'w-16' : 'w-56'
         }`}
       >
@@ -47,7 +48,7 @@ export function AppSidebar() {
           ) : (
             <div>
               <h1 className="text-[18px] font-semibold text-white leading-tight">BMC</h1>
-              <p className="text-[#8E8E93] text-xs mt-0.5">Biomedical Campus</p>
+              <p className="text-secondary text-xs mt-0.5">Biomedical Campus</p>
             </div>
           )}
         </div>
@@ -59,7 +60,7 @@ export function AppSidebar() {
         <div className={collapsed ? 'flex justify-center p-3' : 'flex justify-end p-3'}>
           <button
             onClick={toggleCollapsed}
-            className="text-[#8E8E93] hover:text-white transition-colors p-1 rounded"
+            className="text-secondary hover:text-white transition-colors p-1 rounded"
             aria-label={collapsed ? 'Expand sidebar' : 'Collapse sidebar'}
           >
             {collapsed ? <PanelLeftOpen size={18} /> : <PanelLeftClose size={18} />}
@@ -76,7 +77,7 @@ export function AppSidebar() {
 
         {/* Drawer */}
         <aside
-          className={`fixed top-0 left-0 z-40 h-full w-56 bg-[#0B0B0C] border-r border-[#242427] transition-transform duration-200 ${
+          className={`fixed top-0 left-0 z-40 h-full w-56 bg-canvas border-r border-hairline transition-transform duration-200 ${
             mobileOpen ? 'translate-x-0' : '-translate-x-full'
           }`}
         >
@@ -84,7 +85,7 @@ export function AppSidebar() {
             <h2 className="text-h2">BMC</h2>
             <button
               onClick={closeMobile}
-              className="text-[#8E8E93] hover:text-white transition-colors"
+              className="text-secondary hover:text-white transition-colors"
               aria-label="Close navigation menu"
             >
               <X size={16} />

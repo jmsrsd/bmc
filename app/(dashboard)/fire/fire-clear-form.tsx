@@ -16,7 +16,7 @@ export function FireClearForm({ panelId, panelName }: Props) {
 
   if (success) {
     return (
-      <p className="text-[12px] text-[#32D74B] mt-2">
+      <p className="text-[12px] text-normal mt-2">
         Cleared — {panelName} reset to NORMAL
       </p>
     )
@@ -29,16 +29,16 @@ export function FireClearForm({ panelId, panelName }: Props) {
         type="text"
         name="comment"
         placeholder="Clear comment (optional)"
-        className="w-full bg-[#1C1C1E] border border-[#242427] rounded-lg px-3 py-2 text-[13px] text-white placeholder-[#8E8E93] outline-none focus:border-[#0A84FF] transition-colors"
+        className="w-full bg-elevated border border-hairline rounded-lg px-3 py-2 text-[13px] text-white placeholder-secondary outline-none focus:border-active transition-colors"
       />
       <button
         type="submit"
         disabled={pending}
-        className="w-full text-[13px] font-semibold px-3 py-2 rounded-lg bg-[#FF453A]/10 text-[#FF453A] border border-[#FF453A]/20 transition-colors hover:bg-[#FF453A]/20 disabled:opacity-50"
+        className="w-full text-[13px] font-semibold px-3 py-2 rounded-lg bg-critical/10 text-critical border border-critical/20 transition-colors hover:bg-critical/20 disabled:opacity-50"
       >
         {pending ? 'Clearing...' : 'Clear Alarm'}
       </button>
-      {error && <p className="text-[12px] text-[#FF453A] mt-1">{error}</p>}
+      {error && <p className="text-[12px] text-critical mt-1">{error}</p>}
     </form>
   )
 }

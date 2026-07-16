@@ -21,9 +21,8 @@ describe('Card', () => {
   it('has default glassmorphism classes', () => {
     const html = renderToString(React.createElement(Card, null, 'test'))
     expect(html).toContain('rounded-xl')
-    expect(html).toContain('backdrop-blur')
-    expect(html).toContain('border')
-    expect(html).toContain('bg-')
+    expect(html).toContain('bg-surface/50')
+    expect(html).toContain('border border-hairline')
   })
 
   it('appends custom className', () => {

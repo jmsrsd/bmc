@@ -1,67 +1,127 @@
 import { describe, it, expect, vi } from 'vitest'
-import { checkAccess } from '../auth'
-import { ROLE_HIERARCHY } from '../types'
+import { cookies } from 'next/headers'
 
-// TESTING.md §3.3 — Auth Matrix Tests, UC-AUTH-02
-// DESIGN.md §6.3: checkAccess(user, buildingId, minRole)
+vi.mock('next/headers', () => ({
+  cookies: vi.fn(),
+}))
 
-describe('checkAccess', () => {
-  const op  = { id: 'u1', role: 'operator' as const, name: 'Op' }
-  const tech = { id: 'u2', role: 'tech' as const, name: 'Tech' }
-  const viewer = { id: 'u3', role: 'viewer' as const, name: 'Viewer' }
-  const admin = { id: 'u4', role: 'admin' as const, name: 'Admin' }
-  const security = { id: 'u5', role: 'security' as const, name: 'Security' }
+import { getSession, verifyPassword, createSessionCookie, clearSessionCookie, checkAccess } from '../auth.ts'
 
-  it('allows operator when no minRole (view only)', () => {
-    expect(() => checkAccess(op)).not.toThrow()
+describe('lib/auth.ts', () => {
+  const mockCookies = vi.mocked(cookies)
+
+  beforeEach(() => {
+    vi.clearAllMocks()
   })
 
-  it('allows operator at operator role', () => {
-    expect(() => checkAccess(op, 'b1', 'operator')).not.toThrow()
+  describe('getSession', () => {
+    it('returns session when cookie is valid', async () => {
+      mockCookies.mockResolvedValue({
+        get: vi.fn().mockReturnValue({ value: 'authenticated' }),
+      } as any)
+
+      const session = await getSession()
+      expect(session).not.toBeNull()
+      expect(session?.user.id).toBe('demo-user')
+      expect(session?.user.role).toBe('admin')
+    })
+
+    it('returns null when cookie is missing', async () => {
+      mockCookies.mockResolvedValue({
+        get: vi.fn().mockReturnValue(undefined),
+      } as any)
+
+      const session = await getSession()
+      expect(session).toBeNull()
+    })
+
+    it('returns null when cookie value is wrong', async () => {
+      mockCookies.mockResolvedValue({
+        get: vi.fn().mockReturnValue({ value: 'wrong' }),
+      } as any)
+
+      const session = await getSession()
+      expect(session).toBeNull()
+    })
   })
 
-  it('denies viewer from operator-level actions', () => {
-    expect(() => checkAccess(viewer, 'b1', 'operator')).toThrow('Forbidden')
+  describe('verifyPassword', () => {
+    it('returns true for correct password', async () => {
+      const result = await verifyPassword('bmc2024')
+      expect(result).toBe(true)
+    })
+
+    it('returns false for incorrect password', async () => {
+      const result = await verifyPassword('wrong')
+      expect(result).toBe(false)
+    })
+
+    it('returns false for empty password', async () => {
+      const result = await verifyPassword('')
+      expect(result).toBe(false)
+    })
   })
 
-  it('denies tech from operator-level actions', () => {
-    expect(() => checkAccess(tech, 'b1', 'operator')).toThrow('Forbidden')
+  describe('createSessionCookie', () => {
+    it('returns correct cookie config', () => {
+      const cookie = createSessionCookie()
+      expect(cookie.name).toBe('bmc_session')
+      expect(cookie.value).toBe('authenticated')
+      expect(cookie.maxAge).toBe(60 * 60 * 12)
+      expect(cookie.path).toBe('/')
+      expect(cookie.httpOnly).toBe(true)
+      expect(cookie.sameSite).toBe('lax')
+    })
   })
 
-  it('allows tech view-only', () => {
-    expect(() => checkAccess(tech, 'b1', 'viewer')).not.toThrow()
+  describe('clearSessionCookie', () => {
+    it('returns correct cookie config for clearing', () => {
+      const cookie = clearSessionCookie()
+      expect(cookie.name).toBe('bmc_session')
+      expect(cookie.value).toBe('')
+      expect(cookie.maxAge).toBe(0)
+      expect(cookie.path).toBe('/')
+    })
   })
 
-  it('allows viewer view-only', () => {
-    expect(() => checkAccess(viewer, 'b1', 'viewer')).not.toThrow()
-  })
+  describe('checkAccess', () => {
+    const adminUser = { id: '1', role: 'admin' as const, name: 'Admin' }
+    const operatorUser = { id: '2', role: 'operator' as const, name: 'Operator' }
+    const viewerUser = { id: '3', role: 'viewer' as const, name: 'Viewer' }
 
-  it('allows admin any building at any level', () => {
-    expect(() => checkAccess(admin, 'b3', 'operator')).not.toThrow()
-  })
+    it('throws when user is null', () => {
+      expect(() => checkAccess(null)).toThrow('Unauthenticated')
+    })
 
-  it('allows admin superadmin-level access', () => {
-    // admin role weight (6) >= superadmin (7)? No, so this fails
-    expect(() => checkAccess(admin, 'b1', 'superadmin')).toThrow('Forbidden')
-  })
+    it('allows when no minRole specified', () => {
+      expect(() => checkAccess(viewerUser)).not.toThrow()
+    })
 
-  it('allows security at security level', () => {
-    expect(() => checkAccess(security, 'b1', 'security')).not.toThrow()
-  })
+    it('allows admin for any role', () => {
+      expect(() => checkAccess(adminUser, undefined, 'admin')).not.toThrow()
+      expect(() => checkAccess(adminUser, undefined, 'operator')).not.toThrow()
+      expect(() => checkAccess(adminUser, undefined, 'viewer')).not.toThrow()
+    })
 
-  it('allows admin at security level', () => {
-    expect(() => checkAccess(admin, 'b1', 'security')).not.toThrow()
-  })
+    it('allows operator for operator and viewer', () => {
+      expect(() => checkAccess(operatorUser, undefined, 'operator')).not.toThrow()
+      expect(() => checkAccess(operatorUser, undefined, 'viewer')).not.toThrow()
+    })
 
-  it('throws on null user', () => {
-    expect(() => checkAccess(null)).toThrow('Unauthenticated')
-  })
+    it('throws when operator tries admin', () => {
+      expect(() => checkAccess(operatorUser, undefined, 'admin')).toThrow('Forbidden')
+    })
 
-  it('allows viewer at viewer level', () => {
-    expect(() => checkAccess(viewer, 'b1', 'viewer')).not.toThrow()
-  })
+    it('allows viewer for viewer only', () => {
+      expect(() => checkAccess(viewerUser, undefined, 'viewer')).not.toThrow()
+    })
 
-  it('denies operator at security level', () => {
-    expect(() => checkAccess(op, 'b1', 'security')).toThrow('Forbidden')
+    it('throws when viewer tries operator', () => {
+      expect(() => checkAccess(viewerUser, undefined, 'operator')).toThrow('Forbidden')
+    })
+
+    it('throws when viewer tries admin', () => {
+      expect(() => checkAccess(viewerUser, undefined, 'admin')).toThrow('Forbidden')
+    })
   })
 })
