@@ -1,5 +1,5 @@
 import { describe, it, expect, vi } from 'vitest'
-import { calculateSummary } from '../page'
+import { calculateSummary } from '../_helpers'
 
 describe('app/(dashboard)/energy/page.tsx - pure functions', () => {
   describe('calculateSummary', () => {

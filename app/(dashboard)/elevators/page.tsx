@@ -2,53 +2,8 @@ import { prisma } from '@/lib/prisma'
 import { PageHeader } from '@/components/ui/page-header'
 import { ElevatorRecallForm } from './elevator-recall-form'
 import { ElevatorClearRecall } from './elevator-clear-recall'
-
-export const STATE_COLORS: Record<string, string> = {
-  NORMAL: '#32D74B',
-  RECALL: '#FF9F0A',
-  FAULT: '#FF453A',
-}
-
-export function Arrow({ direction }: { direction: string }) {
-  if (direction === 'UP') return <span className="text-normal text-[16px]">↑</span>
-  if (direction === 'DOWN') return <span className="text-active text-[16px]">↓</span>
-  return <span className="text-secondary text-[16px]">—</span>
-}
-
-export function StatusDot({ state }: { state: string }) {
-  const color = STATE_COLORS[state] ?? '#8E8E93'
-  return (
-    <span
-      className="inline-block w-2 h-2 rounded-full"
-      style={{ backgroundColor: color }}
-      aria-label={`Status: ${state}`}
-    />
-  )
-}
-
-export function getStatusColor(state: string): string {
-  return STATE_COLORS[state] ?? '#8E8E93'
-}
-
-export function getFloorDisplay(floor: number): string {
-  return floor >= 0 ? `F${floor}` : `B${Math.abs(floor)}`
-}
-
-export function buildElevatorRows(building: any): any[] {
-  if (!building) return []
-  return building.elevators.flatMap((elevator: any) =>
-    elevator.cars.map((car: any) => ({
-      id: car.id,
-      carName: car.name,
-      elevatorName: elevator.name,
-      floor: car.floor,
-      direction: car.direction,
-      state: car.state,
-      doorState: car.doorState,
-      statusColor: getStatusColor(car.state),
-    }))
-  )
-}
+import { STATE_COLORS } from './_helpers'
+import { Arrow, StatusDot } from './_components'
 
 function ElevatorCarCard({ car, elevatorName }: { car: any; elevatorName: string }) {
   return (

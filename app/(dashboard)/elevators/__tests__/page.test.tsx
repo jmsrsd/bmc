@@ -1,5 +1,6 @@
 import { describe, it, expect } from 'vitest'
-import { getStatusColor, getFloorDisplay, buildElevatorRows, STATE_COLORS, Arrow, StatusDot } from '../page'
+import { getStatusColor, getFloorDisplay, buildElevatorRows, STATE_COLORS } from '../_helpers'
+import { Arrow, StatusDot } from '../_components'
 
 describe('app/(dashboard)/elevators/page.tsx - pure functions', () => {
   describe('STATE_COLORS', () => {

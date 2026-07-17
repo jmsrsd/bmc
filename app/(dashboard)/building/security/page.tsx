@@ -1,86 +1,6 @@
 import { prisma } from '@/lib/prisma'
 import { PageHeader } from '@/components/ui/page-header'
-import { DataTable, type Column } from '@/components/ui/data-table'
-import { DoorLockButton } from './door-lock-button'
-
-export const STATUS_COLORS: Record<string, string> = {
-  UNLOCKED: '#32D74B',
-  LOCKED: '#FF9F0A',
-  FORCED: '#FF453A',
-}
-
-export const STATUS_LABELS: Record<string, string> = {
-  UNLOCKED: 'Unlocked',
-  LOCKED: 'Locked',
-  FORCED: 'Forced',
-}
-
-export type DoorRow = {
-  id: string
-  doorName: string
-  zoneName: string
-  state: string
-  statusColor: string
-  statusLabel: string
-}
-
-export const columns: Column<DoorRow>[] = [
-  {
-    header: 'Zone',
-    cell: (door) => (
-      <span className="text-[12px] text-secondary">{door.zoneName}</span>
-    ),
-    className: 'w-40',
-  },
-  {
-    header: 'Door',
-    cell: (door) => (
-      <span className="text-[14px] font-medium text-white">{door.doorName}</span>
-    ),
-  },
-  {
-    header: 'Status',
-    cell: (door) => (
-      <div className="flex items-center gap-2">
-        <span
-          className="inline-block w-2 h-2 rounded-full"
-          style={{ backgroundColor: door.statusColor }}
-        />
-        <span className="text-[13px] text-secondary">{door.statusLabel}</span>
-      </div>
-    ),
-    className: 'w-36',
-  },
-  {
-    header: '',
-    cell: (door) => (
-      <div className="flex justify-end">
-        <DoorLockButton
-          doorId={door.id}
-          currentState={door.state}
-          doorName={door.doorName}
-        />
-      </div>
-    ),
-    className: 'w-32 text-right',
-  },
-]
-
-export function buildSecurityRows(building: any): DoorRow[] {
-  if (!building) return []
-  return building.zones
-    .filter((z: any) => z.doors.length > 0)
-    .flatMap((zone: any) =>
-      zone.doors.map((door: any) => ({
-        id: door.id,
-        doorName: door.name,
-        zoneName: zone.name,
-        state: door.state,
-        statusColor: STATUS_COLORS[door.state] ?? '#8E8E93',
-        statusLabel: STATUS_LABELS[door.state] ?? door.state,
-      }))
-    )
-}
+import { SecurityTable } from './_table'
 
 export default async function SecurityPage() {
   const building = await prisma.building.findUnique({
@@ -102,18 +22,11 @@ export default async function SecurityPage() {
     )
   }
 
-  const rows = buildSecurityRows(building)
-
   return (
     <div>
       <PageHeader title="Access Control" subtitle="Door lock/unlock status" />
       <div className="mt-6">
-        <DataTable
-          columns={columns}
-          data={rows}
-          keyExtractor={(d) => d.id}
-          emptyMessage="No doors found"
-        />
+        <SecurityTable building={building} />
       </div>
     </div>
   )

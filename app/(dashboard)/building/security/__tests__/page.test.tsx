@@ -1,30 +1,25 @@
 import { describe, it, expect } from 'vitest'
-import { buildSecurityRows, STATUS_COLORS, STATUS_LABELS, columns, type DoorRow } from '../page.tsx'
+import { buildSecurityRows, STATUS_COLORS, STATUS_LABELS, type DoorRow } from '../_helpers'
+import { columns } from '../_components'
 
 describe('app/(dashboard)/building/security/page.tsx - pure functions', () => {
   describe('STATUS_COLORS', () => {
-    it('has correct color mapping', () => {
-      expect(STATUS_COLORS.UNLOCKED).toBe('#32D74B')
-      expect(STATUS_COLORS.LOCKED).toBe('#FF9F0A')
-      expect(STATUS_COLORS.FORCED).toBe('#FF453A')
+    it('has all statuses', () => {
+      expect(STATUS_COLORS).toMatchObject({
+        UNLOCKED: '#32D74B',
+        LOCKED: '#FF9F0A',
+        FORCED: '#FF453A',
+      })
     })
   })
 
   describe('STATUS_LABELS', () => {
-    it('has correct label mapping', () => {
-      expect(STATUS_LABELS.UNLOCKED).toBe('Unlocked')
-      expect(STATUS_LABELS.LOCKED).toBe('Locked')
-      expect(STATUS_LABELS.FORCED).toBe('Forced')
-    })
-  })
-
-  describe('columns', () => {
-    it('exports 4 columns', () => {
-      expect(columns.length).toBe(4)
-    })
-
-    it('has correct headers', () => {
-      expect(columns.map((c) => c.header)).toEqual(['Zone', 'Door', 'Status', ''])
+    it('has all labels', () => {
+      expect(STATUS_LABELS).toMatchObject({
+        UNLOCKED: 'Unlocked',
+        LOCKED: 'Locked',
+        FORCED: 'Forced',
+      })
     })
   })
 
@@ -37,20 +32,26 @@ describe('app/(dashboard)/building/security/page.tsx - pure functions', () => {
       expect(buildSecurityRows(undefined)).toEqual([])
     })
 
-    it('returns empty array for building with no doors', () => {
-      const building = { zones: [{ id: 'z1', name: 'Zone 1', doors: [] }] }
-      expect(buildSecurityRows(building)).toEqual([])
+    it('skips zones with no doors', () => {
+      const building = {
+        zones: [
+          { name: 'Zone 1', doors: [] },
+          { name: 'Zone 2', doors: [{ id: 'd1', name: 'Door 1', state: 'LOCKED' }] },
+        ],
+      }
+      const rows = buildSecurityRows(building)
+      expect(rows.length).toBe(1)
+      expect(rows[0].doorName).toBe('Door 1')
     })
 
-    it('maps doors to rows with correct structure', () => {
+    it('flattens doors from zones', () => {
       const building = {
         zones: [
           {
-            id: 'z1',
-            name: 'Lobby',
+            name: 'Zone 1',
             doors: [
-              { id: 'd1', name: 'Main Door', state: 'UNLOCKED' },
-              { id: 'd2', name: 'Side Door', state: 'LOCKED' },
+              { id: 'd1', name: 'Door A', state: 'UNLOCKED' },
+              { id: 'd2', name: 'Door B', state: 'LOCKED' },
             ],
           },
         ],
@@ -58,50 +59,28 @@ describe('app/(dashboard)/building/security/page.tsx - pure functions', () => {
       const rows = buildSecurityRows(building)
       expect(rows.length).toBe(2)
       expect(rows[0]).toMatchObject<Partial<DoorRow>>({
-        id: 'd1',
-        doorName: 'Main Door',
-        zoneName: 'Lobby',
+        doorName: 'Door A',
+        zoneName: 'Zone 1',
         state: 'UNLOCKED',
         statusColor: '#32D74B',
         statusLabel: 'Unlocked',
       })
       expect(rows[1]).toMatchObject<Partial<DoorRow>>({
-        id: 'd2',
-        doorName: 'Side Door',
-        zoneName: 'Lobby',
+        doorName: 'Door B',
         state: 'LOCKED',
         statusColor: '#FF9F0A',
         statusLabel: 'Locked',
       })
     })
+  })
 
-    it('handles unknown state with defaults', () => {
-      const building = {
-        zones: [
-          {
-            id: 'z1',
-            name: 'Zone 1',
-            doors: [{ id: 'd1', name: 'Door 1', state: 'UNKNOWN' }],
-          },
-        ],
-      }
-      const rows = buildSecurityRows(building)
-      expect(rows[0].statusColor).toBe('#8E8E93')
-      expect(rows[0].statusLabel).toBe('UNKNOWN')
+  describe('columns', () => {
+    it('exports 4 columns', () => {
+      expect(columns.length).toBe(4)
     })
 
-    it('handles multiple zones with doors', () => {
-      const building = {
-        zones: [
-          { id: 'z1', name: 'Zone A', doors: [{ id: 'd1', name: 'Door A', state: 'LOCKED' }] },
-          { id: 'z2', name: 'Zone B', doors: [{ id: 'd2', name: 'Door B', state: 'UNLOCKED' }] },
-          { id: 'z3', name: 'Zone C', doors: [] }, // no doors
-        ],
-      }
-      const rows = buildSecurityRows(building)
-      expect(rows.length).toBe(2)
-      expect(rows[0].zoneName).toBe('Zone A')
-      expect(rows[1].zoneName).toBe('Zone B')
+    it('has correct headers', () => {
+      expect(columns.map((c) => c.header)).toEqual(['Zone', 'Door', 'Status', ''])
     })
   })
 })

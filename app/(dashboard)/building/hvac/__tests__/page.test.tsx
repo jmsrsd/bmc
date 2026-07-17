@@ -1,5 +1,5 @@
 import { describe, it, expect, vi } from 'vitest'
-import { buildHvacRows } from '../page'
+import { buildHvacRows } from '../_helpers'
 
 vi.mock('@/lib/zone-group', () => ({
   stripTowerPrefix: vi.fn((name: string) => name.replace(/^Tower\s*/i, '')),

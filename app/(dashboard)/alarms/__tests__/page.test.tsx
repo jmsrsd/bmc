@@ -1,5 +1,6 @@
 import { describe, it, expect } from 'vitest'
-import { severityColor, relativeTime, columns, AlarmSection } from '../page'
+import { severityColor, relativeTime } from '../_helpers'
+import { columns, AlarmSection } from '../_components'
 
 describe('app/(dashboard)/alarms/page.tsx - pure functions', () => {
   describe('severityColor', () => {

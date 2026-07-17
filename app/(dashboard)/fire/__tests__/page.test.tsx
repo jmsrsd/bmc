@@ -1,5 +1,5 @@
 import { describe, it, expect, vi } from 'vitest'
-import { buildFireRows, PANEL_STATE_COLORS, DEVICE_STATE_COLORS, getPanelStatusColor, getDeviceStatusColor } from '../page'
+import { buildFireRows, PANEL_STATE_COLORS, DEVICE_STATE_COLORS, getPanelStatusColor, getDeviceStatusColor } from '../_helpers'
 
 describe('app/(dashboard)/fire/page.tsx - pure functions', () => {
   describe('PANEL_STATE_COLORS', () => {
